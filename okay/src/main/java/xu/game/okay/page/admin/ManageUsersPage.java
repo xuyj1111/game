@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.*;
+import java.sql.Connection;
 
 /**
  * @author shkstart
@@ -19,9 +20,11 @@ public class ManageUsersPage extends JPanel {
     public int number;
 
     public ManageUsersPage() {
+        Jdbc jdbc = Jdbc.getInstance();
+        Connection connection = jdbc.getConnection();
         setLayout(null);
-        number = Integer.valueOf(Jdbc.query("select count(*) from biao1 where name != 'admin'"));
-        String[] strings = Jdbc.querys("select name from  biao1 where name != 'admin'");
+        number = Integer.valueOf(jdbc.query("select count(*) from biao1 where name != 'admin'"));
+        String[] strings = jdbc.querys("select name from  biao1 where name != 'admin'");
 
         JLabel[] users = new JLabel[number];
         JLabel[] logout = new JLabel[number];

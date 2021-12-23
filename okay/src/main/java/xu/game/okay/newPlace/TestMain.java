@@ -16,7 +16,8 @@ public class TestMain {
     public static JPanel jPanel = new InitPage().getInnerJPanel();
 
     public static void main(String[] args) throws Exception {
-        Connection connection = Jdbc.getConnection();
+        Jdbc jdbc = Jdbc.getInstance();
+        Connection connection = jdbc.getConnection();
         if (Objects.isNull(connection)) {
             throw new Exception("连接数据库失败！");
         }

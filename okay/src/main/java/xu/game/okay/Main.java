@@ -127,7 +127,8 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
-        Connection connection = xu.game.okay.Jdbc.getConnection();
+        Jdbc jdbc = Jdbc.getInstance();
+        Connection connection = jdbc.getConnection();
         if (Objects.isNull(connection)) {
             throw new Exception("连接数据库失败！");
         }

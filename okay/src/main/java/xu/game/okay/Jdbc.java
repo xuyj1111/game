@@ -1,39 +1,55 @@
 package xu.game.okay;
 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
+import xu.tools.toolsio.PropertyTool;
 
+import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Slf4j
 public class Jdbc {
-    private static String URL = "jdbc:mysql://localhost:3306/my_game?useSSL=true&useUnicode=true&characterEncoding=UTF-8";
-    private static String USER = "root";
-    private static String PSD = "root";
-    private static String DRIVER = "com.mysql.cj.jdbc.Driver";
 
-    private static java.sql.Connection conn;
-    private static PreparedStatement ps;
-    private static ResultSet resultSet;
+    private static final String DB_PROPERTIES = "db.properties";
+    private static final String URL = "datasource.url";
+    private static final String USER = "datasource.username";
+    private static final String PWD = "datasource.password";
+    private static final String DRIVER = "datasource.driver";
+
+    private static Jdbc instance = new Jdbc();
+
+    private Connection conn;
+    private PreparedStatement ps;
+    private ResultSet resultSet;
+
+    //饿汉式
+    private Jdbc() {
+    }
 
     static {
         try {
-            Class.forName(DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            String url = PropertyTool.readProperty(DB_PROPERTIES, URL);
+            String user = PropertyTool.readProperty(DB_PROPERTIES, USER);
+            String pwd = PropertyTool.readProperty(DB_PROPERTIES, PWD);
+            String driver = PropertyTool.readProperty(DB_PROPERTIES, DRIVER);
+            Class.forName(driver);
+            instance.conn = DriverManager.getConnection(url, user, pwd);
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            log.error("Failed to connect to mysql", e);
         }
     }
 
-    public static java.sql.Connection getConnection() {
-        try {
-            conn = DriverManager.getConnection(URL, USER, PSD);
-            return conn;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
+    public static Jdbc getInstance() {
+        return instance;
     }
 
-    public static void update(String sql) {
+    public Connection getConnection() {
+        return conn;
+    }
+
+    public void update(String sql) {
         try {
             ps = conn.prepareStatement(sql);
             ps.execute();
@@ -44,11 +60,11 @@ public class Jdbc {
         }
     }
 
-    public static String query(String sql) {
+    public String query(String sql) {
         String string = null;
         try {
             ps = conn.prepareStatement(sql);
-            ResultSet resultSet = ps.executeQuery();
+            resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 string = resultSet.getString(1);
             }
@@ -61,17 +77,15 @@ public class Jdbc {
         }
     }
 
-    public static String[] querys(String sql) {
-        String[] string = new String[Integer.valueOf(Jdbc.query("select count(*) from biao1 where name != 'admin'"))];
-        int i = 0;
+    public List querys(String sql) {
+        ArrayList<Object> list = Lists.newArrayList();
         try {
             ps = conn.prepareStatement(sql);
             resultSet = ps.executeQuery();
             while (resultSet.next()) {
-                string[i] = resultSet.getString(1);
-                i++;
+                list.add(resultSet.getString(1));
             }
-            return string;
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -80,7 +94,7 @@ public class Jdbc {
         }
     }
 
-    private static void closeStream() {
+    private void closeStream() {
         try {
             if (ps != null)
                 ps.close();
