@@ -1,7 +1,6 @@
 package xu.game.okay;
 
 import xu.game.okay.page.LoginPage;
-import xu.game.okay.page.admin.*;
 import xu.game.okay.page.login.RegisterPage;
 import xu.game.okay.page.other.NumberPage;
 import xu.game.okay.page.users.DefinedMenuPage;
@@ -90,37 +89,37 @@ public class Main {
     //    *****************************user*****************************
 //    *****************************admin*****************************
     public static void admin_choose() {
-        jPanel = new ChoosePage();
+//        jPanel = new ChoosePage();
         jFrame.setContentPane(jPanel);
         jFrame.setVisible(true);
     }
 
     public static void admin_manageGametimeMenu() {
-        jPanel = new ManageGametimeMenuPage();
+        jPanel = new xu.game.okay.page.admin.ManageGametimeMenuPage();
         jFrame.setContentPane(jPanel);
         jFrame.setVisible(true);
     }
 
     public static void admin_manageUsers() {
-        jPanel = new ManageUsersPage();
+        jPanel = new xu.game.okay.page.admin.ManageUsersPage();
         jFrame.setContentPane(jPanel);
         jFrame.setVisible(true);
     }
 
     public static void admin_manageUsersEdit(String username) {
-        jPanel = new ManageUsersEditPage(username);
+        jPanel = new xu.game.okay.page.admin.ManageUsersEditPage(username);
         jFrame.setContentPane(jPanel);
         jFrame.setVisible(true);
     }
 
     public static void admin_manageDefinedMenu() {
-        jPanel = new ManageDefinedMenuPage(username);
+        jPanel = new xu.game.okay.page.admin.ManageDefinedMenuPage(username);
         jFrame.setContentPane(jPanel);
         jFrame.setVisible(true);
     }
 
     public static void admin_defined() {
-        jPanel = new ManageDefinedPage();
+        jPanel = new xu.game.okay.page.admin.ManageDefinedPage();
         jFrame.setContentPane(jPanel);
         jFrame.setVisible(true);
     }
@@ -128,7 +127,7 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
-        Connection connection = Jdbc.getConnection();
+        Connection connection = xu.game.okay.Jdbc.getConnection();
         if (Objects.isNull(connection)) {
             throw new Exception("连接数据库失败！");
         }

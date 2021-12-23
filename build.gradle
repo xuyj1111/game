@@ -1,15 +1,21 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.1'
+    id 'org.springframework.boot' version '2.1.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
-group = 'xu'
+group = 'xu.game'
+archivesBaseName = 'game'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
-    mavenCentral()
+//    使用本地maven仓库的jar包
+    mavenLocal()
+//    找不到再从阿里仓库找
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public/"
+    }
 }
 
 dependencies {
