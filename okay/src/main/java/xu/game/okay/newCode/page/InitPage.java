@@ -1,10 +1,10 @@
 package xu.game.okay.newCode.page;
 
+import xu.game.okay.newCode.BeanFactory;
 import xu.game.okay.newCode.TestMain;
 import xu.game.okay.newCode.constant.IconConstant;
 import xu.game.okay.newCode.impl.InnerJPanel;
 import xu.game.okay.newCode.impl.InnerMouse;
-import xu.game.okay.page.LoginPage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -16,13 +16,16 @@ import java.awt.event.MouseEvent;
 
 /**
  * @Description: 初始化页面
- * 显示图片
- * 鼠标点击界面任意处，
+ * 1.显示图片
+ * 2.鼠标点击界面任意处两次，进入登陆页面
  * @Author: xuyujun
  * @Date: 2021/12/21
  */
 public class InitPage extends BasePage {
 
+    /**
+    * @Description: 点击次数
+    */
     private Integer check_num = 0;
 
     public InitPage() {
@@ -32,7 +35,7 @@ public class InitPage extends BasePage {
     }
 
     class InnerJPanelImpl extends InnerJPanel {
-        public Image img;
+        private Image img;
 
         public InnerJPanelImpl() {
             setLayout(null);
@@ -63,7 +66,8 @@ public class InitPage extends BasePage {
                 start.setFont(new java.awt.Font("华文中宋", Font.ITALIC, 50));
                 innerJPanel.add(start);
             } else {
-                TestMain.jPanel = new LoginPage();
+                check_num = 0;
+                TestMain.jPanel = BeanFactory.loginPage.getInnerJPanel();
                 TestMain.jFrame.setContentPane(TestMain.jPanel);
                 TestMain.jFrame.setVisible(true);
             }
