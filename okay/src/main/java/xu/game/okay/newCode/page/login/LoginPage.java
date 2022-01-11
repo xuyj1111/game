@@ -11,12 +11,12 @@ import javax.swing.JTextField;
  * @Author: xuyujun
  * @Date: 2021/12/24
  */
-public class LoginPage extends BasePage {
+public class LoginPage  {
 
     public LoginPage() {
-        setBaseJPanel(new LoginJPanel());
-        setBaseMouse(new LoginMouse());
-        getBaseJPanel().addMouseListener(getBaseMouse());
+//        setBaseJPanel(new LoginJPanel());
+//        setBaseMouse(new LoginMouse());
+//        getBaseJPanel().addMouseListener(getBaseMouse());
     }
 
 

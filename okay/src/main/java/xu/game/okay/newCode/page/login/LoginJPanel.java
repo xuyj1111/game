@@ -1,26 +1,20 @@
 package xu.game.okay.newCode.page.login;
 
-import lombok.Data;
 import xu.game.okay.newCode.constant.IconConstant;
 import xu.game.okay.newCode.page.base.BaseJPanel;
 
 import javax.swing.*;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.*;
 
-@Data
 public class LoginJPanel extends BaseJPanel {
 
     private static JLabel login_word = new JLabel("登录");
 
     public LoginJPanel() {
 
-        login_word.setForeground(Color.gray);
-        login_word.setFont(new java.awt.Font("幼圆", 1, 40));
-        add(login_word);
+//        login_word.setForeground(Color.gray);
+//        login_word.setFont(new java.awt.Font("幼圆", 1, 40));
+//        add(login_word);
 
 
 //        JLabel username_word = new JLabel("用户名：");
@@ -69,26 +63,24 @@ public class LoginJPanel extends BaseJPanel {
 //        add(question_icon);
 //        mouse(login_icon, username, password, register_word, question_icon);
 
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-            }
-        });
+//        addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//            }
+//        });
 
     }
 
-    @Override
+    //    @Override
     public void paint(Graphics g) {
-//        Graphics2D gr = (Graphics2D) g;
-        g.clearRect(0, 0, getWidth(), getHeight());
-//        g.setBackground(Color.white);
-//        gr.clearRect(0, 0, getWidth(), getHeight());
-//        Stroke dash = new BasicStroke(2.5f, BasicStroke.CAP_BUTT,
-//                BasicStroke.JOIN_ROUND, 3.5f, new float[]{15, 10,},
-//                0f);
-//        gr.setStroke(dash);
-//        gr.setColor(Color.gray);
-//        gr.drawRect(20, 20, getWidth() - 40, getHeight() - 40);
+        Graphics2D gr = (Graphics2D) g;
+        gr.clearRect(0, 0, getWidth(), getHeight());
+        Stroke dash = new BasicStroke(2.5f, BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_ROUND, 3.5f, new float[]{15, 10,},
+                0f);
+        gr.setStroke(dash);
+        gr.setColor(Color.gray);
+        gr.drawRect(20, 20, getWidth() - 40, getHeight() - 40);
         repaint();
         super.paintComponents(g);
     }
