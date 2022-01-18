@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
@@ -98,21 +97,42 @@ public class JdbcAction {
                 //遍历列，result赋值字段名+字段值
                 for (int i = 1; i <= metaData.getColumnCount(); i++) {
                     //sql字段类型对应的Java类名
-                    String className = ResultSetMapping.toClass(metaData.getColumnType(i)).getSimpleName();
+                    String typeName = ResultSetMapping.toClass(metaData.getColumnType(i)).getSimpleName();
+                    typeName = convertTypeName(typeName);
                     //sql字段名
                     String columnName = metaData.getColumnName(i);
                     //调用拼接的方法
-                    Object value = resultSetClass.getDeclaredMethod("get" + className, int.class).invoke(resultSet, i);
+                    Object value = resultSetClass.getDeclaredMethod("get" + typeName, int.class).invoke(resultSet, i);
                     map.put(columnName, value);
                 }
                 result.add(map);
             }
             return result;
-        } catch (SQLException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         } finally {
             closeStream();
+        }
+    }
+
+    /**
+     * @Description: 转换类型名，适配ResultSet对象的方法
+     */
+    private String convertTypeName(String typeName) throws Exception {
+        switch (typeName) {
+            case "Long":
+            case "String":
+            case "BigDecimal":
+            case "Boolean":
+            case "Date":
+            case "Double":
+            case "Float":
+                return typeName;
+            default:
+                throw new Exception("Unmatched type");
+            case "Integer":
+                return "Int";
         }
     }
 

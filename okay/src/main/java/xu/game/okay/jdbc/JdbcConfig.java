@@ -2,10 +2,12 @@ package xu.game.okay.jdbc;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import xu.tools.toolsio.PropertyTool;
+import xu.tools.io.PropertyTool;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
 * @Description: jdbc配置类

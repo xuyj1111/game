@@ -1,8 +1,10 @@
 package xu.game.okay.page.admin.userList;
 
+import xu.game.okay.entity.User;
 import xu.game.okay.factory.BeanFactory;
 import xu.game.okay.jdbc.JdbcAction;
 import xu.game.okay.page.base.BaseJPanel;
+import xu.tools.json.JsonMapper;
 
 import java.awt.*;
 import java.util.List;
@@ -10,12 +12,25 @@ import java.util.Map;
 
 public class UserListJPanel extends BaseJPanel {
 
+    public UserListControls userListControls;
+
+    /**
+     * @Description: 该界面会变化，每次变化执行一次该addControls方法
+     */
     @Override
     public void addControls() {
+        removeAll();
         JdbcAction jdbc = BeanFactory.jdbc;
-        List<Map<String, Object>> querys = jdbc.querys("SELECT * FROM user");
+        java.util.List<Map<String, Object>> querys = jdbc.querys("SELECT * FROM user");
+        List<User> users = JsonMapper.parseList(JsonMapper.writeValueAsString(querys), User.class);
 
-        add()
+        userListControls = new UserListControls(users);
+        add(UserListControls.quit);
+        userListControls.userJLabels.forEach(userJLabel -> {
+            add(userJLabel.getUser());
+            add(userJLabel.getLogout());
+            add(userJLabel.getEdit());
+        });
     }
 
     public void paint(Graphics gr) {

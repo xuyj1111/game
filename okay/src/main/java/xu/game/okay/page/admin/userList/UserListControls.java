@@ -1,7 +1,12 @@
 package xu.game.okay.page.admin.userList;
 
+import com.google.common.collect.Lists;
+import lombok.Data;
 import xu.game.okay.constant.IconConstant;
 import xu.game.okay.entity.User;
+import xu.game.okay.page.admin.userList.listener.EditMouseListener;
+import xu.game.okay.page.admin.userList.listener.LogoutMouseListener;
+import xu.game.okay.page.admin.userList.listener.QuitActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,42 +21,53 @@ import java.util.List;
  * @Date: 2022/1/17
  */
 public class UserListControls {
-    private static JButton quit = new JButton();
-    private List<User> userList;
-    private JLabel[] users;
-    private JLabel[] logout;
-    private JLabel[] edit;
+    public static JButton quit = new JButton();
+    public List<User> userList;
+    public List<UserJLabel> userJLabels;
+
+    @Data
+    public class UserJLabel {
+        public JLabel user;
+        public JLabel logout;
+        public JLabel edit;
+    }
 
     static {
         quit.setForeground(Color.black);
         quit.setIcon(new ImageIcon(IconConstant.ADMIN_QUIT));
         quit.setBounds(310, 390, 50, 50);
         quit.setBorderPainted(false);
+        quit.addActionListener(new QuitActionListener());
     }
 
     public UserListControls(List<User> userList) {
         this.userList = userList;
-        users = new JLabel[userList.size()];
-        logout = new JLabel[userList.size()];
-        edit = new JLabel[userList.size()];
+        userJLabels = Lists.newArrayList();
         for (int i = 0; i < userList.size(); i++) {
-            users[i] = new JLabel((i + 1) + ": " + userList.get(i));
-            users[i].setForeground(Color.gray);
-            users[i].setFont(new Font("幼圆", 1, 15));
+            UserJLabel userJLabel = new UserJLabel();
+            JLabel user = new JLabel(userList.get(i).getName());
+            user.setForeground(Color.gray);
+            user.setFont(new Font("幼圆", 1, 15));
             if (i >= 9)
-                users[i].setBounds(18, 25 + i * 20, 100, 15);
+                user.setBounds(18, 25 + i * 20, 100, 15);
             else
-                users[i].setBounds(25, 25 + i * 20, 100, 15);
+                user.setBounds(25, 25 + i * 20, 100, 15);
+            userJLabel.setUser(user);
 
-            logout[i] = new JLabel("注销");
-            logout[i].setForeground(Color.gray);
-            logout[i].setFont(new Font("宋体", 1, 8));
-            logout[i].setBounds(300, 25 + i * 20, 40, 15);
+            JLabel logout = new JLabel("注销");
+            logout.setForeground(Color.gray);
+            logout.setFont(new Font("宋体", 1, 15));
+            logout.setBounds(300, 25 + i * 20, 40, 15);
+            logout.addMouseListener(new LogoutMouseListener());
+            userJLabel.setLogout(logout);
 
-            edit[i] = new JLabel("编辑");
-            edit[i].setForeground(Color.gray);
-            edit[i].setFont(new Font("宋体", 1, 15));
-            edit[i].setBounds(340, 25 + i * 20, 40, 15);
+            JLabel edit = new JLabel("编辑");
+            edit.setForeground(Color.gray);
+            edit.setFont(new Font("宋体", 1, 15));
+            edit.setBounds(340, 25 + i * 20, 40, 15);
+            edit.addMouseListener(new EditMouseListener());
+            userJLabel.setEdit(edit);
+            userJLabels.add(userJLabel);
         }
     }
 }
