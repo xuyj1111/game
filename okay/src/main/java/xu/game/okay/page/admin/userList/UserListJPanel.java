@@ -15,15 +15,17 @@ public class UserListJPanel extends BaseJPanel {
     public UserListControls userListControls;
 
     /**
-     * @Description: 该界面会变化，每次变化执行一次该addControls方法
+     * @Description: 清空所有控件，并数据库中查询所有用户，重新添加控件
      */
     @Override
     public void addControls() {
+        //清空吗
         removeAll();
+        //数据库中查询所有用户
         JdbcAction jdbc = BeanFactory.jdbc;
         java.util.List<Map<String, Object>> querys = jdbc.querys("SELECT * FROM user");
         List<User> users = JsonMapper.parseList(JsonMapper.writeValueAsString(querys), User.class);
-
+        //添加控件
         userListControls = new UserListControls(users);
         add(UserListControls.quit);
         userListControls.userJLabels.forEach(userJLabel -> {

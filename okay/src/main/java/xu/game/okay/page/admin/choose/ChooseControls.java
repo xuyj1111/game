@@ -20,7 +20,7 @@ public class ChooseControls {
     static {
         welcome.setForeground(Color.gray);
         welcome.setFont(new Font("幼圆", 1, 40));
-        welcome.setBounds(50, 50, 350, 40);
+        welcome.setBounds(45, 50, 350, 40);
 
         manageLevel.setForeground(Color.black);
         manageLevel.setIcon(new ImageIcon(IconConstant.ADMIN_MANAGE_LEVEL));

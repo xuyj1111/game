@@ -1,29 +1,28 @@
-package xu.game.okay.page.admin.userEdit;
+package xu.game.okay.page.user.choose;
 
 import xu.game.okay.page.base.BaseJPanel;
 
 import java.awt.*;
 
-public class UserEditJPanel extends BaseJPanel {
+public class ChooseJPanel extends BaseJPanel {
+
+    public String userName;
+    public ChooseControls chooseControls;
 
     @Override
     public void addControls() {
-        add(UserEditControls.title);
-        add(UserEditControls.userName);
-        add(UserEditControls.userNameF);
-        add(UserEditControls.pwd);
-        add(UserEditControls.pwdF);
-        add(UserEditControls.progress);
-        add(UserEditControls.box);
-        add(UserEditControls.defined);
-        add(UserEditControls.menu);
-        add(UserEditControls.confirm);
-        add(UserEditControls.cancel);
+        removeAll();
+        chooseControls = new ChooseControls(userName);
+        add(chooseControls.welcome);
+        add(ChooseControls.through);
+        add(ChooseControls.defined);
+        add(ChooseControls.quit);
+        add(ChooseControls.question);
     }
 
     public void paint(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
-        g.setBackground(Color.black);
+        g.setBackground(Color.white);
         g.clearRect(0, 0, getWidth(), getHeight());
         Stroke dash = new BasicStroke(2.5f, BasicStroke.CAP_BUTT,
                 BasicStroke.JOIN_ROUND, 3.5f, new float[]{15, 10,},

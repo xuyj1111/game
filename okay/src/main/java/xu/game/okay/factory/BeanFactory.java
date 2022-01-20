@@ -15,7 +15,10 @@ public class BeanFactory {
     public static InitJPanel initJPanel = new InitJPanel();
     public static LoginJPanel loginJPanel = new LoginJPanel();
     public static RegisterJPanel registerJPanel = new RegisterJPanel();
+    //管理员
     public static ChooseJPanel adminChooseJPanel = new ChooseJPanel();
     public static UserListJPanel userListJPanel = new UserListJPanel();
     public static UserEditJPanel userEditJPanel = new UserEditJPanel();
+    //用户
+    public static xu.game.okay.page.user.choose.ChooseJPanel userChooseJPanel = new xu.game.okay.page.user.choose.ChooseJPanel();
 }

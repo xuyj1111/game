@@ -15,13 +15,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
-/**
- * @Description: 因为需要查询数据库中的用户，所以该Controls不同其他，需要new
- * @Author: xuyujun
- * @Date: 2022/1/17
- */
 public class UserListControls {
     public static JButton quit = new JButton();
+
+    /**
+     * @Description: 用户控件数量根据数据库中变化，因此不能是静态
+     * userList：保存User对象
+     * userJLabels：保存一个user对应的三个控件（用户名，注销，编辑）
+     */
     public List<User> userList;
     public List<UserJLabel> userJLabels;
 
@@ -49,7 +50,7 @@ public class UserListControls {
             user.setForeground(Color.gray);
             user.setFont(new Font("幼圆", 1, 15));
             if (i >= 9)
-                user.setBounds(18, 25 + i * 20, 100, 15);
+                user.setBounds(25, 25 + i * 20, 100, 15);
             else
                 user.setBounds(25, 25 + i * 20, 100, 15);
             userJLabel.setUser(user);

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.util.Strings;
 import xu.game.okay.MainClass;
 import xu.game.okay.factory.BeanFactory;
 import xu.game.okay.page.login.LoginControls;
+import xu.game.okay.page.user.choose.ChooseJPanel;
 
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
@@ -44,6 +45,12 @@ public class LoginActionListener implements ActionListener {
             MainClass.jFrame.setVisible(true);
         } else {
             //用户界面
+            ChooseJPanel userChooseJPanel = BeanFactory.userChooseJPanel;
+            userChooseJPanel.userName = userContent;
+            userChooseJPanel.addControls();
+            MainClass.jPanel = userChooseJPanel;
+            MainClass.jFrame.setContentPane(MainClass.jPanel);
+            MainClass.jFrame.setVisible(true);
         }
     }
 }
