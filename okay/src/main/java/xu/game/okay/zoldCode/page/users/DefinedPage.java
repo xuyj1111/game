@@ -29,46 +29,26 @@ public class DefinedPage extends JPanel {
 //        this.username = username;
 //        setLayout(null);
 //
-//        JButton back = new JButton();
-//        back.setForeground(Color.black);
-//        back.setIcon(new ImageIcon("图标/返回.jpg"));
-//        back.setBounds(160, 850, 50, 50);
-//        back.setBorderPainted(false);
+//
+//
 //        add(back);
 //
-//        JButton delete = new JButton();
-//        delete.setForeground(Color.black);
-//        delete.setIcon(new ImageIcon("图标/删除.jfif"));
-//        delete.setBounds(260, 850, 50, 50);
-//        delete.setBorderPainted(false);
+//
 //        add(delete);
 //
-//        JButton ok = new JButton();
-//        ok.setForeground(Color.black);
-//        ok.setIcon(new ImageIcon("图标/确定small.jfif"));
-//        ok.setBounds(360, 850, 50, 50);
-//        ok.setBorderPainted(false);
+//
+//
 //        add(ok);
 //
-//        JButton start = new JButton();
-//        start.setForeground(Color.black);
-//        start.setIcon(new ImageIcon("图标/开始.jfif"));
-//        start.setBounds(460, 850, 50, 50);
-//        start.setBorderPainted(false);
+//
+//
 //        add(start);
 //
-//        JButton menu = new JButton();
-//        menu.setForeground(Color.black);
-//        menu.setIcon(new ImageIcon("图标/菜单.jpg"));
-//        menu.setBounds(560, 850, 50, 50);
-//        menu.setBorderPainted(false);
+//
+//
 //        add(menu);
 //
-//        JButton question_icon = new JButton();
-//        question_icon.setForeground(Color.black);
-//        question_icon.setIcon(new ImageIcon("图标/问号.jpg"));
-//        question_icon.setBounds(700, 50, 30, 30);
-//        question_icon.setBorderPainted(false);
+//
 //        add(question_icon);
 //
 //        mouse(back, delete, ok, start, menu, question_icon);
@@ -86,7 +66,7 @@ public class DefinedPage extends JPanel {
 //            }
 //        }, 0, 50);
 //    }
-//
+
 //    public void mouse(JButton back, JButton delete, JButton ok,
 //                      JButton start, JButton menu, JButton question_icon) {
 //        this.addMouseListener(new MouseAdapter() {

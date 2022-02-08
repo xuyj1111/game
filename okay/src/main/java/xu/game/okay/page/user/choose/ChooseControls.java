@@ -2,6 +2,7 @@ package xu.game.okay.page.user.choose;
 
 import xu.game.okay.constant.IconConstant;
 import xu.game.okay.page.listener.QuestionActionListener;
+import xu.game.okay.page.user.choose.listener.DefinedActionListener;
 import xu.game.okay.page.user.choose.listener.QuitActionListener;
 
 import javax.swing.ImageIcon;
@@ -26,6 +27,7 @@ public class ChooseControls {
         defined.setIcon(new ImageIcon(IconConstant.CUSTOMER_DEFINE));
         defined.setBounds(130, 250, 150, 150);
         defined.setBorderPainted(false);
+        defined.addActionListener(new DefinedActionListener());
 
         quit.setForeground(Color.black);
         quit.setIcon(new ImageIcon(IconConstant.QUIT));

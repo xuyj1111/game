@@ -8,6 +8,7 @@ import xu.game.okay.page.admin.userList.UserListJPanel;
 import xu.game.okay.page.init.InitJPanel;
 import xu.game.okay.page.login.LoginJPanel;
 import xu.game.okay.page.register.RegisterJPanel;
+import xu.game.okay.page.user.defined.DefinedJPanel;
 
 public class BeanFactory {
 
@@ -21,4 +22,5 @@ public class BeanFactory {
     public static UserEditJPanel userEditJPanel = new UserEditJPanel();
     //用户
     public static xu.game.okay.page.user.choose.ChooseJPanel userChooseJPanel = new xu.game.okay.page.user.choose.ChooseJPanel();
+    public static DefinedJPanel definedJPanel = new DefinedJPanel();
 }

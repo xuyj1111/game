@@ -18,7 +18,6 @@ public class BaseJPanel extends AbstractJPanel {
 
     }
 
-    //待删
     @Override
     public void addComponentAdapter() {
 
