@@ -1,9 +1,10 @@
-package xu.game.okay.page.user.defined.listener;
+package xu.game.okay.page.admin.userEdit.listener;
 
 import org.springframework.util.CollectionUtils;
 import xu.game.okay.MainClass;
 import xu.game.okay.factory.BeanFactory;
-import xu.game.okay.page.user.menu.MenuControls;
+import xu.game.okay.page.admin.userEdit.UserEditControls;
+import xu.game.okay.page.admin.userMenu.UserMenuControls;
 
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -17,22 +18,22 @@ public class MenuActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         List<Long> levelIds = null;
-        List<Map<String, Object>> querys = BeanFactory.jdbc.querys("SELECT level_id FROM level WHERE user = '%s' and is_system = 0", BeanFactory.userChooseJPanel.userName);
+        List<Map<String, Object>> querys = BeanFactory.jdbc.querys("SELECT level_id FROM level WHERE user = '%s' and is_system = 0", UserEditControls.userNameF.getText());
         if (!CollectionUtils.isEmpty(querys)) {
             levelIds = querys.stream().map(q -> (Long) q.get("level_id")).collect(Collectors.toList());
         }
         if (!CollectionUtils.isEmpty(levelIds)) {
-            for (JLabel number : MenuControls.components) {
+            for (JLabel number : UserMenuControls.components) {
                 if (levelIds.contains(Long.valueOf(number.getText()))) {
-                    number.setForeground(Color.black);
+                    number.setForeground(Color.white);
                 } else {
-                    number.setForeground(Color.lightGray);
+                    number.setForeground(new Color(50, 50, 50));
                 }
             }
         } else {
-            MenuControls.components.forEach(number -> number.setForeground(Color.lightGray));
+            UserMenuControls.components.forEach(number -> number.setForeground(new Color(50, 50, 50)));
         }
-        MainClass.jPanel = BeanFactory.menuJPanel;
+        MainClass.jPanel = BeanFactory.userMenuJPanel;
         MainClass.jFrame.setContentPane(MainClass.jPanel);
         MainClass.jFrame.setVisible(true);
     }

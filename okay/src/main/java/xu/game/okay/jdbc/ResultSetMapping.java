@@ -2,6 +2,12 @@ package xu.game.okay.jdbc;
 
 import java.sql.Types;
 
+/**
+ * @Description: 将字符串的类转化成 Types 枚举
+ * ResultSet类获取sql查询结果，只能通过getXxx类型的方法，因此使用反射实现以传入字符串参数，转换成对应的getXxx方法
+ * @Author: xuyujun
+ * @Date: 2022/3/15
+ */
 public class ResultSetMapping {
 
     public static Class<?> toClass(int type) {

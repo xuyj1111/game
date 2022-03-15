@@ -3,7 +3,9 @@ package xu.game.okay.page.user.defined;
 import com.google.common.collect.Lists;
 import xu.game.okay.constant.IconConstant;
 import xu.game.okay.page.listener.QuestionActionListener;
+import xu.game.okay.page.user.defined.listener.MenuActionListener;
 import xu.game.okay.page.user.defined.listener.PointActionListener;
+import xu.game.okay.page.user.defined.listener.ReturnActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +27,7 @@ public class DefinedControls {
         returm.setIcon(new ImageIcon(IconConstant.RETURN));
         returm.setBounds(80, 425, 25, 25);
         returm.setBorderPainted(false);
+        returm.addActionListener(new ReturnActionListener());
 
         delete.setForeground(Color.black);
         delete.setIcon(new ImageIcon(IconConstant.DELETE));
@@ -45,6 +48,7 @@ public class DefinedControls {
         menu.setIcon(new ImageIcon(IconConstant.MENU));
         menu.setBounds(280, 425, 25, 25);
         menu.setBorderPainted(false);
+        menu.addActionListener(new MenuActionListener());
 
         question.setForeground(Color.black);
         question.setIcon(new ImageIcon(IconConstant.QUESTION));

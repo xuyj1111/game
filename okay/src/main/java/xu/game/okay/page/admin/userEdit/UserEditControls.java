@@ -3,6 +3,7 @@ package xu.game.okay.page.admin.userEdit;
 import xu.game.okay.constant.IconConstant;
 import xu.game.okay.page.admin.userEdit.listener.CancelActionListener;
 import xu.game.okay.page.admin.userEdit.listener.ConfirmActionListener;
+import xu.game.okay.page.admin.userEdit.listener.MenuActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -68,6 +69,7 @@ public class UserEditControls {
         menu.setIcon(new ImageIcon(IconConstant.ADMIN_MENU));
         menu.setBounds(200, 235, 25, 25);
         menu.setBorderPainted(false);
+        menu.addActionListener(new MenuActionListener());
 
         confirm.setBounds(110, 300, 50, 50);
         confirm.setIcon(new ImageIcon(IconConstant.ADMIN_CONFIRM));
