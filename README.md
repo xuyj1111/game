@@ -1,3 +1,5 @@
-# okay
-划线弹射游戏  
-模仿 okay? app，用 Java 的 Swing 这个老旧技术简单实现的游戏。为本人初学 Java 时，看到教材上的一章是 Swing，就好奇的在此基础上做的毕业设计。程序设计很烂，就做着玩一下。
+# okay（画线弹射游戏）
+> 本项目为个人在初学 Java 时，用 Swing 这个老旧技术简单实现的游戏。模仿的是 okay? app  
+>详细说明见 [README.md](https://github.com/xuyj1111/game/blob/master/okay/README.md)
+# 下一个游戏
+> 功能未定，时间未定

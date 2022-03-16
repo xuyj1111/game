@@ -19,11 +19,11 @@ public class UserListJPanel extends BaseJPanel {
      */
     @Override
     public void addControls() {
-        //清空吗
+        //清空
         removeAll();
         //数据库中查询所有用户
         JdbcAction jdbc = BeanFactory.jdbc;
-        java.util.List<Map<String, Object>> querys = jdbc.querys("SELECT * FROM user");
+        java.util.List<Map<String, Object>> querys = jdbc.querys("SELECT * FROM user WHERE name != 'admin'");
         List<User> users = JsonMapper.parseList(JsonMapper.writeValueAsString(querys), User.class);
         //添加控件
         userListControls = new UserListControls(users);

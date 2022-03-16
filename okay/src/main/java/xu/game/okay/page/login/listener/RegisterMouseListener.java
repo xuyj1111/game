@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 public class RegisterMouseListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
+        LoginControls.userNameF.setText("");
+        LoginControls.passWordF.setText("");
         LoginControls.register.setForeground(Color.gray);
         MainClass.jPanel = BeanFactory.registerJPanel;
         MainClass.jFrame.setContentPane(MainClass.jPanel);

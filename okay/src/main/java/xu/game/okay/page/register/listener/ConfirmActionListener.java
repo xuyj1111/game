@@ -39,9 +39,12 @@ public class ConfirmActionListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "两次密码不一致");
             return;
         }
-        query = BeanFactory.jdbc.query("SELECT COUNT(1) FROM user");
+        query = BeanFactory.jdbc.query("SELECT COUNT(1) FROM user WHERE name != 'admin'");
         count = (Long) query.get("COUNT(1)");
         if (count < 18) {
+            RegisterControls.usernameF.setText("");
+            RegisterControls.passWordF.setText("");
+            RegisterControls.passWord2F.setText("");
             BeanFactory.jdbc.update("INSERT INTO user (`name`, `pwd`) VALUES('%s', '%s')", userContent, pwdContent);
             MainClass.jPanel = BeanFactory.loginJPanel;
             MainClass.jFrame.setContentPane(MainClass.jPanel);

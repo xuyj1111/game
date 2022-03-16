@@ -13,7 +13,7 @@ public class IconConstant {
     public static final String CONFIRM = BASE_PATH + "confirm.jpg";
     public static final String CONFIRM_SMALL = BASE_PATH + "confirm_small.jpg";
     public static final String DELETE = BASE_PATH + "delete.jpg";
-    public static final String DESC = BASE_PATH + "desc.txt";
+    public static final String DESC = BASE_PATH + "desc.md";
     public static final String QUIT = BASE_PATH + "quit.jpg";
     public static final String QUESTION = BASE_PATH + "question.jpg";
     public static final String CUSTOMER_DEFINE = BASE_PATH + "customer_define.jpg";
