@@ -1,7 +1,7 @@
 package xu.game.okay.page.user.menu.listener;
 
 import xu.game.okay.MainClass;
-import xu.game.okay.factory.BeanFactory;
+import xu.game.okay.util.BeanFactory;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

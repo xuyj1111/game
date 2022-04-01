@@ -2,8 +2,9 @@ package xu.game.okay.page.user.defined.listener;
 
 import org.springframework.util.CollectionUtils;
 import xu.game.okay.MainClass;
-import xu.game.okay.factory.BeanFactory;
 import xu.game.okay.page.user.menu.MenuControls;
+import xu.game.okay.util.BeanFactory;
+import xu.game.okay.util.DrawBoardUtil;
 
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class MenuActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
+        DrawBoardUtil.init();
         List<Long> levelIds = null;
         List<Map<String, Object>> querys = BeanFactory.jdbc.querys("SELECT level_id FROM level WHERE user = '%s' and is_system = 0", BeanFactory.userChooseJPanel.userName);
         if (!CollectionUtils.isEmpty(querys)) {

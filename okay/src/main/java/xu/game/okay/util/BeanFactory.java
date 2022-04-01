@@ -1,4 +1,4 @@
-package xu.game.okay.factory;
+package xu.game.okay.util;
 
 import xu.game.okay.jdbc.JdbcAction;
 import xu.game.okay.jdbc.JdbcConfig;

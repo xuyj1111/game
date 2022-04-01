@@ -1,7 +1,7 @@
 package xu.game.okay.page.init.listener;
 
 import xu.game.okay.MainClass;
-import xu.game.okay.factory.BeanFactory;
+import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.base.BaseJPanel;
 import xu.game.okay.page.init.InitControls;
 

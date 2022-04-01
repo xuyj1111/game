@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 /* map格式
 {
-    "shape": 3,
-    "property": 1,
+    "type": "polygon",
+    "property": "elimination",
     "point": [
         {
             "number": 1,
@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `user` (
     ]
 
 }
-shape: 1-线，2-圆，3-多边形
-property: 1-单次消除（灰色），2-双次消除（浅灰），3-障碍（黑色），4-黑洞（空心）
+type: "line"-线，"circle"-圆，"polygon"-多边形
+property: "elimination"-单次消除（灰色），"double_elimination"-双次消除（浅灰），"obstacle"-障碍（黑色），"black_hole"-黑洞（空心）
 point：[number: 序号, x、y: 坐标]
  */
 CREATE TABLE IF NOT EXISTS `level` (

@@ -14,6 +14,7 @@ public class ChooseJPanel extends BaseJPanel {
         add(ChooseControls.quit);
     }
 
+    @Override
     public void paint(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
         g.setBackground(Color.black);

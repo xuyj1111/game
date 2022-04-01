@@ -21,6 +21,7 @@ public class UserEditJPanel extends BaseJPanel {
         add(UserEditControls.cancel);
     }
 
+    @Override
     public void paint(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
         g.setBackground(Color.black);

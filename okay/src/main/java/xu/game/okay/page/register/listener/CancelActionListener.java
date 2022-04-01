@@ -1,7 +1,7 @@
 package xu.game.okay.page.register.listener;
 
 import xu.game.okay.MainClass;
-import xu.game.okay.factory.BeanFactory;
+import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.register.RegisterControls;
 
 import java.awt.event.ActionEvent;

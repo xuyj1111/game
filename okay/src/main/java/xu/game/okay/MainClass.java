@@ -1,6 +1,6 @@
 package xu.game.okay;
 
-import xu.game.okay.factory.BeanFactory;
+import xu.game.okay.util.BeanFactory;
 import xu.game.okay.jdbc.JdbcConfig;
 
 import javax.swing.JFrame;

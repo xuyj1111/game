@@ -2,7 +2,7 @@ package xu.game.okay.page.admin.userEdit.listener;
 
 import org.springframework.util.CollectionUtils;
 import xu.game.okay.MainClass;
-import xu.game.okay.factory.BeanFactory;
+import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.admin.userEdit.UserEditControls;
 import xu.game.okay.page.admin.userMenu.UserMenuControls;
 

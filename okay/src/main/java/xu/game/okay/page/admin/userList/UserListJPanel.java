@@ -1,7 +1,7 @@
 package xu.game.okay.page.admin.userList;
 
 import xu.game.okay.entity.User;
-import xu.game.okay.factory.BeanFactory;
+import xu.game.okay.util.BeanFactory;
 import xu.game.okay.jdbc.JdbcAction;
 import xu.game.okay.page.base.BaseJPanel;
 import xu.tools.json.JsonMapper;
@@ -35,6 +35,7 @@ public class UserListJPanel extends BaseJPanel {
         });
     }
 
+    @Override
     public void paint(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
         g.setBackground(Color.black);

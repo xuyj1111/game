@@ -2,7 +2,7 @@ package xu.game.okay.page.admin.userList.listener;
 
 import xu.game.okay.MainClass;
 import xu.game.okay.entity.User;
-import xu.game.okay.factory.BeanFactory;
+import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.admin.userEdit.UserEditControls;
 import xu.game.okay.page.admin.userList.UserListControls;
 

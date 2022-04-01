@@ -14,6 +14,13 @@ import java.util.List;
 
 public class DefinedControls {
 
+    //点之间的间隔
+    private static final int INTERVAL = 20;
+    //点阵图居中的x轴偏移量
+    private static final int CENTER_OFFSET_X = 50;
+    //点阵图居中的y轴偏移量
+    private static final int CENTER_OFFSET_Y = 25;
+
     public static JButton returm = new JButton();
     public static JButton delete = new JButton();
     public static JButton confirm = new JButton();
@@ -60,7 +67,7 @@ public class DefinedControls {
             for (int j = 0; j < 20; j++) {
                 JButton pointB = new JButton();
                 pointB.setIcon(new ImageIcon(IconConstant.POINT));
-                pointB.setBounds(20 * i + 50, 20 * j + 25, 15, 15);
+                pointB.setBounds(INTERVAL * i + CENTER_OFFSET_X, INTERVAL * j + CENTER_OFFSET_Y, 15, 15);
                 pointB.setBorderPainted(false);
                 pointB.addActionListener(new PointActionListener());
                 components.add(pointB);

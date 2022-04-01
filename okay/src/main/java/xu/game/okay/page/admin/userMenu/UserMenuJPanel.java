@@ -14,6 +14,7 @@ public class UserMenuJPanel extends BaseJPanel {
         UserMenuControls.components.forEach(c -> add(c));
     }
 
+    @Override
     public void paint(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
         g.setBackground(Color.BLACK);

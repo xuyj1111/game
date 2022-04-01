@@ -2,7 +2,7 @@ package xu.game.okay.page.login.listener;
 
 import org.apache.logging.log4j.util.Strings;
 import xu.game.okay.MainClass;
-import xu.game.okay.factory.BeanFactory;
+import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.login.LoginControls;
 import xu.game.okay.page.user.choose.ChooseJPanel;
 
