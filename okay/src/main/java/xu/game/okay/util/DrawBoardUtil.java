@@ -36,7 +36,7 @@ public class DrawBoardUtil {
     //在调用该类方法前，必须要赋值drawJPanel！！！
     public static BaseJPanel drawJPanel;
     //绘图板已构建的图形集
-    private static List<ShapeDTO> shapeDTOS = new ArrayList<>();
+    public static List<ShapeDTO> shapeDTOS = new ArrayList<>();
     //绘图板已点击的点集
     private static List<PointDTO> pointDTOS = new ArrayList<>();
     //序号
@@ -48,6 +48,9 @@ public class DrawBoardUtil {
      * @Description: 初始化
      */
     public static void init() {
+        if (Objects.isNull(drawJPanel)) {
+            return;
+        }
         stopDraw();
         drawJPanel.setDrawnShape(null);
         drawJPanel = null;

@@ -5,6 +5,7 @@ import lombok.Data;
 import xu.game.okay.enums.ShapeProperty;
 import xu.game.okay.enums.ShapeType;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,8 +15,9 @@ import java.util.List;
 */
 @Data
 @Builder
-public class ShapeDTO {
+public class ShapeDTO implements Serializable {
 
+    private static final long serialVersionUID = 5902513291096462641L;
     private ShapeType type;
     private ShapeProperty property;
     //仅为圆使用

@@ -3,6 +3,7 @@ package xu.game.okay.page.user.defined;
 import com.google.common.collect.Lists;
 import xu.game.okay.constant.IconConstant;
 import xu.game.okay.page.listener.QuestionActionListener;
+import xu.game.okay.page.user.defined.listener.ConfirmActionListener;
 import xu.game.okay.page.user.defined.listener.MenuActionListener;
 import xu.game.okay.page.user.defined.listener.PointActionListener;
 import xu.game.okay.page.user.defined.listener.ReturnActionListener;
@@ -45,6 +46,7 @@ public class DefinedControls {
         confirm.setIcon(new ImageIcon(IconConstant.CONFIRM_SMALL));
         confirm.setBounds(180, 425, 25, 25);
         confirm.setBorderPainted(false);
+        confirm.addActionListener(new ConfirmActionListener());
 
         start.setForeground(Color.black);
         start.setIcon(new ImageIcon(IconConstant.START));

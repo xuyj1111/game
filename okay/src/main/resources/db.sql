@@ -11,33 +11,34 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /* map格式
-{
-    "type": "polygon",
-    "property": "elimination",
-    "point": [
-        {
-            "number": 1,
-            "x": 4,
-            "y": 4
-        },
-        {
-            "number": 2,
-            "x": 6,
-            "y": 4
-        },
-        {
-            "number": 3,
-            "x": 6,
-            "y": 6
-        },
-        {
-            "number": 4,
-            "x": 4,
-            "y": 6
-        }
-    ]
-
-}
+[
+    {
+        "type":"POLYGON",
+        "property":"ELIMINATION",
+        "point":[
+            {
+                "number":0,
+                "x":6,
+                "y":9
+            },
+            {
+                "number":1,
+                "x":5,
+                "y":11
+            },
+            {
+                "number":2,
+                "x":10,
+                "y":8
+            },
+            {
+                "number":3,
+                "x":6,
+                "y":9
+            }
+        ]
+    }
+]
 type: "line"-线，"circle"-圆，"polygon"-多边形
 property: "elimination"-单次消除（灰色），"double_elimination"-双次消除（浅灰），"obstacle"-障碍（黑色），"black_hole"-黑洞（空心）
 point：[number: 序号, x、y: 坐标]
@@ -50,6 +51,5 @@ CREATE TABLE IF NOT EXISTS `level` (
 	`user` VARCHAR(255) DEFAULT NULL COMMENT '使用者',
 	`is_system` TINYINT(1) DEFAULT 1 COMMENT '是否系统，0否1是',
     PRIMARY KEY (`id`),
-    KEY `idx_level` (`level_id`),
-    UNIQUE KEY `uni_idx_name_user_system` (`name`,`user`,`is_system`)
+    UNIQUE KEY `uni_idx_levelId_user_system` (`level_id`,`user`,`is_system`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

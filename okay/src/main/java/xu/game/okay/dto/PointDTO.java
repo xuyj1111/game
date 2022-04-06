@@ -1,9 +1,11 @@
 package xu.game.okay.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.swing.JButton;
+import java.io.Serializable;
 
 /**
 * @Description: 绘图板`点`的dto
@@ -12,8 +14,9 @@ import javax.swing.JButton;
 */
 @Data
 @Builder
-public class PointDTO {
+public class PointDTO implements Serializable {
 
+    private static final long serialVersionUID = -7540063795606609401L;
     /**
     * @Description: 序号
     */
@@ -32,5 +35,6 @@ public class PointDTO {
     /**
     * @Description: `点`按钮
     */
+    @JsonIgnore
     private JButton pointB;
 }
