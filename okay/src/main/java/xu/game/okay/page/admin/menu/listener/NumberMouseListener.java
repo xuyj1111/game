@@ -1,9 +1,14 @@
 package xu.game.okay.page.admin.menu.listener;
 
+import javax.swing.JLabel;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class NumberMouseListener implements MouseListener {
+
+    private Color foreground;
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -21,11 +26,14 @@ public class NumberMouseListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        JLabel label = (JLabel) e.getSource();
+        foreground = label.getForeground();
+        label.setForeground(Color.lightGray);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        JLabel label = (JLabel) e.getSource();
+        label.setForeground(foreground);
     }
 }

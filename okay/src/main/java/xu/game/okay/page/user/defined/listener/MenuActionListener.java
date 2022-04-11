@@ -28,11 +28,12 @@ public class MenuActionListener implements ActionListener {
                 if (levelIds.contains(Long.valueOf(number.getText()))) {
                     number.setForeground(Color.black);
                 } else {
-                    number.setForeground(Color.lightGray);
+                    //区别一下Color.lightGray
+                    number.setForeground(new Color(192,192,193));
                 }
             }
         } else {
-            MenuControls.components.forEach(number -> number.setForeground(Color.lightGray));
+            MenuControls.components.forEach(number -> number.setForeground(new Color(192,192,193)));
         }
         MainClass.jPanel = BeanFactory.menuJPanel;
         MainClass.jFrame.setContentPane(MainClass.jPanel);
