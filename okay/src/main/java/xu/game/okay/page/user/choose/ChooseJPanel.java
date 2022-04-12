@@ -4,6 +4,11 @@ import xu.game.okay.page.base.BaseJPanel;
 
 import java.awt.*;
 
+/** 
+ * @Description: 用户模式选择界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12 
+ */ 
 public class ChooseJPanel extends BaseJPanel {
 
     public String userName;

@@ -11,6 +11,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.stream.Collectors;
 
+/**
+ * @Description: 用户注销键
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class LogoutMouseListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {

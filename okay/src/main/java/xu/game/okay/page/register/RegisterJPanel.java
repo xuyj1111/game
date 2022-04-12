@@ -1,10 +1,14 @@
 package xu.game.okay.page.register;
 
 import xu.game.okay.page.base.BaseJPanel;
-import xu.game.okay.page.login.LoginControls;
 
 import java.awt.*;
 
+/**
+ * @Description: 注册界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class RegisterJPanel extends BaseJPanel {
 
     @Override

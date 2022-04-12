@@ -10,6 +10,11 @@ import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @Description: 用户列表界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class UserListJPanel extends BaseJPanel {
 
     public UserListControls userListControls;

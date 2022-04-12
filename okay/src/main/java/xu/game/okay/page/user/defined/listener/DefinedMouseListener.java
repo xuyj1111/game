@@ -1,22 +1,20 @@
 package xu.game.okay.page.user.defined.listener;
 
-import xu.game.okay.page.user.defined.DefinedControls;
+import xu.game.okay.util.DrawBoardUtil;
 
-import javax.swing.JButton;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 
+/**
+ * @Description: 自定义关卡界面键
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class DefinedMouseListener implements MouseListener {
 
-    /**
-     * @Description: 鼠标点击
-     * 取消选中的点，让其失去聚焦（即边框）
-     */
     @Override
     public void mouseClicked(MouseEvent e) {
-        List<JButton> points = DefinedControls.components;
-        points.forEach(p -> p.setBorderPainted(false));
+        DrawBoardUtil.stopDraw();
     }
 
     @Override

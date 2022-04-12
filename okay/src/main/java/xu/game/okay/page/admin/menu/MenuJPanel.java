@@ -6,6 +6,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+/**
+ * @Description: 系统关卡菜单界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class MenuJPanel extends BaseJPanel {
     @Override
     public void addControls() {

@@ -5,8 +5,16 @@ import xu.game.okay.page.base.BaseJPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.List;
 
+/**
+ * @Description: 用户关卡菜单界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class MenuJPanel extends BaseJPanel {
+    //关卡名
+    public List<String> names;
 
     @Override
     public void addControls() {

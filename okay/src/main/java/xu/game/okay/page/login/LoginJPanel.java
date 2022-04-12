@@ -4,6 +4,11 @@ import xu.game.okay.page.base.BaseJPanel;
 
 import java.awt.*;
 
+/**
+ * @Description: 登陆界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class LoginJPanel extends BaseJPanel {
 
     @Override

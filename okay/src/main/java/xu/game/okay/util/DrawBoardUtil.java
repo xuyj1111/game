@@ -131,9 +131,6 @@ public class DrawBoardUtil {
         pointB.setBorderPainted(!pointB.isBorderPainted());
     }
 
-
-    /*--------------------以下方法为private，内部调用---------------------------*/
-
     /**
      * @Description: 检查点击位置
      */
@@ -207,7 +204,7 @@ public class DrawBoardUtil {
     /**
      * @Description: 停止当前绘画的图形
      */
-    private static void stopDraw() {
+    public static void stopDraw() {
         DefinedControls.components.forEach(point -> point.setBorderPainted(false));
         drawJPanel.setDrawing(null);
         pointDTOS.clear();

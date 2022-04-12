@@ -1,7 +1,7 @@
 package xu.game.okay;
 
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.jdbc.JdbcConfig;
+import xu.game.okay.util.BeanFactory;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +20,6 @@ public class MainClass {
         if (Objects.isNull(connection)) {
             throw new Exception("连接数据库失败！");
         }
-        jFrame.setDefaultLookAndFeelDecorated(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setBounds(0, 0,400, 500);
         jFrame.setLocationRelativeTo(null);

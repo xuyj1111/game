@@ -1,5 +1,10 @@
 package xu.game.okay.constant;
 
+/**
+ * @Description: 图片路径常量
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class IconConstant {
 
     public static final String BASE_PATH = IconConstant.class.getClassLoader().getResource("file/").getPath();
@@ -19,6 +24,7 @@ public class IconConstant {
     public static final String CUSTOMER_DEFINE = BASE_PATH + "customer_define.jpg";
     public static final String POINT = BASE_PATH + "point.png";
 
+    //以下是管理员界面的图片
     public static final String ADMIN_PATH = BASE_PATH + "admin/";
     public static final String ADMIN_CANCEL = ADMIN_PATH + "cancel.jpg";
     public static final String ADMIN_CONFIRM = ADMIN_PATH + "confirm.jpg";

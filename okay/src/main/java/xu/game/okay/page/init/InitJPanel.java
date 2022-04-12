@@ -5,6 +5,11 @@ import xu.game.okay.page.init.listener.InitMouse;
 
 import java.awt.Graphics;
 
+/**
+ * @Description: 初始界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class InitJPanel extends BaseJPanel {
     
     @Override

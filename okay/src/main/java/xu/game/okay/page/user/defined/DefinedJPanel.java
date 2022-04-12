@@ -8,6 +8,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Objects;
 
+/** 
+ * @Description: 自定义关卡界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12 
+ */ 
 public class DefinedJPanel extends BaseJPanel {
 
     @Override

@@ -8,6 +8,11 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @Description: help键（全局）
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class QuestionActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {

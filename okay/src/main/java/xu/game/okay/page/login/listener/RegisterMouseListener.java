@@ -8,6 +8,11 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * @Description: 注册键
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class RegisterMouseListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {

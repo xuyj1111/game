@@ -4,6 +4,11 @@ import xu.game.okay.page.base.BaseJPanel;
 
 import java.awt.*;
 
+/**
+ * @Description: 用户编辑界面
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class UserEditJPanel extends BaseJPanel {
 
     @Override

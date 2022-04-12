@@ -8,6 +8,11 @@ import xu.game.okay.page.init.InitControls;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * @Description: 鼠标点击界面触发
+ * @Author: xuyujun
+ * @Date: 2022/4/12
+ */
 public class InitMouse extends MouseAdapter {
     /**
      * @Description: 点击次数
