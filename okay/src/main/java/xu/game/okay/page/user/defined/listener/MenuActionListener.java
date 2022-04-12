@@ -24,14 +24,17 @@ public class MenuActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         DrawBoardUtil.init();
         List<Long> levelIds = null;
-        List<Map<String, Object>> querys = BeanFactory.jdbc.querys("SELECT level_id FROM level WHERE user = '%s' and is_system = 0", BeanFactory.userChooseJPanel.userName);
+        List<String> names = null;
+        List<Map<String, Object>> querys = BeanFactory.jdbc.querys("SELECT level_id, name FROM level WHERE user = '%s' and is_system = 0 ORDER BY id", BeanFactory.userChooseJPanel.userName);
         if (!CollectionUtils.isEmpty(querys)) {
             levelIds = querys.stream().map(q -> (Long) q.get("level_id")).collect(Collectors.toList());
+            names = querys.stream().map(q -> String.valueOf(q.get("name"))).collect(Collectors.toList());
         }
         if (!CollectionUtils.isEmpty(levelIds)) {
             for (JLabel number : MenuControls.components) {
                 if (levelIds.contains(Long.valueOf(number.getText()))) {
                     number.setForeground(Color.black);
+                    number.setToolTipText(names.get(Integer.parseInt(number.getText()) - 1));
                 } else {
                     //与Color.lightGray区别一下
                     number.setForeground(new Color(192,192,193));
