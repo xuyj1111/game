@@ -1,4 +1,4 @@
-package xu.game.okay.page.user.defined.listener;
+package xu.game.okay.page.defined.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

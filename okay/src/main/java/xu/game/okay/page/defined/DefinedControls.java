@@ -1,12 +1,12 @@
-package xu.game.okay.page.user.defined;
+package xu.game.okay.page.defined;
 
 import com.google.common.collect.Lists;
 import xu.game.okay.constant.IconConstant;
+import xu.game.okay.page.defined.listener.ConfirmActionListener;
+import xu.game.okay.page.defined.listener.MenuActionListener;
+import xu.game.okay.page.defined.listener.PointActionListener;
+import xu.game.okay.page.defined.listener.ReturnActionListener;
 import xu.game.okay.page.listener.QuestionActionListener;
-import xu.game.okay.page.user.defined.listener.ConfirmActionListener;
-import xu.game.okay.page.user.defined.listener.MenuActionListener;
-import xu.game.okay.page.user.defined.listener.PointActionListener;
-import xu.game.okay.page.user.defined.listener.ReturnActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

@@ -1,6 +1,7 @@
-package xu.game.okay.page.user.defined.listener;
+package xu.game.okay.page.defined.listener;
 
 import org.springframework.util.CollectionUtils;
+import xu.game.okay.enums.JPanelSource;
 import xu.game.okay.util.BeanFactory;
 import xu.game.okay.util.DrawBoardUtil;
 import xu.tools.json.JsonMapper;
@@ -24,6 +25,19 @@ public class ConfirmActionListener implements ActionListener {
         if (DrawBoardUtil.shapeDTOS.size() == 0) {
             return;
         }
+
+        if (BeanFactory.definedJPanel.source == JPanelSource.USER) {
+            insertUserLevel();
+        } else if (BeanFactory.definedJPanel.source == JPanelSource.ADMIN_SYSTEM) {
+            String json = JsonMapper.writeValueAsString(DrawBoardUtil.shapeDTOS);
+            BeanFactory.jdbc.update("update level set map = '%s' where level_id = '%s' and is_system = 1", json, BeanFactory.definedJPanel.number);
+        } else {
+
+        }
+        DrawBoardUtil.init();
+    }
+
+    private void insertUserLevel() {
         long count = 0L;
         Map<String, Object> query = BeanFactory.jdbc.query("select count(1) from level where user = '%s' and is_system = 0", BeanFactory.userChooseJPanel.userName);
         if (!CollectionUtils.isEmpty(query)) {
@@ -33,18 +47,16 @@ public class ConfirmActionListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "关数已满，不可新增");
             return;
         }
-
         String name = JOptionPane.showInputDialog(null, "请输入关卡名");
         if (Objects.isNull(name)) {
             return;
         }
         String json = JsonMapper.writeValueAsString(DrawBoardUtil.shapeDTOS);
         BeanFactory.jdbc.update("insert into level(level_id, name, map, user, is_system) values(" +
-                "IFNULL((select max(l.level_id) + 1 from level l where l.user = '%s' and l.is_system = 0), 1), " +
-                "'%s', '%s', '%s', 0) ",
+                        "IFNULL((select max(l.level_id) + 1 from level l where l.user = '%s' and l.is_system = 0), 1), " +
+                        "'%s', '%s', '%s', 0) ",
                 BeanFactory.userChooseJPanel.userName,
                 name, json,
                 BeanFactory.userChooseJPanel.userName);
-        DrawBoardUtil.init();
     }
 }

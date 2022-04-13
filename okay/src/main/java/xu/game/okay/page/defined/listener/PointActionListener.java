@@ -1,7 +1,6 @@
-package xu.game.okay.page.user.defined.listener;
+package xu.game.okay.page.defined.listener;
 
-import xu.game.okay.page.user.defined.DefinedControls;
-import xu.game.okay.util.BeanFactory;
+import xu.game.okay.page.defined.DefinedControls;
 import xu.game.okay.util.DrawBoardUtil;
 
 import javax.swing.JButton;
@@ -18,8 +17,6 @@ public class PointActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton pointB = (JButton) e.getSource();
-        //首先赋值 drawJPanel, 表示在指定的 JPanel 上绘图
-        DrawBoardUtil.drawJPanel = BeanFactory.definedJPanel;
         DrawBoardUtil.logicForDraw(getIndex(pointB), pointB);
     }
 

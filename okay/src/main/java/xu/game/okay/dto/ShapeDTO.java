@@ -1,7 +1,7 @@
 package xu.game.okay.dto;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import xu.game.okay.enums.ShapeProperty;
 import xu.game.okay.enums.ShapeType;
 
@@ -14,7 +14,7 @@ import java.util.List;
 * @Date: 2022/3/24
 */
 @Data
-@Builder
+@NoArgsConstructor
 public class ShapeDTO implements Serializable {
 
     private static final long serialVersionUID = 5902513291096462641L;

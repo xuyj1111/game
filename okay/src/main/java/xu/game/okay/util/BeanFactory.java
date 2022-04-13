@@ -10,7 +10,7 @@ import xu.game.okay.page.admin.userMenu.UserMenuJPanel;
 import xu.game.okay.page.init.InitJPanel;
 import xu.game.okay.page.login.LoginJPanel;
 import xu.game.okay.page.register.RegisterJPanel;
-import xu.game.okay.page.user.defined.DefinedJPanel;
+import xu.game.okay.page.defined.DefinedJPanel;
 
 public class BeanFactory {
 

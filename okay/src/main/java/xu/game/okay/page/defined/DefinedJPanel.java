@@ -1,19 +1,24 @@
-package xu.game.okay.page.user.defined;
+package xu.game.okay.page.defined;
 
+import xu.game.okay.enums.JPanelSource;
 import xu.game.okay.page.base.BaseJPanel;
-import xu.game.okay.page.user.defined.listener.DefinedMouseListener;
+import xu.game.okay.page.defined.listener.DefinedMouseListener;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Objects;
 
-/** 
+/**
  * @Description: 自定义关卡界面
  * @Author: xuyujun
- * @Date: 2022/4/12 
- */ 
+ * @Date: 2022/4/12
+ */
 public class DefinedJPanel extends BaseJPanel {
+
+    public JPanelSource source;
+
+    public String number;
 
     @Override
     public void addControls() {

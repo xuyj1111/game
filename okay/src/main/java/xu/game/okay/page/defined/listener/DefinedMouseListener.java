@@ -1,4 +1,4 @@
-package xu.game.okay.page.user.defined.listener;
+package xu.game.okay.page.defined.listener;
 
 import xu.game.okay.util.DrawBoardUtil;
 

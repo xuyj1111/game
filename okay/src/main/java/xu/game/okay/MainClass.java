@@ -21,7 +21,7 @@ public class MainClass {
             throw new Exception("连接数据库失败！");
         }
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setBounds(0, 0,400, 500);
+        jFrame.setBounds(0, 0, 400, 500);
         jFrame.setLocationRelativeTo(null);
         jFrame.setLayout(new FlowLayout());
         jFrame.setContentPane(jPanel);

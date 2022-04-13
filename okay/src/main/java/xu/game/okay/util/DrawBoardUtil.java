@@ -6,8 +6,8 @@ import xu.game.okay.dto.PointDTO;
 import xu.game.okay.dto.ShapeDTO;
 import xu.game.okay.enums.ShapeProperty;
 import xu.game.okay.enums.ShapeType;
-import xu.game.okay.page.base.BaseJPanel;
-import xu.game.okay.page.user.defined.DefinedControls;
+import xu.game.okay.page.defined.DefinedControls;
+import xu.game.okay.page.defined.DefinedJPanel;
 
 import javax.swing.JButton;
 import java.awt.Color;
@@ -33,8 +33,7 @@ public class DrawBoardUtil {
     //点的西北向为起点，到点中心的偏移量
     private static final int POINRT_OFFSET = 8;
 
-    //在调用该类方法前，必须要赋值drawJPanel！！！
-    public static BaseJPanel drawJPanel;
+    public static DefinedJPanel drawJPanel = BeanFactory.definedJPanel;
     //绘图板已构建的图形集
     public static List<ShapeDTO> shapeDTOS = new ArrayList<>();
     //绘图板已点击的点集
@@ -48,12 +47,9 @@ public class DrawBoardUtil {
      * @Description: 初始化
      */
     public static void init() {
-        if (Objects.isNull(drawJPanel)) {
-            return;
-        }
         stopDraw();
         drawJPanel.setDrawnShape(null);
-        drawJPanel = null;
+        drawJPanel.number = null;
         shapeDTOS.clear();
     }
 
@@ -61,27 +57,14 @@ public class DrawBoardUtil {
      * @Description: 公共工具方法，绘图逻辑
      */
     public static void logicForDraw(int index, JButton pointB) {
-        if (Objects.isNull(drawJPanel)) {
-            log.warn("drawJPanel can not be null...");
-            return;
-        }
-        //插入绘图"已构建的图形"代码
-        if (Objects.isNull(drawJPanel.getDrawnShape())) {
-            drawJPanel.setDrawnShape(g -> {
-                shapeDTOS.forEach(shapeDTO -> {
-                    if (shapeDTO.getType() == ShapeType.LINE) {
-                        drawLine(g, shapeDTO.getPoint());
-                    } else if (shapeDTO.getType() == ShapeType.CIRCLE) {
-                        drawCircle(g, shapeDTO);
-                    } else if (shapeDTO.getType() == ShapeType.POLYGON){
-                        drawPolygon(g, shapeDTO);
-                    }
-                });
-                return null;
-            });
-        }
+        setDefinedJPDrawnShape();
+        PointDTO dto = new PointDTO();
+        dto.setNumber(number);
+        dto.setPointB(pointB);
+        dto.setX(index / 20);
+        dto.setY(index % 20);
         //记录点击'点'
-        pointDTOS.add(PointDTO.builder().number(number).x(index / 20).y(index % 20).pointB(pointB).build());
+        pointDTOS.add(dto);
         number++;
         int size = pointDTOS.size();
         //校验点击的位置
@@ -129,6 +112,26 @@ public class DrawBoardUtil {
         }
         clickTime = System.currentTimeMillis();
         pointB.setBorderPainted(!pointB.isBorderPainted());
+    }
+
+    /**
+     * @Description: 插入绘图"已构建的图形"代码
+     */
+    public static void setDefinedJPDrawnShape() {
+        if (Objects.isNull(drawJPanel.getDrawnShape())) {
+            drawJPanel.setDrawnShape(g -> {
+                shapeDTOS.forEach(shapeDTO -> {
+                    if (shapeDTO.getType() == ShapeType.LINE) {
+                        drawLine(g, shapeDTO.getPoint());
+                    } else if (shapeDTO.getType() == ShapeType.CIRCLE) {
+                        drawCircle(g, shapeDTO);
+                    } else if (shapeDTO.getType() == ShapeType.POLYGON) {
+                        drawPolygon(g, shapeDTO);
+                    }
+                });
+                return null;
+            });
+        }
     }
 
     /**
@@ -180,7 +183,10 @@ public class DrawBoardUtil {
      * @Description: 添加线
      */
     private static void addLine() {
-        shapeDTOS.add(ShapeDTO.builder().type(ShapeType.LINE).point(Lists.newArrayList(pointDTOS)).build());
+        ShapeDTO dto = new ShapeDTO();
+        dto.setType(ShapeType.LINE);
+        dto.setPoint(Lists.newArrayList(pointDTOS));
+        shapeDTOS.add(dto);
         stopDraw();
     }
 
@@ -188,8 +194,13 @@ public class DrawBoardUtil {
      * @Description: 添加圆
      */
     private static void addCircle() {
+        ShapeDTO dto = new ShapeDTO();
+        dto.setType(ShapeType.CIRCLE);
+        dto.setProperty(ShapeProperty.ELIMINATION);
         //size 为圆的直径，所以需要 *2
-        shapeDTOS.add(ShapeDTO.builder().type(ShapeType.CIRCLE).property(ShapeProperty.ELIMINATION).size(INTERVAL * 2).point(Lists.newArrayList(pointDTOS)).build());
+        dto.setSize(INTERVAL * 2);
+        dto.setPoint(Lists.newArrayList(pointDTOS));
+        shapeDTOS.add(dto);
         stopDraw();
     }
 
@@ -197,7 +208,11 @@ public class DrawBoardUtil {
      * @Description: 添加多边形
      */
     private static void addPolygon() {
-        shapeDTOS.add(ShapeDTO.builder().type(ShapeType.POLYGON).property(ShapeProperty.ELIMINATION).point(Lists.newArrayList(pointDTOS)).build());
+        ShapeDTO dto = new ShapeDTO();
+        dto.setType(ShapeType.POLYGON);
+        dto.setProperty(ShapeProperty.ELIMINATION);
+        dto.setPoint(Lists.newArrayList(pointDTOS));
+        shapeDTOS.add(dto);
         stopDraw();
     }
 
