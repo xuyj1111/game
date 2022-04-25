@@ -23,18 +23,20 @@ public class ConfirmActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (DrawBoardUtil.shapeDTOS.size() == 0) {
+            JOptionPane.showMessageDialog(null, "请添加图形");
             return;
         }
 
         if (BeanFactory.definedJPanel.source == JPanelSource.USER) {
             insertUserLevel();
+            DrawBoardUtil.init();
         } else if (BeanFactory.definedJPanel.source == JPanelSource.ADMIN_SYSTEM) {
             String json = JsonMapper.writeValueAsString(DrawBoardUtil.shapeDTOS);
             BeanFactory.jdbc.update("update level set map = '%s' where level_id = '%s' and is_system = 1", json, BeanFactory.definedJPanel.number);
+            JOptionPane.showMessageDialog(null, "修改成功");
         } else {
 
         }
-        DrawBoardUtil.init();
     }
 
     private void insertUserLevel() {
