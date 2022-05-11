@@ -6,9 +6,10 @@
 
 ## 项目文件
 - constant：常量类
+- dto：对象
 - entity：实体类，对应数据库表
-- factory：工厂类
-- jdbc：简单封装了jdbc
+- enums：枚举类
+- jdbc：简单封装了jdbc（新手时期没学持久化框架）
 - page：游戏的界面
     - admin：管理员界面
     - base：构建界面的自定义基础类
@@ -18,6 +19,10 @@
     - play：游戏界面
     - register：注册界面
     - user：用户界面
+- util：工具类
+  - BeanFactory：放了一堆静态类
+  - DrawBoardUtil：绘图板工具类
+  - RayCasUtil：射线法实现工具类（用于判断各种图形重合）
 
 ## 游戏玩法
 详细说明见 [desc.md](https://github.com/xuyj1111/game/blob/master/okay/src/main/resources/file/desc.md)

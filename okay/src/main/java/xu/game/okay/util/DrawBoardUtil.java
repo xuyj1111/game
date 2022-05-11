@@ -63,51 +63,58 @@ public class DrawBoardUtil {
         dto.setPointB(pointB);
         dto.setX(index / 20);
         dto.setY(index % 20);
-        //记录点击'点'
+        // 记录点击'点'
         pointDTOS.add(dto);
         number++;
         int size = pointDTOS.size();
-        //校验点击的位置
+        // 校验点击的位置
         checkLocation();
-        //获取上一次点击的'点'
+        // 获取上一次点击的'点'
         PointDTO lastPoint = size > 1 ? pointDTOS.get(size - 2) : null;
-        //根据点击的次数，绘画图形
+        // 根据点击的次数，绘画图形
         switch (size) {
             case 1:
                 break;
             case 2: {
                 long now = System.currentTimeMillis();
-                if (lastPoint.getPointB().equals(pointB) && now - clickTime <= 1000) {
-                    addCircle();
-                    return;
-                } else if (lastPoint.getPointB().equals(pointB) && now - clickTime > 1000) {
+                // 两次点击同一个点
+                if (lastPoint.getPointB().equals(pointB)) {
+                    // 时间差 <= 1s，表示双击画画
+                    if (now - clickTime <= 1000) {
+                        addCircle();
+                        return;
+                    }
+                    // 否则退出
                     stopDraw();
                     return;
                 }
             }
             default: {
+                // 当前点是否被点击过
                 boolean hasSamePoint = pointDTOS.stream().filter(pointDTO -> pointDTO.getPointB().equals(pointB)).count() > 1;
-                if (hasSamePoint && pointDTOS.get(0).getPointB().equals(pointB)) {
-                    if (size > 3) {
-                        addPolygon();
-                    } else {
+                if (hasSamePoint) {
+                    // 与首次点击相同
+                    if (pointDTOS.get(0).getPointB().equals(pointB)) {
+                        if (size > 3) {
+                            addPolygon();
+                        } else {
+                            addLine();
+                        }
+                        return;
+                    } else if (size == 3) {
                         addLine();
+                        return;
                     }
-                    return;
-                } else if (hasSamePoint && size == 3) {
-                    addLine();
-                    return;
-                } else if (hasSamePoint) {
+                    // 与首次点击不同，且不是第三次点击，退出
                     stopDraw();
                     return;
-                } else {
-                    //连线
-                    drawJPanel.setDrawing(g -> {
-                        drawLine(g, pointDTOS);
-                        return null;
-                    });
-                    lastPoint.getPointB().setBorderPainted(!lastPoint.getPointB().isBorderPainted());
                 }
+                // 连线
+                drawJPanel.setDrawing(g -> {
+                    drawLine(g, pointDTOS);
+                    return null;
+                });
+                lastPoint.getPointB().setBorderPainted(!lastPoint.getPointB().isBorderPainted());
             }
         }
         clickTime = System.currentTimeMillis();
