@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 /**
  * @Description: 自定义关卡界面键
+ * 在'点'之外的窗口内区域点击，清除当前绘画
  * @Author: xuyujun
  * @Date: 2022/4/12
  */

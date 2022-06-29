@@ -5,7 +5,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.util.CollectionUtils;
 import xu.game.okay.MainClass;
 import xu.game.okay.dto.ShapeDTO;
-import xu.game.okay.enums.JPanelSource;
+import xu.game.okay.enums.DefinedJPanelSource;
 import xu.game.okay.util.BeanFactory;
 import xu.game.okay.util.DrawBoardUtil;
 import xu.tools.json.JsonMapper;
@@ -19,13 +19,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @Description: 关卡数字键
+ * @Description: 系统关卡数字键
  * @Author: xuyujun
  * @Date: 2022/4/12
  */
 @Slf4j
 public class NumberMouseListener implements MouseListener {
 
+    /**
+     * 关卡序号颜色
+     */
     private Color foreground;
 
     @Override
@@ -44,8 +47,8 @@ public class NumberMouseListener implements MouseListener {
             return;
         }
         DrawBoardUtil.shapeDTOS = JsonMapper.parseList(map, ShapeDTO.class);
-        DrawBoardUtil.setDefinedJPDrawnShape();
-        BeanFactory.definedJPanel.source = JPanelSource.ADMIN_SYSTEM;
+        DrawBoardUtil.setDefinedJPDrawnShape(BeanFactory.definedJPanel);
+        BeanFactory.definedJPanel.source = DefinedJPanelSource.ADMIN_SYSTEM;
         BeanFactory.definedJPanel.number = number;
         MainClass.jPanel = BeanFactory.definedJPanel;
         MainClass.jFrame.setContentPane(MainClass.jPanel);

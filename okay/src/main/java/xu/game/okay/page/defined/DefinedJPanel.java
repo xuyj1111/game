@@ -1,6 +1,6 @@
 package xu.game.okay.page.defined;
 
-import xu.game.okay.enums.JPanelSource;
+import xu.game.okay.enums.DefinedJPanelSource;
 import xu.game.okay.page.base.BaseJPanel;
 import xu.game.okay.page.defined.listener.DefinedMouseListener;
 
@@ -16,8 +16,14 @@ import java.util.Objects;
  */
 public class DefinedJPanel extends BaseJPanel {
 
-    public JPanelSource source;
+    /**
+     * @Description: 上级界面
+     */
+    public DefinedJPanelSource source;
 
+    /**
+     * @Description: 当前页面的关卡序号
+     */
     public String number;
 
     @Override
@@ -42,7 +48,7 @@ public class DefinedJPanel extends BaseJPanel {
         g.setBackground(Color.white);
         g.clearRect(0, 0, getWidth(), getHeight());
         super.paintComponents(g);
-        //动态执行绘图程序
+        // 动态执行绘图程序
         if (!Objects.isNull(getDrawing())) {
             getDrawing().apply(g);
         }

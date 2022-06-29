@@ -11,7 +11,14 @@ import java.awt.*;
  */ 
 public class ChooseJPanel extends BaseJPanel {
 
+    /**
+     * 用户名
+     */
     public String userName;
+
+    /**
+     * 由于用户名是动态变化，因此不能为静态
+     */
     public ChooseControls chooseControls;
 
     @Override

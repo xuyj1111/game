@@ -1,7 +1,7 @@
 package xu.game.okay.page.user.choose.listener;
 
 import xu.game.okay.MainClass;
-import xu.game.okay.enums.JPanelSource;
+import xu.game.okay.enums.DefinedJPanelSource;
 import xu.game.okay.util.BeanFactory;
 
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 public class DefinedActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        BeanFactory.definedJPanel.source = JPanelSource.USER;
+        BeanFactory.definedJPanel.source = DefinedJPanelSource.USER;
         MainClass.jPanel = BeanFactory.definedJPanel;
         MainClass.jFrame.setContentPane(MainClass.jPanel);
         MainClass.jFrame.setVisible(true);

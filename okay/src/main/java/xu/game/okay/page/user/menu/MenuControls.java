@@ -15,8 +15,19 @@ import java.util.List;
 
 public class MenuControls {
 
+    /**
+     * 返回键
+     */
     public static JButton returm = new JButton();
+
+    /**
+     * help键
+     */
     public static JButton question = new JButton();
+
+    /**
+     * 关卡序号键
+     */
     public static List<JLabel> components = Lists.newArrayList();
 
     static {
@@ -44,6 +55,4 @@ public class MenuControls {
             }
         }
     }
-
-
 }

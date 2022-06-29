@@ -6,6 +6,7 @@ import xu.game.okay.dto.PointDTO;
 import xu.game.okay.dto.ShapeDTO;
 import xu.game.okay.enums.ShapeProperty;
 import xu.game.okay.enums.ShapeType;
+import xu.game.okay.page.base.BaseJPanel;
 import xu.game.okay.page.defined.DefinedControls;
 import xu.game.okay.page.defined.DefinedJPanel;
 
@@ -24,24 +25,47 @@ import java.util.Objects;
 @Slf4j
 public class DrawBoardUtil {
 
-    //点之间的间隔
+    /**
+     * '点'之间的间隔
+     */
     private static final int INTERVAL = 20;
-    //点阵图居中的x轴偏移量
+
+    /**
+     * 点阵图居中的x轴偏移量
+     */
     private static final int CENTER_OFFSET_X = 50;
-    //点阵图居中的y轴偏移量
+
+    /**
+     * 点阵图居中的y轴偏移量
+     */
     private static final int CENTER_OFFSET_Y = 25;
-    //点的西北向为起点，到点中心的偏移量
+
+    /**
+     * '点'的西北向为起点，到'点'中心的偏移量
+     */
     private static final int POINRT_OFFSET = 8;
 
-    public static DefinedJPanel drawJPanel = BeanFactory.definedJPanel;
-    //绘图板已构建的图形集
+    /**
+     * 绘图板已构建的图形集
+     */
     public static List<ShapeDTO> shapeDTOS = new ArrayList<>();
-    //绘图板已点击的点集
+
+    /**
+     * 绘图板已点击的'点'集
+     */
     private static List<PointDTO> pointDTOS = new ArrayList<>();
-    //序号
+
+    /**
+     * '点'的序号
+     */
     private static int number = 0;
-    //点击的时间戳，用于判断双击
+
+    /**
+     * 点击的时间戳，用于判断双击
+     */
     private static long clickTime;
+
+    public static DefinedJPanel drawJPanel = BeanFactory.definedJPanel;
 
     /**
      * @Description: 初始化
@@ -54,10 +78,10 @@ public class DrawBoardUtil {
     }
 
     /**
-     * @Description: 公共工具方法，绘图逻辑
+     * @Description: 绘图逻辑
      */
     public static void logicForDraw(int index, JButton pointB) {
-        setDefinedJPDrawnShape();
+        setDefinedJPDrawnShape(drawJPanel);
         PointDTO dto = new PointDTO();
         dto.setNumber(number);
         dto.setPointB(pointB);
@@ -124,9 +148,9 @@ public class DrawBoardUtil {
     /**
      * @Description: 插入绘图"已构建的图形"代码
      */
-    public static void setDefinedJPDrawnShape() {
-        if (Objects.isNull(drawJPanel.getDrawnShape())) {
-            drawJPanel.setDrawnShape(g -> {
+    public static void setDefinedJPDrawnShape(BaseJPanel jPanel) {
+        if (Objects.isNull(jPanel.getDrawnShape())) {
+            jPanel.setDrawnShape(g -> {
                 shapeDTOS.forEach(shapeDTO -> {
                     if (shapeDTO.getType() == ShapeType.LINE) {
                         drawLine(g, shapeDTO.getPoint());

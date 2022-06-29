@@ -2,10 +2,7 @@ package xu.game.okay.page.defined;
 
 import com.google.common.collect.Lists;
 import xu.game.okay.constant.IconConstant;
-import xu.game.okay.page.defined.listener.ConfirmActionListener;
-import xu.game.okay.page.defined.listener.MenuActionListener;
-import xu.game.okay.page.defined.listener.PointActionListener;
-import xu.game.okay.page.defined.listener.ReturnActionListener;
+import xu.game.okay.page.defined.listener.*;
 import xu.game.okay.page.listener.QuestionActionListener;
 
 import javax.swing.ImageIcon;
@@ -15,11 +12,19 @@ import java.util.List;
 
 public class DefinedControls {
 
-    //点之间的间隔
+    /**
+     * '点'之间的间隔
+     */
     private static final int INTERVAL = 20;
-    //点阵图居中的x轴偏移量
+
+    /**
+     * 点阵图居中的x轴偏移量
+     */
     private static final int CENTER_OFFSET_X = 50;
-    //点阵图居中的y轴偏移量
+
+    /**
+     * 点阵图居中的y轴偏移量
+     */
     private static final int CENTER_OFFSET_Y = 25;
 
     public static JButton returm = new JButton();
@@ -52,6 +57,7 @@ public class DefinedControls {
         start.setIcon(new ImageIcon(IconConstant.START));
         start.setBounds(230, 425, 25, 25);
         start.setBorderPainted(false);
+        start.addActionListener(new StartActionListener());
 
         menu.setForeground(Color.black);
         menu.setIcon(new ImageIcon(IconConstant.MENU));

@@ -40,16 +40,16 @@ public class LoginActionListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "密码错误");
             return;
         }
-        //账号密码都正确
+        // 账号密码都正确
         LoginControls.userNameF.setText("");
         LoginControls.passWordF.setText("");
         if ("admin".equals(userContent)) {
-            //管理员界面
+            // 管理员界面
             MainClass.jPanel = BeanFactory.adminChooseJPanel;
             MainClass.jFrame.setContentPane(MainClass.jPanel);
             MainClass.jFrame.setVisible(true);
         } else {
-            //用户界面
+            // 用户界面
             ChooseJPanel userChooseJPanel = BeanFactory.userChooseJPanel;
             userChooseJPanel.userName = userContent;
             userChooseJPanel.addControls();

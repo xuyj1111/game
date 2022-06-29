@@ -129,10 +129,10 @@ public class JdbcAction {
             case "Double":
             case "Float":
                 return typeName;
-            default:
-                throw new Exception("Unmatched type");
             case "Integer":
                 return "Int";
+            default:
+                throw new Exception("Unmatched type");
         }
     }
 

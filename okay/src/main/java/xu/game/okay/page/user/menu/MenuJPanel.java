@@ -13,7 +13,9 @@ import java.util.List;
  * @Date: 2022/4/12
  */
 public class MenuJPanel extends BaseJPanel {
-    //关卡名
+    /**
+     * 关卡名
+     */
     public List<String> names;
 
     @Override

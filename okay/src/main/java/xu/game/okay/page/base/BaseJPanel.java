@@ -9,14 +9,14 @@ import java.util.function.Function;
 public class BaseJPanel extends AbstractJPanel {
 
     /**
-    * @Description: JPanel的paint方法中使用，可动态插入代码，实现绘图中的线条
+    * @Description: 显示绘图板中的线条（动态变化）
     */
     @Getter
     @Setter
     private Function<Graphics2D, Void> drawing;
 
     /**
-    * @Description: like drawing attribute，绘画已构建完的图形
+    * @Description: 显示已构建完的图形（动态变化）
     */
     @Getter
     @Setter

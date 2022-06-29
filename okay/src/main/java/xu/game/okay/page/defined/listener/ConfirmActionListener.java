@@ -1,7 +1,7 @@
 package xu.game.okay.page.defined.listener;
 
 import org.springframework.util.CollectionUtils;
-import xu.game.okay.enums.JPanelSource;
+import xu.game.okay.enums.DefinedJPanelSource;
 import xu.game.okay.util.BeanFactory;
 import xu.game.okay.util.DrawBoardUtil;
 import xu.tools.json.JsonMapper;
@@ -27,15 +27,17 @@ public class ConfirmActionListener implements ActionListener {
             return;
         }
 
-        if (BeanFactory.definedJPanel.source == JPanelSource.USER) {
+        if (BeanFactory.definedJPanel.source == DefinedJPanelSource.USER) {
             insertUserLevel();
             DrawBoardUtil.init();
-        } else if (BeanFactory.definedJPanel.source == JPanelSource.ADMIN_SYSTEM) {
+        } else if (BeanFactory.definedJPanel.source == DefinedJPanelSource.ADMIN_SYSTEM) {
             String json = JsonMapper.writeValueAsString(DrawBoardUtil.shapeDTOS);
             BeanFactory.jdbc.update("update level set map = '%s' where level_id = '%s' and is_system = 1", json, BeanFactory.definedJPanel.number);
             JOptionPane.showMessageDialog(null, "修改成功");
         } else {
-
+            String json = JsonMapper.writeValueAsString(DrawBoardUtil.shapeDTOS);
+            BeanFactory.jdbc.update("update level set map = '%s' where level_id = '%s' and is_system = 0", json, BeanFactory.definedJPanel.number);
+            JOptionPane.showMessageDialog(null, "修改成功");
         }
     }
 

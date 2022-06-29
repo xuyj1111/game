@@ -1,4 +1,4 @@
-package xu.game.okay.page.defined.listener;
+package xu.game.okay.page.play.listener;
 
 import org.springframework.util.CollectionUtils;
 import xu.game.okay.MainClass;
@@ -15,11 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * @Description: 用户关卡菜单键
- * @Author: xuyujun
- * @Date: 2022/4/12
- */
 public class MenuActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -58,4 +53,5 @@ public class MenuActionListener implements ActionListener {
             MenuControls.components.forEach(number -> number.setForeground(new Color(192, 192, 193)));
         }
     }
+
 }
