@@ -1,12 +1,13 @@
 package xu.game.okay.page.play;
 
+import lombok.Getter;
+import lombok.Setter;
 import xu.game.okay.enums.PlayJPanelSource;
 import xu.game.okay.page.base.BaseJPanel;
 import xu.game.okay.page.play.listener.PlayMouseListener;
+import xu.game.okay.util.Function3;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.util.Objects;
 
 /**
@@ -17,9 +18,26 @@ import java.util.Objects;
 public class PlayJPanel extends BaseJPanel {
 
     /**
-     * @Description: 上级界面
+     * 上级界面
      */
     public PlayJPanelSource source;
+
+    /**
+     * 拖拽线
+     */
+    @Getter
+    @Setter
+    private Function3<Graphics2D, Point, Point> dragLine;
+
+    /**
+     * 拖拽线的起点
+     */
+    @Getter
+    @Setter
+    private Point startPoint;
+
+    private static final int MOUSE_OFFSET_X = 642;
+    private static final int MOUSE_OFFSET_Y = 272;
 
     @Override
     public void addControls() {
@@ -42,6 +60,14 @@ public class PlayJPanel extends BaseJPanel {
         // 动态执行绘图程序
         if (!Objects.isNull(getDrawnShape())) {
             getDrawnShape().apply(g);
+        }
+        if (!Objects.isNull(getDragLine())) {
+            Point point = MouseInfo.getPointerInfo().getLocation();
+            if (Objects.isNull(this.startPoint)) {
+                this.startPoint = new Point(point.x - MOUSE_OFFSET_X, point.y - MOUSE_OFFSET_Y);
+            }
+            point.setLocation(point.x - MOUSE_OFFSET_X, point.y - MOUSE_OFFSET_Y);
+            getDragLine().apply(g, this.startPoint, point);
         }
     }
 }
