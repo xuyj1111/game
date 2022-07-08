@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static xu.game.okay.util.RayCastUtil.realX;
+import static xu.game.okay.util.RayCastUtil.realY;
+
 /**
  * @Description: 绘图板
  * @Author: xuyujun
@@ -29,21 +32,6 @@ public class DrawBoardUtil {
      * '点'之间的间隔
      */
     private static final int INTERVAL = 20;
-
-    /**
-     * 点阵图居中的x轴偏移量
-     */
-    private static final int CENTER_OFFSET_X = 50;
-
-    /**
-     * 点阵图居中的y轴偏移量
-     */
-    private static final int CENTER_OFFSET_Y = 25;
-
-    /**
-     * '点'的西北向为起点，到'点'中心的偏移量
-     */
-    private static final int POINRT_OFFSET = 8;
 
     /**
      * 绘图板已构建的图形集
@@ -153,7 +141,7 @@ public class DrawBoardUtil {
             jPanel.setDrawnShape(g -> {
                 shapeDTOS.forEach(shapeDTO -> {
                     if (shapeDTO.getType() == ShapeType.LINE) {
-                        drawLine(g, shapeDTO.getPoint());
+                        drawLine(g, shapeDTO.getPoints());
                     } else if (shapeDTO.getType() == ShapeType.CIRCLE) {
                         drawCircle(g, shapeDTO);
                     } else if (shapeDTO.getType() == ShapeType.POLYGON) {
@@ -180,8 +168,7 @@ public class DrawBoardUtil {
         for (int i = 0; i < points.size() - 1; i++) {
             PointDTO startPoint = points.get(i);
             PointDTO endPoint = points.get(i + 1);
-            g.drawLine(INTERVAL * startPoint.getX() + CENTER_OFFSET_X + POINRT_OFFSET, INTERVAL * startPoint.getY() + CENTER_OFFSET_Y + POINRT_OFFSET,
-                    INTERVAL * endPoint.getX() + CENTER_OFFSET_X + POINRT_OFFSET, INTERVAL * endPoint.getY() + CENTER_OFFSET_Y + POINRT_OFFSET);
+            g.drawLine(realX(startPoint.getX()), realY(startPoint.getY()), realX(endPoint.getX()), realY(endPoint.getY()));
             drawJPanel.repaint();
         }
     }
@@ -190,10 +177,10 @@ public class DrawBoardUtil {
      * @Description: 画圆
      */
     private static void drawCircle(Graphics2D g, ShapeDTO shapeDTO) {
-        PointDTO point = shapeDTO.getPoint().get(0);
+        PointDTO point = shapeDTO.getPoints().get(0);
         Integer size = shapeDTO.getSize();
         g.setColor(Color.gray);
-        g.fillOval(INTERVAL * point.getX() + CENTER_OFFSET_X + POINRT_OFFSET - size / 2, INTERVAL * point.getY() + CENTER_OFFSET_Y + POINRT_OFFSET - size / 2, shapeDTO.getSize(), shapeDTO.getSize());
+        g.fillOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
 //        g.drawOval(INTERVAL * point.getX() + CENTER_OFFSET_X + POINRT_OFFSET - size / 2, INTERVAL * point.getY() + CENTER_OFFSET_Y + POINRT_OFFSET - size / 2, shapeDTO.getSize(), shapeDTO.getSize());
         drawJPanel.repaint();
     }
@@ -202,10 +189,10 @@ public class DrawBoardUtil {
      * @Description: 画多边形
      */
     private static void drawPolygon(Graphics2D g, ShapeDTO shapeDTO) {
-        int[] arrX = shapeDTO.getPoint().stream().mapToInt(p -> INTERVAL * p.getX() + CENTER_OFFSET_X + POINRT_OFFSET).toArray();
-        int[] arrY = shapeDTO.getPoint().stream().mapToInt(p -> INTERVAL * p.getY() + CENTER_OFFSET_Y + POINRT_OFFSET).toArray();
+        int[] arrX = shapeDTO.getPoints().stream().mapToInt(p -> realX(p.getX())).toArray();
+        int[] arrY = shapeDTO.getPoints().stream().mapToInt(p -> realY(p.getY())).toArray();
         g.setColor(Color.gray);
-        g.fillPolygon(arrX, arrY, shapeDTO.getPoint().size());
+        g.fillPolygon(arrX, arrY, shapeDTO.getPoints().size());
 //        g.drawPolygon(x, y, ji + 1);
         drawJPanel.repaint();
     }
@@ -216,7 +203,7 @@ public class DrawBoardUtil {
     private static void addLine() {
         ShapeDTO dto = new ShapeDTO();
         dto.setType(ShapeType.LINE);
-        dto.setPoint(Lists.newArrayList(pointDTOS));
+        dto.setPoints(Lists.newArrayList(pointDTOS));
         shapeDTOS.add(dto);
         stopDraw();
     }
@@ -228,9 +215,8 @@ public class DrawBoardUtil {
         ShapeDTO dto = new ShapeDTO();
         dto.setType(ShapeType.CIRCLE);
         dto.setProperty(ShapeProperty.ELIMINATION);
-        //size 为圆的直径，所以需要 *2
-        dto.setSize(INTERVAL * 2);
-        dto.setPoint(Lists.newArrayList(pointDTOS));
+        dto.setSize(INTERVAL);
+        dto.setPoints(Lists.newArrayList(pointDTOS));
         shapeDTOS.add(dto);
         stopDraw();
     }
@@ -242,7 +228,7 @@ public class DrawBoardUtil {
         ShapeDTO dto = new ShapeDTO();
         dto.setType(ShapeType.POLYGON);
         dto.setProperty(ShapeProperty.ELIMINATION);
-        dto.setPoint(Lists.newArrayList(pointDTOS));
+        dto.setPoints(Lists.newArrayList(pointDTOS));
         shapeDTOS.add(dto);
         stopDraw();
     }

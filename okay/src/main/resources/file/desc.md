@@ -2,7 +2,7 @@
 
 
 
-## 界面介绍
+## 界面简介
 
 - 初始界面：游戏启动后显示的界面，在界面的任意处点击，显示文字 “Let's start...”，再次界面的任意处点击，进入登陆界面
 - 登陆界面：
@@ -19,24 +19,28 @@
   - 管理关卡：对用户闯关的关卡进行修改设置
   - 管理用户：对用户进行 “注销” 和 “编辑” 操作
 
+## 流程图
+
+ 
+
 ```mermaid
 graph TD
 	init(初始化界面) --> login(登陆界面)
-	login --> register(注册界面)
 	login --用户--> userChoose(模式选择界面)
 	login --管理员--> adminChoose(管理选择界面)
+	login --注册--> register(注册界面)
 	
 	userChoose --闯关模式--> game(游戏界面)
   userChoose --自定义模式--> define(画板界面)
-  define --开始键--> defineGame(自定义游戏界面)
-  define --菜单键--> menu(菜单界面) --> defineGame
+  define --开始键--> gamePreview(游戏预览界面)
+  define --菜单键--> menu(菜单界面) --关卡序号--> gamePreview
 	
-	adminChoose --管理关卡--> systemMenu(菜单界面) --> adminDefine(画板界面)
-	adminChoose --管理用户--> userList(用户列表界面) --编辑--> userEdit(编辑用户界面) --> userMenu(菜单界面) --> adminDefine
-	adminDefine --> gamePreview(游戏预览界面)
+	adminChoose --管理关卡--> systemMenu(菜单界面) --关卡序号--> define2(画板界面)
+	adminChoose --管理用户--> userList(用户列表界面) --编辑--> userEdit(编辑用户界面) --自定义关卡--> userMenu(菜单界面) --关卡序号--> define2
+	define2 --开始键--> gamePreview
 ```
 
-## 画板界面介绍
+## 画板界面
 
 1. 创建图形
 
@@ -56,12 +60,7 @@ graph TD
    5. “开始” 键，预览当前绘图板，进行游戏（不保存）。
    6. “菜单” 键，进入自定义菜单界面。
 
-## 自定义菜单界面介绍
-
-- 选择创建的自定义关卡
-- 右键删除已创建的关卡
-
-## 游戏界面介绍
+## 游戏界面
 
 - 按住左键，拖动鼠标选择方向发射小球
 - 右键，按出“返回”键、“菜单”键

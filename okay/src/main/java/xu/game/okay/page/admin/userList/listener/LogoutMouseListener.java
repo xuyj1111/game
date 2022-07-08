@@ -37,12 +37,12 @@ public class LogoutMouseListener extends MouseAdapter {
     }
 
     /**
-     * @Description: 鼠标移入控件，控件变蓝
+     * @Description: 鼠标移入控件，控件变红
      */
     @Override
     public void mouseEntered(MouseEvent e) {
         JLabel jLabel = (JLabel) e.getSource();
-        jLabel.setForeground(Color.BLUE);
+        jLabel.setForeground(Color.RED);
     }
 
     /**
