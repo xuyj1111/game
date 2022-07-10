@@ -20,6 +20,8 @@ public class MainClass {
         if (Objects.isNull(connection)) {
             throw new Exception("连接数据库失败！");
         }
+        // 设置窗口不可调节大小
+        jFrame.setResizable(false);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setBounds(0, 0, 400, 500);
         jFrame.setLocationRelativeTo(null);

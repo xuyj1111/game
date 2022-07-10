@@ -18,26 +18,26 @@ public class ChooseControls {
     public static JButton question = new JButton();
 
     static {
-        through.setForeground(Color.black);
+        through.setContentAreaFilled(false);
         through.setIcon(new ImageIcon(IconConstant.BREAK_THROUGH));
         through.setBounds(130, 100, 150, 150);
         through.setBorderPainted(false);
 
-        defined.setForeground(Color.black);
+        defined.setContentAreaFilled(false);
         defined.setIcon(new ImageIcon(IconConstant.CUSTOMER_DEFINE));
         defined.setBounds(130, 250, 150, 150);
         defined.setBorderPainted(false);
         defined.addActionListener(new DefinedActionListener());
 
-        quit.setForeground(Color.black);
+        quit.setContentAreaFilled(false);
         quit.setIcon(new ImageIcon(IconConstant.QUIT));
-        quit.setBounds(310, 390, 50, 50);
+        quit.setBounds(300, 380, 50, 50);
         quit.setBorderPainted(false);
         quit.addActionListener(new QuitActionListener());
 
-        question.setForeground(Color.black);
+        question.setContentAreaFilled(false);
         question.setIcon(new ImageIcon(IconConstant.QUESTION));
-        question.setBounds(355, 30, 15, 15);
+        question.setBounds(340, 35, 15, 15);
         question.setBorderPainted(false);
         question.addActionListener(new QuestionActionListener());
     }

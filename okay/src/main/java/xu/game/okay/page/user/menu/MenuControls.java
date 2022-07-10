@@ -9,7 +9,6 @@ import xu.game.okay.page.user.menu.listener.ReturnActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
@@ -32,13 +31,13 @@ public class MenuControls {
 
     static {
 
-        returm.setForeground(Color.black);
+        returm.setContentAreaFilled(false);
         returm.setIcon(new ImageIcon(IconConstant.RETURN));
         returm.setBounds(50, 425, 25, 25);
         returm.setBorderPainted(false);
         returm.addActionListener(new ReturnActionListener());
 
-        question.setForeground(Color.black);
+        question.setContentAreaFilled(false);
         question.setIcon(new ImageIcon(IconConstant.QUESTION));
         question.setBounds(355, 30, 15, 15);
         question.setBorderPainted(false);

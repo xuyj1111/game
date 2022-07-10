@@ -22,19 +22,19 @@ public class ChooseControls {
         welcome.setFont(new Font("幼圆", 1, 40));
         welcome.setBounds(45, 50, 350, 40);
 
-        manageLevel.setForeground(Color.black);
+        manageLevel.setContentAreaFilled(false);
         manageLevel.setIcon(new ImageIcon(IconConstant.ADMIN_MANAGE_LEVEL));
         manageLevel.setBounds(125, 100, 150, 150);
         manageLevel.setBorderPainted(false);
         manageLevel.addActionListener(new ManageLevelActionListener());
 
-        manageUser.setForeground(Color.black);
+        manageUser.setContentAreaFilled(false);
         manageUser.setIcon(new ImageIcon(IconConstant.ADMIN_MANAGE_USER));
         manageUser.setBounds(125, 250, 150, 150);
         manageUser.setBorderPainted(false);
         manageUser.addActionListener(new ManageUserActionListener());
 
-        quit.setForeground(Color.black);
+        quit.setContentAreaFilled(false);
         quit.setIcon(new ImageIcon(IconConstant.ADMIN_QUIT));
         quit.setBounds(310, 390, 50, 50);
         quit.setBorderPainted(false);

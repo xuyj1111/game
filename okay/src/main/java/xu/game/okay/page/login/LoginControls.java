@@ -45,13 +45,13 @@ public class LoginControls {
         register.setBounds(300, 225, 50, 40);
         register.addMouseListener(new RegisterMouseListener());
 
-        loginJ.setForeground(Color.black);
+        loginJ.setContentAreaFilled(false);
         loginJ.setIcon(new ImageIcon(IconConstant.LANDING));
         loginJ.setBounds(140, 275, 100, 100);
         loginJ.setBorderPainted(false);
         loginJ.addActionListener(new LoginActionListener());
 
-        question.setForeground(Color.black);
+        question.setContentAreaFilled(false);
         question.setIcon(new ImageIcon(IconConstant.QUESTION));
         question.setBounds(340, 35, 15, 15);
         question.setBorderPainted(false);

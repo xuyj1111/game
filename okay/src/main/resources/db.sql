@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     PRIMARY KEY (`id`),
     UNIQUE KEY `un_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `okay`.`user`(`id`, `name`, `pwd`, `record`) VALUES (1, 'admin', 'admin', 20);
 
 /* map格式
 [

@@ -7,7 +7,6 @@ import xu.game.okay.page.play.listener.ReturnActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Color;
 
 public class PlayControls {
 
@@ -18,21 +17,21 @@ public class PlayControls {
 
     static {
         returm.setVisible(false);
-        returm.setForeground(Color.black);
+        returm.setContentAreaFilled(false);
         returm.setIcon(new ImageIcon(IconConstant.RETURN));
         returm.setBounds(80, 425, 25, 25);
         returm.setBorderPainted(false);
         returm.addActionListener(new ReturnActionListener());
 
         menu.setVisible(false);
-        menu.setForeground(Color.black);
+        menu.setContentAreaFilled(false);
         menu.setIcon(new ImageIcon(IconConstant.MENU));
         menu.setBounds(280, 425, 25, 25);
         menu.setBorderPainted(false);
         menu.addActionListener(new MenuActionListener());
 
         question.setVisible(false);
-        question.setForeground(Color.black);
+        question.setContentAreaFilled(false);
         question.setIcon(new ImageIcon(IconConstant.QUESTION));
         question.setBounds(355, 30, 15, 15);
         question.setBorderPainted(false);

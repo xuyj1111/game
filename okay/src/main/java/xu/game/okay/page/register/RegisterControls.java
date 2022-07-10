@@ -50,17 +50,19 @@ public class RegisterControls {
         passWord2F.setFont(new Font("幼圆", 1, 25));
         passWord2F.setEchoChar('*');
 
+        confirm.setContentAreaFilled(false);
         confirm.setBounds(110, 300, 50, 50);
         confirm.setIcon(new ImageIcon(IconConstant.CONFIRM));
         confirm.setBorderPainted(false);
         confirm.addActionListener(new ConfirmActionListener());
 
+        cancel.setContentAreaFilled(false);
         cancel.setBounds(230, 300, 50, 50);
         cancel.setIcon(new ImageIcon(IconConstant.CANCEL));
         cancel.setBorderPainted(false);
         cancel.addActionListener(new CancelActionListener());
 
-        question.setForeground(Color.black);
+        question.setContentAreaFilled(false);
         question.setIcon(new ImageIcon(IconConstant.QUESTION));
         question.setBounds(340, 35, 15, 15);
         question.setBorderPainted(false);

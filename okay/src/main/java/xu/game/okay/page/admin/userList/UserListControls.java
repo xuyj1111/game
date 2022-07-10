@@ -34,7 +34,7 @@ public class UserListControls {
     }
 
     static {
-        quit.setForeground(Color.black);
+        quit.setContentAreaFilled(false);
         quit.setIcon(new ImageIcon(IconConstant.ADMIN_QUIT));
         quit.setBounds(310, 390, 50, 50);
         quit.setBorderPainted(false);

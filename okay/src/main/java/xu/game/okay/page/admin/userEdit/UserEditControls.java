@@ -65,7 +65,7 @@ public class UserEditControls {
         defined.setFont(new java.awt.Font("幼圆", 1, 25));
         defined.setBounds(50, 235, 175, 25);
 
-        menu.setForeground(Color.black);
+        menu.setContentAreaFilled(false);
         menu.setIcon(new ImageIcon(IconConstant.ADMIN_MENU));
         menu.setBounds(200, 235, 25, 25);
         menu.setBorderPainted(false);
@@ -74,11 +74,13 @@ public class UserEditControls {
         confirm.setBounds(110, 300, 50, 50);
         confirm.setIcon(new ImageIcon(IconConstant.ADMIN_CONFIRM));
         confirm.setBorderPainted(false);
+        confirm.setContentAreaFilled(false);
         confirm.addActionListener(new ConfirmActionListener());
 
         cancel.setBounds(230, 300, 50, 50);
         cancel.setIcon(new ImageIcon(IconConstant.ADMIN_CANCEL));
         cancel.setBorderPainted(false);
+        cancel.setContentAreaFilled(false);
         cancel.addActionListener(new CancelActionListener());
     }
 }

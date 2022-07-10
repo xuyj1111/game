@@ -18,7 +18,7 @@ public class MenuControls {
     public static List<JLabel> components = Lists.newArrayList();
 
     static {
-        returm.setForeground(Color.black);
+        returm.setContentAreaFilled(false);
         returm.setIcon(new ImageIcon(IconConstant.ADMIN_RETURN));
         returm.setBounds(50, 425, 25, 25);
         returm.setBorderPainted(false);

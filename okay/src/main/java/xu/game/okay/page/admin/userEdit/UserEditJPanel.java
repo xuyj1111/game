@@ -36,7 +36,7 @@ public class UserEditJPanel extends BaseJPanel {
                 0f);
         g.setStroke(dash);
         g.setColor(Color.gray);
-        g.drawRect(20, 20, getWidth() - 40, getHeight() - 40);
+        g.drawRect(10, 10, getWidth() - 20, getHeight() - 20);
         super.paintComponents(g);
     }
 }
