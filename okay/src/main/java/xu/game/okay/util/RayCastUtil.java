@@ -62,14 +62,18 @@ public class RayCastUtil {
     private static boolean isInsideCircle(Point mousePoint, ShapeDTO shapeDTO) {
         List<PointDTO> points = shapeDTO.getPoints();
         int size = points.size();
-        // pointOne 和 pointTwo 是一根线的两端
-        // pointTwo 初值为 lastPoint（lastPoint 和 firstPoint 在一根线上）
+        double pX = mousePoint.getX();
+        double pY = mousePoint.getY();
+        // 遍历图形的每根线，pointOne 和 pointTwo 是一根线的两端
         for (int pointOne = 0, pointTwo = size - 1; pointOne < size; pointTwo = pointOne, pointOne++) {
             int oneX = realX(points.get(pointOne).getX());
             int oneY = realY(points.get(pointOne).getY());
             int twoX = realX(points.get(pointTwo).getX());
             int twoY = realY(points.get(pointTwo).getY());
-
+//            // 点与多边形顶点重合
+            if ((oneX == pX && oneY == pY) || (twoX == pX && twoY == pY)) {
+                return true;
+            }
 
 
 
