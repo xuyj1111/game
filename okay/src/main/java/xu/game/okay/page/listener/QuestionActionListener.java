@@ -1,7 +1,13 @@
 package xu.game.okay.page.listener;
 
+import cn.hutool.core.io.FileUtil;
+import xu.game.okay.constant.IconConstant;
+
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @Description: help键（全局）
@@ -11,11 +17,12 @@ import java.awt.event.ActionListener;
 public class QuestionActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-//        File file = new File(IconConstant.DESC);
-//        try {
-//            Desktop.getDesktop().open(file);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
+        try {
+            File file = File.createTempFile("desc", ".md");
+            FileUtil.writeFromStream(IconConstant.class.getClassLoader().getResourceAsStream(IconConstant.DESC), file, true);
+            Desktop.getDesktop().open(file);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
