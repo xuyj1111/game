@@ -36,8 +36,18 @@ public class PlayJPanel extends BaseJPanel {
     @Setter
     private Point startPoint;
 
-    private static final int MOUSE_OFFSET_X = 642;
-    private static final int MOUSE_OFFSET_Y = 272;
+    private static int MOUSE_OFFSET_X;
+    private static int MOUSE_OFFSET_Y;
+
+    /**
+     * @Description: 根据屏幕尺寸，计算出鼠标与界面的偏移量
+     * MainClass中设置了居中显示，界面尺寸400*500
+     */
+    static {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        MOUSE_OFFSET_X = (screenSize.width - 400) / 2;
+        MOUSE_OFFSET_Y = (screenSize.height - 500) / 2;
+    }
 
     @Override
     public void addControls() {

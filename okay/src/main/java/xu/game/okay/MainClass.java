@@ -34,6 +34,7 @@ public class MainClass {
         jFrame.setResizable(false);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setBounds(0, 0, 400, 500);
+        // 居中显示
         jFrame.setLocationRelativeTo(null);
         jFrame.setLayout(new FlowLayout());
         jFrame.setContentPane(jPanel);
