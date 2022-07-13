@@ -1,6 +1,6 @@
 package xu.game.okay.page.admin.choose;
 
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 import xu.game.okay.page.admin.choose.listener.ManageLevelActionListener;
 import xu.game.okay.page.admin.choose.listener.ManageUserActionListener;
 import xu.game.okay.page.admin.choose.listener.QuitActionListener;
@@ -23,19 +23,19 @@ public class ChooseControls {
         welcome.setBounds(45, 50, 350, 40);
 
         manageLevel.setContentAreaFilled(false);
-        manageLevel.setIcon(new ImageIcon(IconConstant.ADMIN_MANAGE_LEVEL));
+        manageLevel.setIcon(new ImageIcon(FileConstant.ADMIN_MANAGE_LEVEL));
         manageLevel.setBounds(125, 100, 150, 150);
         manageLevel.setBorderPainted(false);
         manageLevel.addActionListener(new ManageLevelActionListener());
 
         manageUser.setContentAreaFilled(false);
-        manageUser.setIcon(new ImageIcon(IconConstant.ADMIN_MANAGE_USER));
+        manageUser.setIcon(new ImageIcon(FileConstant.ADMIN_MANAGE_USER));
         manageUser.setBounds(125, 250, 150, 150);
         manageUser.setBorderPainted(false);
         manageUser.addActionListener(new ManageUserActionListener());
 
         quit.setContentAreaFilled(false);
-        quit.setIcon(new ImageIcon(IconConstant.ADMIN_QUIT));
+        quit.setIcon(new ImageIcon(FileConstant.ADMIN_QUIT));
         quit.setBounds(310, 390, 50, 50);
         quit.setBorderPainted(false);
         quit.addActionListener(new QuitActionListener());

@@ -20,7 +20,7 @@ import java.util.Properties;
 @Slf4j
 public class JdbcConfig {
 
-    private static final String DB_PROPERTIES = "db.properties";
+    private static final String DB_PROPERTIES = "application.properties";
     private static final String URL = "datasource.url";
     private static final String USER = "datasource.username";
     private static final String PWD = "datasource.password";

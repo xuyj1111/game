@@ -1,7 +1,7 @@
 package xu.game.okay.page.user.menu;
 
 import com.google.common.collect.Lists;
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 import xu.game.okay.page.listener.QuestionActionListener;
 import xu.game.okay.page.user.menu.listener.NumberMouseListener;
 import xu.game.okay.page.user.menu.listener.ReturnActionListener;
@@ -32,13 +32,13 @@ public class MenuControls {
     static {
 
         returm.setContentAreaFilled(false);
-        returm.setIcon(new ImageIcon(IconConstant.RETURN));
+        returm.setIcon(new ImageIcon(FileConstant.RETURN));
         returm.setBounds(50, 425, 25, 25);
         returm.setBorderPainted(false);
         returm.addActionListener(new ReturnActionListener());
 
         question.setContentAreaFilled(false);
-        question.setIcon(new ImageIcon(IconConstant.QUESTION));
+        question.setIcon(new ImageIcon(FileConstant.QUESTION));
         question.setBounds(355, 30, 15, 15);
         question.setBorderPainted(false);
         question.addActionListener(new QuestionActionListener());

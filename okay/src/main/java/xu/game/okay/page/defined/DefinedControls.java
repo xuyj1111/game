@@ -1,7 +1,7 @@
 package xu.game.okay.page.defined;
 
 import com.google.common.collect.Lists;
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 import xu.game.okay.page.defined.listener.*;
 import xu.game.okay.page.listener.QuestionActionListener;
 
@@ -36,36 +36,36 @@ public class DefinedControls {
 
     static {
         returm.setContentAreaFilled(false);
-        returm.setIcon(new ImageIcon(IconConstant.RETURN));
+        returm.setIcon(new ImageIcon(FileConstant.RETURN));
         returm.setBounds(80, 425, 25, 25);
         returm.setBorderPainted(false);
         returm.addActionListener(new ReturnActionListener());
 
         delete.setContentAreaFilled(false);
-        delete.setIcon(new ImageIcon(IconConstant.DELETE));
+        delete.setIcon(new ImageIcon(FileConstant.DELETE));
         delete.setBounds(130, 425, 25, 25);
         delete.setBorderPainted(false);
 
         confirm.setContentAreaFilled(false);
-        confirm.setIcon(new ImageIcon(IconConstant.CONFIRM_SMALL));
+        confirm.setIcon(new ImageIcon(FileConstant.CONFIRM_SMALL));
         confirm.setBounds(180, 425, 25, 25);
         confirm.setBorderPainted(false);
         confirm.addActionListener(new ConfirmActionListener());
 
         start.setContentAreaFilled(false);
-        start.setIcon(new ImageIcon(IconConstant.START));
+        start.setIcon(new ImageIcon(FileConstant.START));
         start.setBounds(230, 425, 25, 25);
         start.setBorderPainted(false);
         start.addActionListener(new StartActionListener());
 
         menu.setContentAreaFilled(false);
-        menu.setIcon(new ImageIcon(IconConstant.MENU));
+        menu.setIcon(new ImageIcon(FileConstant.MENU));
         menu.setBounds(280, 425, 25, 25);
         menu.setBorderPainted(false);
         menu.addActionListener(new MenuActionListener());
 
         question.setContentAreaFilled(false);
-        question.setIcon(new ImageIcon(IconConstant.QUESTION));
+        question.setIcon(new ImageIcon(FileConstant.QUESTION));
         question.setBounds(355, 30, 15, 15);
         question.setBorderPainted(false);
         question.addActionListener(new QuestionActionListener());
@@ -73,7 +73,7 @@ public class DefinedControls {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 20; j++) {
                 JButton pointB = new JButton();
-                pointB.setIcon(new ImageIcon(IconConstant.POINT));
+                pointB.setIcon(new ImageIcon(FileConstant.POINT));
                 pointB.setBounds(INTERVAL * i + CENTER_OFFSET_X, INTERVAL * j + CENTER_OFFSET_Y, 15, 15);
                 pointB.setBorderPainted(false);
                 pointB.setContentAreaFilled(false);

@@ -1,6 +1,6 @@
 package xu.game.okay.page.init;
 
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -10,7 +10,7 @@ import java.awt.Image;
 
 public class InitControls {
 
-    public static Image img = new ImageIcon(IconConstant.INIT).getImage();
+    public static Image img = new ImageIcon(FileConstant.INIT).getImage();
     public static JLabel lets = new JLabel("Let‘s");
     public static JLabel start = new JLabel("start...");
 

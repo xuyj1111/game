@@ -1,9 +1,13 @@
 package xu.game.okay.jdbc;
 
+import cn.hutool.core.io.FileUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.jdbc.ScriptRunner;
+import xu.game.okay.constant.FileConstant;
 
+import java.io.*;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +27,20 @@ public class JdbcAction {
 
     public JdbcAction(Connection conn) {
         this.conn = conn;
+    }
+
+    /**
+     * @Description: 初始化数据库，执行init.sql
+     */
+    public void init() throws IOException {
+        //初始化脚本运行器
+        ScriptRunner sr = new ScriptRunner(conn);
+        //创建阅读器对象
+        File file = File.createTempFile("init", ".sql");
+        FileUtil.writeFromStream(FileConstant.INIT_SQL, file, true);
+        Reader reader = new BufferedReader(new FileReader(file));
+        //运行脚本
+        sr.runScript(reader);
     }
 
     /**
@@ -141,14 +159,16 @@ public class JdbcAction {
      */
     private void closeStream() {
         try {
-            if (ps != null)
+            if (ps != null) {
                 ps.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         try {
-            if (resultSet != null)
+            if (resultSet != null) {
                 resultSet.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

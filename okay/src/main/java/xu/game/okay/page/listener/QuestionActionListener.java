@@ -1,7 +1,7 @@
 package xu.game.okay.page.listener;
 
 import cn.hutool.core.io.FileUtil;
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -19,7 +19,7 @@ public class QuestionActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             File file = File.createTempFile("desc", ".md");
-            FileUtil.writeFromStream(IconConstant.class.getClassLoader().getResourceAsStream(IconConstant.DESC), file, true);
+            FileUtil.writeFromStream(FileConstant.DESC, file, true);
             Desktop.getDesktop().open(file);
         } catch (IOException ex) {
             ex.printStackTrace();

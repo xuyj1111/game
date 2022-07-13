@@ -2,7 +2,7 @@ package xu.game.okay.page.admin.userList;
 
 import com.google.common.collect.Lists;
 import lombok.Data;
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 import xu.game.okay.entity.User;
 import xu.game.okay.page.admin.userList.listener.EditMouseListener;
 import xu.game.okay.page.admin.userList.listener.LogoutMouseListener;
@@ -35,7 +35,7 @@ public class UserListControls {
 
     static {
         quit.setContentAreaFilled(false);
-        quit.setIcon(new ImageIcon(IconConstant.ADMIN_QUIT));
+        quit.setIcon(new ImageIcon(FileConstant.ADMIN_QUIT));
         quit.setBounds(310, 390, 50, 50);
         quit.setBorderPainted(false);
         quit.addActionListener(new QuitActionListener());

@@ -1,6 +1,6 @@
 package xu.game.okay.page.register;
 
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 import xu.game.okay.page.listener.QuestionActionListener;
 import xu.game.okay.page.register.listener.CancelActionListener;
 import xu.game.okay.page.register.listener.ConfirmActionListener;
@@ -52,18 +52,18 @@ public class RegisterControls {
 
         confirm.setContentAreaFilled(false);
         confirm.setBounds(110, 300, 50, 50);
-        confirm.setIcon(new ImageIcon(IconConstant.CONFIRM));
+        confirm.setIcon(new ImageIcon(FileConstant.CONFIRM));
         confirm.setBorderPainted(false);
         confirm.addActionListener(new ConfirmActionListener());
 
         cancel.setContentAreaFilled(false);
         cancel.setBounds(230, 300, 50, 50);
-        cancel.setIcon(new ImageIcon(IconConstant.CANCEL));
+        cancel.setIcon(new ImageIcon(FileConstant.CANCEL));
         cancel.setBorderPainted(false);
         cancel.addActionListener(new CancelActionListener());
 
         question.setContentAreaFilled(false);
-        question.setIcon(new ImageIcon(IconConstant.QUESTION));
+        question.setIcon(new ImageIcon(FileConstant.QUESTION));
         question.setBounds(340, 35, 15, 15);
         question.setBorderPainted(false);
         question.addActionListener(new QuestionActionListener());

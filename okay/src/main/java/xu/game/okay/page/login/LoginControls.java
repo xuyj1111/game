@@ -1,6 +1,6 @@
 package xu.game.okay.page.login;
 
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 import xu.game.okay.page.login.listener.LoginActionListener;
 import xu.game.okay.page.listener.QuestionActionListener;
 import xu.game.okay.page.login.listener.RegisterMouseListener;
@@ -46,13 +46,13 @@ public class LoginControls {
         register.addMouseListener(new RegisterMouseListener());
 
         loginJ.setContentAreaFilled(false);
-        loginJ.setIcon(new ImageIcon(IconConstant.LANDING));
+        loginJ.setIcon(new ImageIcon(FileConstant.LANDING));
         loginJ.setBounds(140, 275, 100, 100);
         loginJ.setBorderPainted(false);
         loginJ.addActionListener(new LoginActionListener());
 
         question.setContentAreaFilled(false);
-        question.setIcon(new ImageIcon(IconConstant.QUESTION));
+        question.setIcon(new ImageIcon(FileConstant.QUESTION));
         question.setBounds(340, 35, 15, 15);
         question.setBorderPainted(false);
         question.addActionListener(new QuestionActionListener());

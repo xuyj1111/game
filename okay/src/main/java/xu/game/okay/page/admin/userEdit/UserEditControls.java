@@ -1,6 +1,6 @@
 package xu.game.okay.page.admin.userEdit;
 
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 import xu.game.okay.page.admin.userEdit.listener.CancelActionListener;
 import xu.game.okay.page.admin.userEdit.listener.ConfirmActionListener;
 import xu.game.okay.page.admin.userEdit.listener.MenuActionListener;
@@ -66,19 +66,19 @@ public class UserEditControls {
         defined.setBounds(50, 235, 175, 25);
 
         menu.setContentAreaFilled(false);
-        menu.setIcon(new ImageIcon(IconConstant.ADMIN_MENU));
+        menu.setIcon(new ImageIcon(FileConstant.ADMIN_MENU));
         menu.setBounds(200, 235, 25, 25);
         menu.setBorderPainted(false);
         menu.addActionListener(new MenuActionListener());
 
         confirm.setBounds(110, 300, 50, 50);
-        confirm.setIcon(new ImageIcon(IconConstant.ADMIN_CONFIRM));
+        confirm.setIcon(new ImageIcon(FileConstant.ADMIN_CONFIRM));
         confirm.setBorderPainted(false);
         confirm.setContentAreaFilled(false);
         confirm.addActionListener(new ConfirmActionListener());
 
         cancel.setBounds(230, 300, 50, 50);
-        cancel.setIcon(new ImageIcon(IconConstant.ADMIN_CANCEL));
+        cancel.setIcon(new ImageIcon(FileConstant.ADMIN_CANCEL));
         cancel.setBorderPainted(false);
         cancel.setContentAreaFilled(false);
         cancel.addActionListener(new CancelActionListener());

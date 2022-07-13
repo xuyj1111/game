@@ -1,6 +1,6 @@
 package xu.game.okay.page.user.choose;
 
-import xu.game.okay.constant.IconConstant;
+import xu.game.okay.constant.FileConstant;
 import xu.game.okay.page.listener.QuestionActionListener;
 import xu.game.okay.page.user.choose.listener.DefinedActionListener;
 import xu.game.okay.page.user.choose.listener.QuitActionListener;
@@ -19,24 +19,24 @@ public class ChooseControls {
 
     static {
         through.setContentAreaFilled(false);
-        through.setIcon(new ImageIcon(IconConstant.BREAK_THROUGH));
+        through.setIcon(new ImageIcon(FileConstant.BREAK_THROUGH));
         through.setBounds(130, 100, 150, 150);
         through.setBorderPainted(false);
 
         defined.setContentAreaFilled(false);
-        defined.setIcon(new ImageIcon(IconConstant.CUSTOMER_DEFINE));
+        defined.setIcon(new ImageIcon(FileConstant.CUSTOMER_DEFINE));
         defined.setBounds(130, 250, 150, 150);
         defined.setBorderPainted(false);
         defined.addActionListener(new DefinedActionListener());
 
         quit.setContentAreaFilled(false);
-        quit.setIcon(new ImageIcon(IconConstant.QUIT));
+        quit.setIcon(new ImageIcon(FileConstant.QUIT));
         quit.setBounds(300, 380, 50, 50);
         quit.setBorderPainted(false);
         quit.addActionListener(new QuitActionListener());
 
         question.setContentAreaFilled(false);
-        question.setIcon(new ImageIcon(IconConstant.QUESTION));
+        question.setIcon(new ImageIcon(FileConstant.QUESTION));
         question.setBounds(340, 35, 15, 15);
         question.setBorderPainted(false);
         question.addActionListener(new QuestionActionListener());
