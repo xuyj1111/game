@@ -2,6 +2,7 @@ package xu.game.okay.page.play.listener;
 
 import xu.game.okay.page.play.PlayControls;
 import xu.game.okay.util.BeanFactory;
+import xu.game.okay.util.RayCastUtil;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -69,6 +70,9 @@ public class PlayMouseListener implements MouseListener {
         // 使用double，小球跟鼠标移动精度更高
         double distanceX = startX - mouseX;
         double distanceY = startY - mouseY;
+        boolean inside = RayCastUtil.isInside(mousePoint);
+        System.out.println("isInside: " + inside);
+
         g.setColor(Color.BLACK);
         for (int i = 0; i <= LINE_LENGTH; i++) {
             int locationX = (int) (startX - (distanceX / 6) * i - 5);
