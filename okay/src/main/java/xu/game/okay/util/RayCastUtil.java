@@ -75,8 +75,8 @@ public class RayCastUtil {
     private static boolean isInsidePolygon(Point point, ShapeDTO shapeDTO) {
         List<PointDTO> points = shapeDTO.getPoints();
         int size = points.size();
-        double px = point.getX();
-        double py = point.getY();
+        int px = point.x;
+        int py = point.y;
         boolean flag = false;
         // 遍历图形的每根线
         for (int i = 0; i < size - 1; i++) {
@@ -91,7 +91,7 @@ public class RayCastUtil {
             // p点的 y坐标 在线段的 y坐标 之间（不包括线段平行x轴）
             if ((py > y1 && py <= y2) || (py > y2 && py <= y1)) {
                 // 计算出线段上 y坐标=pY 点的 x坐标（计算出的x坐标是double类型，但p点的坐标是整数，所以此处最大误差 0.99999...）
-                int x = (int) (x1 + (py - y1) * (x2 - x1) / (y2 - y1));
+                int x = x1 + (py - y1) * (x2 - x1) / (y2 - y1);
                 // 点在多边形的边上
                 if (x == px) {
                     return true;
