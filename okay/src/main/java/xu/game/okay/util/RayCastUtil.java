@@ -88,39 +88,35 @@ public class RayCastUtil {
             if ((x1 == px && y1 == py) || (x2 == px && y2 == py)) {
                 return true;
             }
-            // p点的 y坐标 在线段的 y坐标 之间（不包括线段平行x轴）
-            if ((py > y1 && py <= y2) || (py > y2 && py <= y1)) {
-                // 计算出线段上 y坐标=pY 点的 x坐标（计算出的x坐标是double类型，但p点的坐标是整数，所以此处最大误差 0.99999...）
-                int x = x1 + (py - y1) * (x2 - x1) / (y2 - y1);
-                // 点在多边形的边上
-                if (x == px) {
-                    return true;
-                }
+            if (y1 != y2) {
+                // p点的 y坐标 在线段的 y坐标 之间
+                if ((py >= y1 && py <= y2) || (py >= y2 && py <= y1)) {
+                    // 计算出线段上 y坐标=pY 点的 x坐标
+                    double x = x1 + (double)(py - y1) * (x2 - x1) / (y2 - y1);
+                    // 点在多边形的边上
+                    if (x == px) {
+                        return true;
+                    }
                 /*
                  思路：以p点开始，做一条平行于x轴，向右无限延长的线
                  x 大于 pX，表示 p点 在线段的左侧，则 (x, pY)点 是 p延长线与线段的交点
                  x 小于 pX，表示 p点 在线段的右侧，此认定为无交点
                  */
-                if (x > px) {
-                    flag = !flag;
+                    if (x > px) {
+                        // 处理延伸线穿过顶点的情况
+                        if (x == x1 || x == x2) {
+                            if ((y1 < y2 && py == y1) || (y1 > y2 && py == y2)) {
+                                flag = !flag;
+                            }
+                        } else {
+                            flag = !flag;
+                        }
+                    }
                 }
+            } else if (py == y1 && ((px >= x1 && px <= x2) || (px >= x2 && px <= x1))) {
+                // 处理p点在平行于x轴的线段上
+                return true;
             }
-
-
-            // p点的 x坐标 必须要在线段的 x坐标 之间（不包括线段平行x轴）
-//            else if ((px > x1 && px <= x2) || (px > x2 && px <= x1)) {
-//
-//                // 计算出线段上 x坐标=pX 点的 y坐标（计算出的y坐标是double类型，但p点的坐标是整数，所以此处最大误差 0.99999...）
-//                int y = (int) (y1 + (px - x1) * (y2 - y1) / (x2 - x1));
-//                // 点在多边形的边上
-//                if (y == py) {
-//                    return true;
-//                }
-//                // 射线穿过多边形的边界
-//                if (y > py) {
-//                    flag = !flag;
-//                }
-//            }
         }
         return flag;
     }
