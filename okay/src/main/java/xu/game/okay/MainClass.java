@@ -30,9 +30,13 @@ public class MainClass {
         } catch (Exception e) {
             throw new Exception("初始化数据库错误！", e);
         }
-        // 设置窗口不可调节大小
+        // 窗口不可调节大小
         jFrame.setResizable(false);
+        // 窗口不可移动（隐藏窗口标题栏后实现不可移动，但是标题栏有高度，影响显示）
+//        jFrame.setUndecorated(true);
+        // 关闭时退出
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // 窗口大小
         jFrame.setBounds(0, 0, 400, 500);
         // 居中显示
         jFrame.setLocationRelativeTo(null);

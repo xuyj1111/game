@@ -9,22 +9,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.util.List;
 
+import static xu.game.okay.constant.PageConstant.CENTER_OFFSET_X;
+import static xu.game.okay.constant.PageConstant.CENTER_OFFSET_Y;
+import static xu.game.okay.constant.PageConstant.INTERVAL;
+
 public class DefinedControls {
-
-    /**
-     * '点'之间的间隔
-     */
-    private static final int INTERVAL = 20;
-
-    /**
-     * 点阵图居中的x轴偏移量
-     */
-    private static final int CENTER_OFFSET_X = 50;
-
-    /**
-     * 点阵图居中的y轴偏移量
-     */
-    private static final int CENTER_OFFSET_Y = 25;
 
     public static JButton returm = new JButton();
     public static JButton delete = new JButton();
@@ -45,6 +34,7 @@ public class DefinedControls {
         delete.setIcon(new ImageIcon(FileConstant.DELETE));
         delete.setBounds(130, 425, 25, 25);
         delete.setBorderPainted(false);
+        delete.addActionListener(new DeleteActionListener());
 
         confirm.setContentAreaFilled(false);
         confirm.setIcon(new ImageIcon(FileConstant.CONFIRM_SMALL));

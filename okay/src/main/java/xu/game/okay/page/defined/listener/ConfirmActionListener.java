@@ -12,13 +12,14 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.Objects;
 
+import static xu.game.okay.constant.PageConstant.LIMIT_NUM;
+
 /**
  * @Description: 保存键
  * @Author: xuyujun
  * @Date: 2022/4/12
  */
 public class ConfirmActionListener implements ActionListener {
-    private static long LIMIT_NUM = 20L;
 
     @Override
     public void actionPerformed(ActionEvent e) {

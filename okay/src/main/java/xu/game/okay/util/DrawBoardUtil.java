@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static xu.game.okay.constant.PageConstant.INTERVAL;
 import static xu.game.okay.util.RayCastUtil.realX;
 import static xu.game.okay.util.RayCastUtil.realY;
 
@@ -27,11 +28,6 @@ import static xu.game.okay.util.RayCastUtil.realY;
  */
 @Slf4j
 public class DrawBoardUtil {
-
-    /**
-     * '点'之间的间隔
-     */
-    private static final int INTERVAL = 20;
 
     /**
      * 绘图板已构建的图形集
@@ -181,7 +177,10 @@ public class DrawBoardUtil {
         Integer size = shapeDTO.getSize();
         g.setColor(Color.gray);
         g.fillOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
-//        g.drawOval(INTERVAL * point.getX() + CENTER_OFFSET_X + POINRT_OFFSET - size / 2, INTERVAL * point.getY() + CENTER_OFFSET_Y + POINRT_OFFSET - size / 2, shapeDTO.getSize(), shapeDTO.getSize());
+        if (shapeDTO.getIsSelected()) {
+            g.setColor(Color.red);
+            g.drawOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
+        }
         drawJPanel.repaint();
     }
 
@@ -193,7 +192,10 @@ public class DrawBoardUtil {
         int[] arrY = shapeDTO.getPoints().stream().mapToInt(p -> realY(p.getY())).toArray();
         g.setColor(Color.gray);
         g.fillPolygon(arrX, arrY, shapeDTO.getPoints().size());
-//        g.drawPolygon(x, y, ji + 1);
+        if (shapeDTO.getIsSelected()) {
+            g.setColor(Color.red);
+            g.drawPolygon(arrX, arrY, shapeDTO.getPoints().size());
+        }
         drawJPanel.repaint();
     }
 

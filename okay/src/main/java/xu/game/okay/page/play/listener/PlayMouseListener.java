@@ -2,13 +2,15 @@ package xu.game.okay.page.play.listener;
 
 import xu.game.okay.page.play.PlayControls;
 import xu.game.okay.util.BeanFactory;
-import xu.game.okay.util.RayCastUtil;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import static xu.game.okay.constant.PageConstant.BALL_RADIUS;
+import static xu.game.okay.constant.PageConstant.LINE_LENGTH;
 
 /**
  * @Description: 游戏界面键
@@ -17,16 +19,6 @@ import java.awt.event.MouseListener;
  * @Date: 2022/6/29
  */
 public class PlayMouseListener implements MouseListener {
-
-    /**
-     * 拉伸线的长度（球的数量）
-     */
-    private static final int LINE_LENGTH = 6;
-
-    /**
-     * 球的初始半径
-     */
-    private static final int BALL_RADIUS = 10;
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -70,8 +62,6 @@ public class PlayMouseListener implements MouseListener {
         // 使用double，小球跟鼠标移动精度更高
         double distanceX = startX - mouseX;
         double distanceY = startY - mouseY;
-        boolean inside = RayCastUtil.isInside(mousePoint);
-        System.out.println("isInside: " + inside);
 
         g.setColor(Color.BLACK);
         for (int i = 0; i <= LINE_LENGTH; i++) {

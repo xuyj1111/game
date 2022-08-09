@@ -10,6 +10,9 @@ import xu.game.okay.util.Function3;
 import java.awt.*;
 import java.util.Objects;
 
+import static xu.game.okay.constant.PageConstant.MOUSE_OFFSET_X;
+import static xu.game.okay.constant.PageConstant.MOUSE_OFFSET_Y;
+
 /**
  * @Description: 游戏界面（或预览）
  * @Author: xuyujun
@@ -35,19 +38,6 @@ public class PlayJPanel extends BaseJPanel {
     @Getter
     @Setter
     private Point startPoint;
-
-    private static int MOUSE_OFFSET_X;
-    private static int MOUSE_OFFSET_Y;
-
-    /**
-     * @Description: 根据屏幕尺寸，计算出鼠标与界面的偏移量
-     * MainClass中设置了居中显示，界面尺寸400*500
-     */
-    static {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        MOUSE_OFFSET_X = (screenSize.width - 400) / 2;
-        MOUSE_OFFSET_Y = (screenSize.height - 500) / 2;
-    }
 
     @Override
     public void addControls() {

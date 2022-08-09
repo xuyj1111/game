@@ -7,6 +7,11 @@ import xu.game.okay.enums.ShapeType;
 import java.awt.Point;
 import java.util.List;
 
+import static xu.game.okay.constant.PageConstant.CENTER_OFFSET_X;
+import static xu.game.okay.constant.PageConstant.CENTER_OFFSET_Y;
+import static xu.game.okay.constant.PageConstant.INTERVAL;
+import static xu.game.okay.constant.PageConstant.POINRT_OFFSET;
+
 /**
  * @Description: 射线法的实现及应用
  * @Author: xuyujun
@@ -14,65 +19,46 @@ import java.util.List;
  */
 public class RayCastUtil {
 
-
     /**
-     * 偏移量（随鼠标移动的小球有大小，需要在靠近的一定范围内就判定为在图形内部）
+     * @Description: 判断当前鼠标是否在图形内，并返回所在图形（不在内部返回null）
      */
-    private static final int OFFSET_X = 50;
-    private static final int OFFSET_Y = 50;
-
-    /**
-     * '点'之间的间隔
-     */
-    private static final int INTERVAL = 20;
-
-    /**
-     * 点阵图居中的x轴偏移量
-     */
-    private static final int CENTER_OFFSET_X = 50;
-
-    /**
-     * 点阵图居中的y轴偏移量
-     */
-    private static final int CENTER_OFFSET_Y = 25;
-
-    /**
-     * '点'的西北向为起点，到'点'中心的偏移量
-     */
-    private static final int POINRT_OFFSET = 8;
-
-    /**
-     * @Description: 判断当前鼠标是否在图形内
-     */
-    public static boolean isInside(Point point) {
-        boolean flag = false;
+    public static ShapeDTO isInside(Point point) {
         for (ShapeDTO shapeDTO : DrawBoardUtil.shapeDTOS) {
+            boolean flag = false;
             ShapeType type = shapeDTO.getType();
             switch (type) {
                 case CIRCLE:
-                    flag = isInsideCircle(point, shapeDTO) | flag;
+                    flag = isInsideCircle(point, shapeDTO);
                     break;
                 case POLYGON:
-                    flag = isInsidePolygon(point, shapeDTO) | flag;
+                    flag = isInsidePolygon(point, shapeDTO);
                     break;
                 default:
                     break;
             }
+            if (flag) {
+                return shapeDTO;
+            }
         }
-        return flag;
+        return null;
     }
 
     /**
      * @Description: 判断当前鼠标是否在圆形内
      */
-    private static boolean isInsideCircle(Point point, ShapeDTO shapeDTO) {
-        return false;
+    public static boolean isInsideCircle(Point point, ShapeDTO shapeDTO) {
+        List<PointDTO> points = shapeDTO.getPoints();
+        int px = point.x;
+        int py = point.y;
+        int x = realX(points.get(0).getX());
+        int y = realY(points.get(0).getY());
+        return Math.abs(x - px) < shapeDTO.getSize() && Math.abs(y - py) < shapeDTO.getSize();
     }
 
     /**
      * @Description: 判断当前鼠标是否在多边形内
      */
-    private static boolean isInsidePolygon(Point point, ShapeDTO shapeDTO) {
+    public static boolean isInsidePolygon(Point point, ShapeDTO shapeDTO) {
         List<PointDTO> points = shapeDTO.getPoints();
         int size = points.size();
         int px = point.x;

@@ -1,5 +1,6 @@
 package xu.game.okay.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import xu.game.okay.enums.ShapeProperty;
@@ -23,4 +24,7 @@ public class ShapeDTO implements Serializable {
     // 仅为圆使用，圆的半径
     private Integer size;
     private List<PointDTO> points;
+    // 是否被选中
+    @JsonIgnore
+    private Boolean isSelected = false;
 }
