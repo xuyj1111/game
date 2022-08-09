@@ -9,7 +9,6 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 import java.util.Objects;
 
 import static xu.game.okay.constant.PageConstant.INTERVAL;
@@ -28,7 +27,6 @@ public class DefinedMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         DrawBoardUtil.stopDraw();
-        List<ShapeDTO> shapeDTOS = DrawBoardUtil.shapeDTOS;
         // 获取当前鼠标位置
         Point point = MouseInfo.getPointerInfo().getLocation();
         point.setLocation(point.x - MOUSE_OFFSET_X, point.y - MOUSE_OFFSET_Y);
@@ -36,14 +34,14 @@ public class DefinedMouseListener implements MouseListener {
         ShapeDTO inside = RayCastUtil.isInside(point);
         if (Objects.isNull(inside)) {
             // 清除所有选中
-            shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
+            DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
         } else {
             // 调整圆形大小
             if (inside.getIsSelected() && inside.getType() == ShapeType.CIRCLE) {
                 inside.setSize(inside.getSize() % 60 + INTERVAL);
             }
             // 清除所有选中
-            shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
+            DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
             // 选中
             inside.setIsSelected(!inside.getIsSelected());
         }

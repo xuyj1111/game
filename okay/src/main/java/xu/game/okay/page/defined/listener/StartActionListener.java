@@ -23,6 +23,8 @@ public class StartActionListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "请添加图形");
             return;
         }
+        // 清除所有选中
+        DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
         PlayControls.isVisible = false;
         PlayControls.returm.setVisible(false);
         PlayControls.menu.setVisible(false);

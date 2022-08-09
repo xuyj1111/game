@@ -28,9 +28,10 @@ public class ConfirmActionListener implements ActionListener {
             return;
         }
 
+        // 清除所有选中
+        DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
         if (BeanFactory.definedJPanel.source == DefinedJPanelSource.USER) {
             insertUserLevel();
-            DrawBoardUtil.init();
         } else if (BeanFactory.definedJPanel.source == DefinedJPanelSource.ADMIN_SYSTEM) {
             String json = JsonMapper.writeValueAsString(DrawBoardUtil.shapeDTOS);
             BeanFactory.jdbc.update("update level set map = '%s' where level_id = '%s' and is_system = 1", json, BeanFactory.definedJPanel.number);
@@ -63,5 +64,6 @@ public class ConfirmActionListener implements ActionListener {
                 BeanFactory.userChooseJPanel.userName,
                 name, json,
                 BeanFactory.userChooseJPanel.userName);
+        DrawBoardUtil.init();
     }
 }
