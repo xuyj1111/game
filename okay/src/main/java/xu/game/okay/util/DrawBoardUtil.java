@@ -304,7 +304,7 @@ public class DrawBoardUtil {
             // 清除所有选中
             DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
             // 选中
-            inside.setIsSelected(!inside.getIsSelected());
+            inside.setIsSelected(true);
         }
     }
 }
