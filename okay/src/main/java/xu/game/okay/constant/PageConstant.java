@@ -1,7 +1,11 @@
 package xu.game.okay.constant;
 
+import com.google.common.collect.Lists;
+import xu.game.okay.enums.ShapeProperty;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 
 public class PageConstant {
 
@@ -47,7 +51,15 @@ public class PageConstant {
     /**
      * 用户关卡数
      */
-    public static long LIMIT_NUM = 20L;
+    public static final long LIMIT_NUM = 20L;
+
+    /**
+     * 图形属性枚举list，方便自增变化值
+     */
+    public static final List<ShapeProperty> shapeProList = Lists.newArrayList(ShapeProperty.ELIMINATION,
+            ShapeProperty.DOUBLE_ELIMINATION,
+            ShapeProperty.OBSTACLE,
+            ShapeProperty.BLACK_HOLE);
 
 
     /**

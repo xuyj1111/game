@@ -67,7 +67,7 @@ public class DefinedControls {
                 pointB.setBounds(INTERVAL * i + CENTER_OFFSET_X, INTERVAL * j + CENTER_OFFSET_Y, 15, 15);
                 pointB.setBorderPainted(false);
                 pointB.setContentAreaFilled(false);
-                pointB.addActionListener(new PointActionListener());
+                pointB.addMouseListener(new PointMouseListener());
                 components.add(pointB);
             }
         }

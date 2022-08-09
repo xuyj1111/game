@@ -13,11 +13,13 @@ import xu.game.okay.page.defined.DefinedJPanel;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static xu.game.okay.constant.PageConstant.INTERVAL;
+import static xu.game.okay.constant.PageConstant.shapeProList;
 import static xu.game.okay.util.RayCastUtil.realX;
 import static xu.game.okay.util.RayCastUtil.realY;
 
@@ -175,8 +177,26 @@ public class DrawBoardUtil {
     private static void drawCircle(Graphics2D g, ShapeDTO shapeDTO) {
         PointDTO point = shapeDTO.getPoints().get(0);
         Integer size = shapeDTO.getSize();
-        g.setColor(Color.gray);
-        g.fillOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
+        switch (shapeDTO.getProperty()) {
+            case ELIMINATION:
+                g.setColor(Color.gray);
+                g.fillOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
+                break;
+            case DOUBLE_ELIMINATION:
+                g.setColor(Color.lightGray);
+                g.fillOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
+                break;
+            case OBSTACLE:
+                g.setColor(Color.black);
+                g.fillOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
+                break;
+            case BLACK_HOLE:
+                g.setColor(Color.black);
+                g.drawOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
+                break;
+            default:
+                break;
+        }
         if (shapeDTO.getIsSelected()) {
             g.setColor(Color.red);
             g.drawOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
@@ -190,8 +210,26 @@ public class DrawBoardUtil {
     private static void drawPolygon(Graphics2D g, ShapeDTO shapeDTO) {
         int[] arrX = shapeDTO.getPoints().stream().mapToInt(p -> realX(p.getX())).toArray();
         int[] arrY = shapeDTO.getPoints().stream().mapToInt(p -> realY(p.getY())).toArray();
-        g.setColor(Color.gray);
-        g.fillPolygon(arrX, arrY, shapeDTO.getPoints().size());
+        switch (shapeDTO.getProperty()) {
+            case ELIMINATION:
+                g.setColor(Color.gray);
+                g.fillPolygon(arrX, arrY, shapeDTO.getPoints().size());
+                break;
+            case DOUBLE_ELIMINATION:
+                g.setColor(Color.lightGray);
+                g.fillPolygon(arrX, arrY, shapeDTO.getPoints().size());
+                break;
+            case OBSTACLE:
+                g.setColor(Color.black);
+                g.fillPolygon(arrX, arrY, shapeDTO.getPoints().size());
+                break;
+            case BLACK_HOLE:
+                g.setColor(Color.black);
+                g.drawPolygon(arrX, arrY, shapeDTO.getPoints().size());
+                break;
+            default:
+                break;
+        }
         if (shapeDTO.getIsSelected()) {
             g.setColor(Color.red);
             g.drawPolygon(arrX, arrY, shapeDTO.getPoints().size());
@@ -243,5 +281,30 @@ public class DrawBoardUtil {
         drawJPanel.setDrawing(null);
         pointDTOS.clear();
         number = 0;
+    }
+
+    /**
+     * @Description: 修改图形大小或属性
+     */
+    public static void changeSizeOrProperty(ShapeDTO inside, MouseEvent e) {
+        if (Objects.isNull(inside)) {
+            // 清除所有选中
+            DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
+        } else {
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                // 调整圆形大小
+                if (inside.getIsSelected() && inside.getType() == ShapeType.CIRCLE) {
+                    inside.setSize(inside.getSize() % 60 + INTERVAL);
+                }
+            } else if (e.getButton() == MouseEvent.BUTTON3) {
+                int index = shapeProList.indexOf(inside.getProperty());
+                index = (index + 1) % 4;
+                inside.setProperty(shapeProList.get(index));
+            }
+            // 清除所有选中
+            DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
+            // 选中
+            inside.setIsSelected(!inside.getIsSelected());
+        }
     }
 }
