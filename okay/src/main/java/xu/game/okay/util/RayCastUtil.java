@@ -7,10 +7,7 @@ import xu.game.okay.enums.ShapeType;
 import java.awt.Point;
 import java.util.List;
 
-import static xu.game.okay.constant.PageConstant.CENTER_OFFSET_X;
-import static xu.game.okay.constant.PageConstant.CENTER_OFFSET_Y;
-import static xu.game.okay.constant.PageConstant.INTERVAL;
-import static xu.game.okay.constant.PageConstant.POINRT_OFFSET;
+import static xu.game.okay.constant.PageConstant.*;
 
 /**
  * @Description: 射线法的实现及应用
@@ -20,7 +17,7 @@ import static xu.game.okay.constant.PageConstant.POINRT_OFFSET;
 public class RayCastUtil {
 
     /**
-     * @Description: 判断当前鼠标是否在图形内，并返回所在图形（不在内部返回null）
+     * @Description: 判断"点"是否在图形内，并返回所在图形（不在内部返回null）
      */
     public static ShapeDTO isInside(Point point) {
         for (ShapeDTO shapeDTO : DrawBoardUtil.shapeDTOS) {
@@ -44,7 +41,7 @@ public class RayCastUtil {
     }
 
     /**
-     * @Description: 判断当前鼠标是否在圆形内
+     * @Description: 判断"点"是否在圆形内
      */
     public static boolean isInsideCircle(Point point, ShapeDTO shapeDTO) {
         List<PointDTO> points = shapeDTO.getPoints();
@@ -56,7 +53,7 @@ public class RayCastUtil {
     }
 
     /**
-     * @Description: 判断当前鼠标是否在多边形内
+     * @Description: 判断"点"是否在多边形内
      */
     public static boolean isInsidePolygon(Point point, ShapeDTO shapeDTO) {
         List<PointDTO> points = shapeDTO.getPoints();
@@ -78,7 +75,7 @@ public class RayCastUtil {
                 // p点的 y坐标 在线段的 y坐标 之间
                 if ((py >= y1 && py <= y2) || (py >= y2 && py <= y1)) {
                     // 计算出线段上 y坐标=pY 点的 x坐标
-                    double x = x1 + (double)(py - y1) * (x2 - x1) / (y2 - y1);
+                    double x = x1 + (double) (py - y1) * (x2 - x1) / (y2 - y1);
                     // 点在多边形的边上
                     if (x == px) {
                         return true;

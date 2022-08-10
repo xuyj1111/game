@@ -39,6 +39,14 @@ public class PlayJPanel extends BaseJPanel {
     @Setter
     private Point startPoint;
 
+    @Getter
+    @Setter
+    private Point endPoint;
+
+    @Getter
+    @Setter
+    private Function3<Graphics2D, Point, Point> ballMove;
+
     @Override
     public void addControls() {
         add(PlayControls.returm);

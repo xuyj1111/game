@@ -9,7 +9,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import static xu.game.okay.constant.PageConstant.BALL_RADIUS;
+import static xu.game.okay.constant.PageConstant.BALL_DIAMETER;
 import static xu.game.okay.constant.PageConstant.LINE_LENGTH;
 
 /**
@@ -22,23 +22,41 @@ public class PlayMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        PlayControls.isVisible = !PlayControls.isVisible;
-        PlayControls.returm.setVisible(PlayControls.isVisible);
-        PlayControls.menu.setVisible(PlayControls.isVisible);
-        PlayControls.question.setVisible(PlayControls.isVisible);
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            PlayControls.isVisible = !PlayControls.isVisible;
+            PlayControls.returm.setVisible(PlayControls.isVisible);
+            PlayControls.menu.setVisible(PlayControls.isVisible);
+            PlayControls.question.setVisible(PlayControls.isVisible);
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        BeanFactory.playJPanel.setDragLine(this::drawline);
-        BeanFactory.playJPanel.repaint();
+        if (PlayControls.isVisible) {
+            PlayControls.isVisible = false;
+            PlayControls.returm.setVisible(false);
+            PlayControls.menu.setVisible(false);
+            PlayControls.question.setVisible(false);
+        }
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            BeanFactory.playJPanel.setDragLine(this::drawline);
+            BeanFactory.playJPanel.repaint();
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        BeanFactory.playJPanel.setDragLine(null);
-        BeanFactory.playJPanel.setStartPoint(null);
-        BeanFactory.playJPanel.repaint();
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            BeanFactory.playJPanel.setDragLine(null);
+            BeanFactory.playJPanel.setStartPoint(null);
+            // 延时是解决jpanel刷新页面时，会出现拉伸线未清理情况
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            BeanFactory.playJPanel.repaint();
+        }
     }
 
     @Override
@@ -68,7 +86,7 @@ public class PlayMouseListener implements MouseListener {
             int locationX = (int) (startX - (distanceX / 6) * i - 5);
             int locationY = (int) (startY - (distanceY / 6) * i - 5);
             if (isDisplayed(locationX, locationY)) {
-                g.fillOval(locationX, locationY, BALL_RADIUS - i, BALL_RADIUS - i);
+                g.fillOval(locationX, locationY, BALL_DIAMETER - i, BALL_DIAMETER - i);
             }
         }
         BeanFactory.playJPanel.repaint();

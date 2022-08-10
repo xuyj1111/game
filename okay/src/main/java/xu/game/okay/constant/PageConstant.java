@@ -15,8 +15,7 @@ public class PageConstant {
     /**
      * 偏移量（随鼠标移动的小球有大小，需要在靠近的一定范围内就判定为在图形内部）
      */
-    public static final int OFFSET_X = 50;
-    public static final int OFFSET_Y = 50;
+    public static final int OFFSET_RADIUS = 5;
 
     /**
      * '点'之间的间隔
@@ -44,9 +43,9 @@ public class PageConstant {
     public static final int LINE_LENGTH = 6;
 
     /**
-     * 球的初始半径
+     * 球的初始直径
      */
-    public static final int BALL_RADIUS = 10;
+    public static final int BALL_DIAMETER = 10;
 
     /**
      * 用户关卡数
