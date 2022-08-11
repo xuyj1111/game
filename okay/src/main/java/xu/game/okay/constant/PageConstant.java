@@ -13,11 +13,6 @@ public class PageConstant {
     public static int MOUSE_OFFSET_Y;
 
     /**
-     * 偏移量（随鼠标移动的小球有大小，需要在靠近的一定范围内就判定为在图形内部）
-     */
-    public static final int OFFSET_RADIUS = 5;
-
-    /**
      * '点'之间的间隔
      */
     public static final int INTERVAL = 20;

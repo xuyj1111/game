@@ -2,12 +2,14 @@ package xu.game.okay.page.play.listener;
 
 import xu.game.okay.page.play.PlayControls;
 import xu.game.okay.util.BeanFactory;
+import xu.game.okay.util.RayCastUtil;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
 
 import static xu.game.okay.constant.PageConstant.BALL_DIAMETER;
 import static xu.game.okay.constant.PageConstant.LINE_LENGTH;
@@ -85,7 +87,7 @@ public class PlayMouseListener implements MouseListener {
         for (int i = 0; i <= LINE_LENGTH; i++) {
             int locationX = (int) (startX - (distanceX / 6) * i - 5);
             int locationY = (int) (startY - (distanceY / 6) * i - 5);
-            if (isDisplayed(locationX, locationY)) {
+            if (isDisplayed(locationX, locationY, BALL_DIAMETER - i)) {
                 g.fillOval(locationX, locationY, BALL_DIAMETER - i, BALL_DIAMETER - i);
             }
         }
@@ -95,7 +97,19 @@ public class PlayMouseListener implements MouseListener {
     /**
      * @Description: 判断拉伸线的小球是否显示（不覆盖图形）
      */
-    private boolean isDisplayed(int locationX, int locationY) {
+    private boolean isDisplayed(int locationX, int locationY, int diameter) {
+        if (Objects.nonNull(RayCastUtil.isInside(new Point(locationX, locationY)))) {
+            return false;
+        }
+        if (Objects.nonNull(RayCastUtil.isInside(new Point(locationX + diameter, locationY)))) {
+            return false;
+        }
+        if (Objects.nonNull(RayCastUtil.isInside(new Point(locationX, locationY + diameter)))) {
+            return false;
+        }
+        if (Objects.nonNull(RayCastUtil.isInside(new Point(locationX + diameter, locationY + diameter)))) {
+            return false;
+        }
         return true;
     }
 }
