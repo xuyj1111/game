@@ -49,10 +49,10 @@ public class DefinedJPanel extends BaseJPanel {
         g.clearRect(0, 0, getWidth(), getHeight());
         super.paintComponents(g);
         // 动态执行绘图程序
-        if (!Objects.isNull(getDrawing())) {
+        if (Objects.nonNull(getDrawing())) {
             getDrawing().apply(g);
         }
-        if (!Objects.isNull(getDrawnShape())) {
+        if (Objects.nonNull(getDrawnShape())) {
             getDrawnShape().apply(g);
         }
     }

@@ -9,6 +9,9 @@ import java.util.List;
 
 public class PageConstant {
 
+    /**
+     * 见下面静态代码块赋值
+     */
     public static int MOUSE_OFFSET_X;
     public static int MOUSE_OFFSET_Y;
 
