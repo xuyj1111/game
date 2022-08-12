@@ -134,29 +134,22 @@ public class PlayJPanel extends BaseJPanel {
         double dEndX = endX;
         double dEndY = endY;
         if (startX != endX && startY != endY) {
-            if (Math.abs(dEndX - dStartX) < Math.abs(dEndY - dStartY)) {
-                moveX = (dEndX - dStartX) / (dEndY - dStartY);
-                moveY = 1.0;
-            } else if (Math.abs(dEndX - dStartX) == Math.abs(dEndY - dStartY)) {
-                moveX = moveY = 1.0;
-            } else if (Math.abs(dEndX - dStartX) > Math.abs(dEndY - dStartY)) {
-                moveX = 1.0;
-                moveY = (dEndY - dStartY) / (dEndX - dStartX);
+            moveX = (dEndX - dStartX) / Math.abs(dEndY - dStartY);
+            if (Math.abs(moveX) > 1) {
+                moveX = moveX > 1 ? 1.0 : -1.0;
+            }
+            moveY = (dEndY - dStartY) / Math.abs(dEndX - dStartX);
+            if (Math.abs(moveY) > 1) {
+                moveY = moveY > 1 ? 1.0 : -1.0;
             }
         } else {
             if (startX == endX && startY != endY) {
                 moveX = 1.0;
                 moveY = 0.0;
-            } else if (startX != endX){
+            } else if (startX != endX) {
                 moveX = 0.0;
                 moveY = 1.0;
             }
-        }
-        if ((startX < endX && moveX < 0) || (startX > endX && moveX > 0)) {
-            moveX = -moveX;
-        }
-        if ((startY < endY && moveY < 0) || (startY > endY && moveY > 0)) {
-            moveY = -moveY;
         }
     }
 }

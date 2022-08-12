@@ -80,7 +80,7 @@ public class PlayMouseListener implements MouseListener {
                     Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "triggerGroup1")
                             .startNow()
                             .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                                    .withIntervalInMilliseconds(5)
+                                    .withIntervalInMilliseconds(3)
                                     .repeatForever())
                             .build();
                     //4、执行
