@@ -1,10 +1,10 @@
 package xu.game.okay.page.admin.menu.listener;
 
-import xu.game.okay.MainClass;
-import xu.game.okay.util.BeanFactory;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.adminChooseJPanel;
 
 /**
  * @Description: 返回键
@@ -15,8 +15,7 @@ public class ReturnActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MainClass.jPanel = BeanFactory.adminChooseJPanel;
-        MainClass.jFrame.setContentPane(MainClass.jPanel);
-        MainClass.jFrame.setVisible(true);
+        jFrame.setContentPane(adminChooseJPanel);
+        jFrame.setVisible(true);
     }
 }

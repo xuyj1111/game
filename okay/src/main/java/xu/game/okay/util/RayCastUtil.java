@@ -16,6 +16,14 @@ import static xu.game.okay.constant.PageConstant.*;
  */
 public class RayCastUtil {
 
+    public static int realX(int x) {
+        return INTERVAL * x + CENTER_OFFSET_X + POINRT_OFFSET;
+    }
+
+    public static int realY(int y) {
+        return INTERVAL * y + CENTER_OFFSET_Y + POINRT_OFFSET;
+    }
+
     /**
      * @Description: 判断"点"是否在图形内，并返回所在图形（不在内部返回null）
      */
@@ -43,7 +51,7 @@ public class RayCastUtil {
     /**
      * @Description: 判断"点"是否在圆形内
      */
-    public static boolean isInsideCircle(Point point, ShapeDTO shapeDTO) {
+    private static boolean isInsideCircle(Point point, ShapeDTO shapeDTO) {
         List<PointDTO> points = shapeDTO.getPoints();
         int px = point.x;
         int py = point.y;
@@ -55,7 +63,7 @@ public class RayCastUtil {
     /**
      * @Description: 判断"点"是否在多边形内
      */
-    public static boolean isInsidePolygon(Point point, ShapeDTO shapeDTO) {
+    private static boolean isInsidePolygon(Point point, ShapeDTO shapeDTO) {
         List<PointDTO> points = shapeDTO.getPoints();
         int size = points.size();
         int px = point.x;
@@ -102,13 +110,5 @@ public class RayCastUtil {
             }
         }
         return flag;
-    }
-
-    public static int realX(int x) {
-        return INTERVAL * x + CENTER_OFFSET_X + POINRT_OFFSET;
-    }
-
-    public static int realY(int y) {
-        return INTERVAL * y + CENTER_OFFSET_Y + POINRT_OFFSET;
     }
 }

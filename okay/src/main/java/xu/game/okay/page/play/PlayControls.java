@@ -37,4 +37,11 @@ public class PlayControls {
         question.setBorderPainted(false);
         question.addActionListener(new QuestionActionListener());
     }
+
+    public static void setControlsIsVisible(boolean visible) {
+        isVisible = visible;
+        returm.setVisible(isVisible);
+        menu.setVisible(isVisible);
+        question.setVisible(isVisible);
+    }
 }

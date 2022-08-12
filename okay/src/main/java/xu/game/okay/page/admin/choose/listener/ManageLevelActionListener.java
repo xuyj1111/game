@@ -1,10 +1,10 @@
 package xu.game.okay.page.admin.choose.listener;
 
-import xu.game.okay.MainClass;
-import xu.game.okay.util.BeanFactory;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.adminMenuJPanel;
 
 /** 
  * @Description: 管理关卡键
@@ -14,8 +14,7 @@ import java.awt.event.ActionListener;
 public class ManageLevelActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        MainClass.jPanel = BeanFactory.adminMenuJPanel;
-        MainClass.jFrame.setContentPane(MainClass.jPanel);
-        MainClass.jFrame.setVisible(true);
+        jFrame.setContentPane(adminMenuJPanel);
+        jFrame.setVisible(true);
     }
 }

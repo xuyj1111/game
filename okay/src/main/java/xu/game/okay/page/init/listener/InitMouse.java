@@ -1,12 +1,13 @@
 package xu.game.okay.page.init.listener;
 
-import xu.game.okay.MainClass;
-import xu.game.okay.util.BeanFactory;
-import xu.game.okay.page.base.BaseJPanel;
 import xu.game.okay.page.init.InitControls;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.initJPanel;
+import static xu.game.okay.util.BeanFactory.loginJPanel;
 
 /**
  * @Description: 鼠标点击界面触发
@@ -21,15 +22,13 @@ public class InitMouse extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        BaseJPanel initJPanel = BeanFactory.initJPanel;
         if (check_num == 0) {
             initJPanel.add(InitControls.lets);
             initJPanel.add(InitControls.start);
         } else {
             check_num = 0;
-            MainClass.jPanel = BeanFactory.loginJPanel;
-            MainClass.jFrame.setContentPane(MainClass.jPanel);
-            MainClass.jFrame.setVisible(true);
+            jFrame.setContentPane(loginJPanel);
+            jFrame.setVisible(true);
         }
         initJPanel.repaint();
         check_num++;

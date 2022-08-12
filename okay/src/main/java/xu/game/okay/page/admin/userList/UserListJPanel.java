@@ -1,14 +1,14 @@
 package xu.game.okay.page.admin.userList;
 
 import xu.game.okay.entity.User;
-import xu.game.okay.util.BeanFactory;
-import xu.game.okay.jdbc.JdbcAction;
 import xu.game.okay.page.base.BaseJPanel;
 import xu.tools.json.JsonMapper;
 
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
+
+import static xu.game.okay.util.BeanFactory.jdbc;
 
 /**
  * @Description: 用户列表界面
@@ -27,7 +27,6 @@ public class UserListJPanel extends BaseJPanel {
         //清空
         removeAll();
         //数据库中查询所有用户
-        JdbcAction jdbc = BeanFactory.jdbc;
         java.util.List<Map<String, Object>> querys = jdbc.querys("SELECT * FROM user WHERE name != 'admin'");
         List<User> users = JsonMapper.parseList(JsonMapper.writeValueAsString(querys), User.class);
         //添加控件

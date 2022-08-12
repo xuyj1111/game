@@ -3,11 +3,9 @@ package xu.game.okay.page.user.menu.listener;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.util.CollectionUtils;
-import xu.game.okay.MainClass;
 import xu.game.okay.dto.ShapeDTO;
 import xu.game.okay.enums.PlayJPanelSource;
 import xu.game.okay.page.play.PlayControls;
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.util.DrawBoardUtil;
 import xu.tools.json.JsonMapper;
 
@@ -18,6 +16,10 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.jdbc;
+import static xu.game.okay.util.BeanFactory.playJPanel;
 
 /**
  * @Description: 用户关卡数字键
@@ -42,7 +44,7 @@ public class NumberMouseListener implements MouseListener {
         label.setForeground(foreground);
         String map = null;
         String number = label.getText();
-        List<Map<String, Object>> querys = BeanFactory.jdbc.querys("SELECT map FROM level WHERE is_system = 0 AND level_id = '%s'", number);
+        List<Map<String, Object>> querys = jdbc.querys("SELECT map FROM level WHERE is_system = 0 AND level_id = '%s'", number);
         if (!CollectionUtils.isEmpty(querys)) {
             map = querys.stream().map(q -> String.valueOf(q.get("map"))).collect(Collectors.toList()).get(0);
         }
@@ -51,16 +53,12 @@ public class NumberMouseListener implements MouseListener {
             return;
         }
         DrawBoardUtil.shapeDTOS = JsonMapper.parseList(map, ShapeDTO.class);
-        DrawBoardUtil.setDefinedJPDrawnShape(BeanFactory.playJPanel);
-        PlayControls.isVisible = false;
-        PlayControls.returm.setVisible(false);
-        PlayControls.menu.setVisible(false);
-        PlayControls.question.setVisible(false);
+        DrawBoardUtil.setDefinedJPDrawnShape(playJPanel);
+        PlayControls.setControlsIsVisible(false);
 
-        BeanFactory.playJPanel.source = PlayJPanelSource.MENUJPANEL;
-        MainClass.jPanel = BeanFactory.playJPanel;
-        MainClass.jFrame.setContentPane(MainClass.jPanel);
-        MainClass.jFrame.setVisible(true);
+        playJPanel.source = PlayJPanelSource.MENUJPANEL;
+        jFrame.setContentPane(playJPanel);
+        jFrame.setVisible(true);
     }
 
     @Override

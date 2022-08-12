@@ -3,10 +3,8 @@ package xu.game.okay.page.admin.menu.listener;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.util.CollectionUtils;
-import xu.game.okay.MainClass;
 import xu.game.okay.dto.ShapeDTO;
 import xu.game.okay.enums.DefinedJPanelSource;
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.util.DrawBoardUtil;
 import xu.tools.json.JsonMapper;
 
@@ -17,6 +15,10 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.definedJPanel;
+import static xu.game.okay.util.BeanFactory.jdbc;
 
 /**
  * @Description: 系统关卡数字键
@@ -38,7 +40,7 @@ public class NumberMouseListener implements MouseListener {
 
         String map = null;
         String number = label.getText();
-        List<Map<String, Object>> querys = BeanFactory.jdbc.querys("SELECT map FROM level WHERE is_system = 1 AND level_id = '%s'", number);
+        List<Map<String, Object>> querys = jdbc.querys("SELECT map FROM level WHERE is_system = 1 AND level_id = '%s'", number);
         if (!CollectionUtils.isEmpty(querys)) {
             map = querys.stream().map(q -> String.valueOf(q.get("map"))).collect(Collectors.toList()).get(0);
         }
@@ -47,12 +49,11 @@ public class NumberMouseListener implements MouseListener {
             return;
         }
         DrawBoardUtil.shapeDTOS = JsonMapper.parseList(map, ShapeDTO.class);
-        DrawBoardUtil.setDefinedJPDrawnShape(BeanFactory.definedJPanel);
-        BeanFactory.definedJPanel.source = DefinedJPanelSource.ADMIN_SYSTEM;
-        BeanFactory.definedJPanel.number = number;
-        MainClass.jPanel = BeanFactory.definedJPanel;
-        MainClass.jFrame.setContentPane(MainClass.jPanel);
-        MainClass.jFrame.setVisible(true);
+        DrawBoardUtil.setDefinedJPDrawnShape(definedJPanel);
+        definedJPanel.source = DefinedJPanelSource.ADMIN_SYSTEM;
+        definedJPanel.number = number;
+        jFrame.setContentPane(definedJPanel);
+        jFrame.setVisible(true);
     }
 
     @Override

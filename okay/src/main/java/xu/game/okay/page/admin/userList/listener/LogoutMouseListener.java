@@ -1,7 +1,5 @@
 package xu.game.okay.page.admin.userList.listener;
 
-import xu.game.okay.MainClass;
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.admin.userList.UserListControls;
 
 import javax.swing.JLabel;
@@ -10,6 +8,10 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.stream.Collectors;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.jdbc;
+import static xu.game.okay.util.BeanFactory.userListJPanel;
 
 /**
  * @Description: 用户注销键
@@ -22,17 +24,17 @@ public class LogoutMouseListener extends MouseAdapter {
         //获取触发事件的控件
         Object source = e.getSource();
         //获取该控件对应的其他控件，即用户名
-        UserListControls.UserJLabel userJLabel = BeanFactory.userListJPanel.userListControls.userJLabels
+        UserListControls.UserJLabel userJLabel = userListJPanel.userListControls.userJLabels
                 .stream().filter(userL -> userL.getLogout().equals(source)).collect(Collectors.toList()).get(0);
         //弹出判断框
         int result = JOptionPane.showConfirmDialog(null, "是否删除该用户？", "删除用户", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         //点击yes后
         if (result == 0) {
             //删除对应用户名的数据，并重新刷新当前界面
-            BeanFactory.jdbc.update("DELETE FROM user WHERE name = '%s'", userJLabel.user.getText());
-            BeanFactory.userListJPanel.addControls();
-            MainClass.jFrame.setContentPane(MainClass.jPanel);
-            MainClass.jFrame.setVisible(true);
+            jdbc.update("DELETE FROM user WHERE name = '%s'", userJLabel.user.getText());
+            userListJPanel.addControls();
+            jFrame.setContentPane(userListJPanel);
+            jFrame.setVisible(true);
         }
     }
 

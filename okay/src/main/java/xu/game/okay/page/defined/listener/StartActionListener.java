@@ -1,14 +1,15 @@
 package xu.game.okay.page.defined.listener;
 
-import xu.game.okay.MainClass;
 import xu.game.okay.enums.PlayJPanelSource;
 import xu.game.okay.page.play.PlayControls;
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.util.DrawBoardUtil;
 
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.playJPanel;
 
 /**
  * @Description: 开始键（预览）
@@ -25,15 +26,11 @@ public class StartActionListener implements ActionListener {
         }
         // 清除所有选中
         DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
-        PlayControls.isVisible = false;
-        PlayControls.returm.setVisible(false);
-        PlayControls.menu.setVisible(false);
-        PlayControls.question.setVisible(false);
+        PlayControls.setControlsIsVisible(false);
 
-        BeanFactory.playJPanel.source = PlayJPanelSource.DEFINEJPANEL;
-        DrawBoardUtil.setDefinedJPDrawnShape(BeanFactory.playJPanel);
-        MainClass.jPanel = BeanFactory.playJPanel;
-        MainClass.jFrame.setContentPane(MainClass.jPanel);
-        MainClass.jFrame.setVisible(true);
+        playJPanel.source = PlayJPanelSource.DEFINEJPANEL;
+        DrawBoardUtil.setDefinedJPDrawnShape(playJPanel);
+        jFrame.setContentPane(playJPanel);
+        jFrame.setVisible(true);
     }
 }

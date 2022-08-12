@@ -19,12 +19,21 @@ import java.util.List;
 public class ShapeDTO implements Serializable {
 
     private static final long serialVersionUID = 5902513291096462641L;
+
     private ShapeType type;
+
     private ShapeProperty property;
-    // 仅为圆使用，圆的半径
+
+    /**
+     * 仅为圆使用，圆的半径
+     */
     private Integer size;
+
     private List<PointDTO> points;
-    // 是否被选中
+
+    /**
+     * 是否被选中
+     */
     @JsonIgnore
     private Boolean isSelected = false;
 }

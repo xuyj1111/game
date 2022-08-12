@@ -1,15 +1,17 @@
 package xu.game.okay.page.login.listener;
 
 import org.apache.logging.log4j.util.Strings;
-import xu.game.okay.MainClass;
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.login.LoginControls;
-import xu.game.okay.page.user.choose.ChooseJPanel;
 
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.adminChooseJPanel;
+import static xu.game.okay.util.BeanFactory.jdbc;
+import static xu.game.okay.util.BeanFactory.userChooseJPanel;
 
 /**
  * @Description: 登录键
@@ -29,7 +31,7 @@ public class LoginActionListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "请输入密码");
             return;
         }
-        Map<String, Object> query = BeanFactory.jdbc.query("SELECT COUNT(1), pwd FROM user WHERE name = '%s'", userContent);
+        Map<String, Object> query = jdbc.query("SELECT COUNT(1), pwd FROM user WHERE name = '%s'", userContent);
         Long count = (Long) query.get("COUNT(1)");
         String pwd = (String) query.get("pwd");
         if (count == 0) {
@@ -45,17 +47,14 @@ public class LoginActionListener implements ActionListener {
         LoginControls.passWordF.setText("");
         if ("admin".equals(userContent)) {
             // 管理员界面
-            MainClass.jPanel = BeanFactory.adminChooseJPanel;
-            MainClass.jFrame.setContentPane(MainClass.jPanel);
-            MainClass.jFrame.setVisible(true);
+            jFrame.setContentPane(adminChooseJPanel);
+            jFrame.setVisible(true);
         } else {
             // 用户界面
-            ChooseJPanel userChooseJPanel = BeanFactory.userChooseJPanel;
             userChooseJPanel.userName = userContent;
             userChooseJPanel.addControls();
-            MainClass.jPanel = userChooseJPanel;
-            MainClass.jFrame.setContentPane(MainClass.jPanel);
-            MainClass.jFrame.setVisible(true);
+            jFrame.setContentPane(userChooseJPanel);
+            jFrame.setVisible(true);
         }
     }
 }

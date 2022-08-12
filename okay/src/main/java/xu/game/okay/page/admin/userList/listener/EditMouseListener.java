@@ -1,8 +1,6 @@
 package xu.game.okay.page.admin.userList.listener;
 
-import xu.game.okay.MainClass;
 import xu.game.okay.entity.User;
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.admin.userEdit.UserEditControls;
 import xu.game.okay.page.admin.userList.UserListControls;
 
@@ -12,6 +10,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.stream.Collectors;
 
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.userEditJPanel;
+import static xu.game.okay.util.BeanFactory.userListJPanel;
+
 /**
  * @Description: 用户编辑键
  * @Author: xuyujun
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 public class EditMouseListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
-        UserListControls userListControls = BeanFactory.userListJPanel.userListControls;
+        UserListControls userListControls = userListJPanel.userListControls;
         //获取触发事件的控件
         JLabel source = (JLabel) e.getSource();
         //控件设置灰色
@@ -37,9 +39,8 @@ public class EditMouseListener extends MouseAdapter {
         UserEditControls.pwdF.setText(user.getPwd());
         UserEditControls.box.setSelectedItem(user.getRecord());
         //切换页面
-        MainClass.jPanel = BeanFactory.userEditJPanel;
-        MainClass.jFrame.setContentPane(MainClass.jPanel);
-        MainClass.jFrame.setVisible(true);
+        jFrame.setContentPane(userEditJPanel);
+        jFrame.setVisible(true);
     }
 
     /**

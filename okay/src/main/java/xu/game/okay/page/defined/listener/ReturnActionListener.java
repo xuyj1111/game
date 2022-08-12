@@ -1,12 +1,16 @@
 package xu.game.okay.page.defined.listener;
 
-import xu.game.okay.MainClass;
 import xu.game.okay.enums.DefinedJPanelSource;
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.util.DrawBoardUtil;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.adminMenuJPanel;
+import static xu.game.okay.util.BeanFactory.definedJPanel;
+import static xu.game.okay.util.BeanFactory.userChooseJPanel;
+import static xu.game.okay.util.BeanFactory.userMenuJPanel;
 
 /**
  * @Description: 返回键
@@ -17,14 +21,13 @@ public class ReturnActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         DrawBoardUtil.init();
-        if (BeanFactory.definedJPanel.source == DefinedJPanelSource.USER) {
-            MainClass.jPanel = BeanFactory.userChooseJPanel;
-        } else if (BeanFactory.definedJPanel.source == DefinedJPanelSource.ADMIN_SYSTEM) {
-            MainClass.jPanel = BeanFactory.adminMenuJPanel;
+        if (definedJPanel.source == DefinedJPanelSource.USER) {
+            jFrame.setContentPane(userChooseJPanel);
+        } else if (definedJPanel.source == DefinedJPanelSource.ADMIN_SYSTEM) {
+            jFrame.setContentPane(adminMenuJPanel);
         } else {
-            MainClass.jPanel = BeanFactory.userMenuJPanel;
+            jFrame.setContentPane(userMenuJPanel);
         }
-        MainClass.jFrame.setContentPane(MainClass.jPanel);
-        MainClass.jFrame.setVisible(true);
+        jFrame.setVisible(true);
     }
 }

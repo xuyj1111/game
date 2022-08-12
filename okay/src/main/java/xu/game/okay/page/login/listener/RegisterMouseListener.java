@@ -1,12 +1,13 @@
 package xu.game.okay.page.login.listener;
 
-import xu.game.okay.MainClass;
-import xu.game.okay.util.BeanFactory;
 import xu.game.okay.page.login.LoginControls;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.registerJPanel;
 
 /**
  * @Description: 注册键
@@ -19,9 +20,8 @@ public class RegisterMouseListener extends MouseAdapter {
         LoginControls.userNameF.setText("");
         LoginControls.passWordF.setText("");
         LoginControls.register.setForeground(Color.gray);
-        MainClass.jPanel = BeanFactory.registerJPanel;
-        MainClass.jFrame.setContentPane(MainClass.jPanel);
-        MainClass.jFrame.setVisible(true);
+        jFrame.setContentPane(registerJPanel);
+        jFrame.setVisible(true);
     }
 
     @Override

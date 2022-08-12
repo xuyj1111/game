@@ -35,6 +35,7 @@ public class PointDTO implements Serializable {
 
     /**
     * @Description: `点`按钮
+     * equals比较，来判断是否已点击
     */
     @JsonIgnore
     private JButton pointB;

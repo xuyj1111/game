@@ -8,7 +8,6 @@ import xu.game.okay.enums.ShapeProperty;
 import xu.game.okay.enums.ShapeType;
 import xu.game.okay.page.base.BaseJPanel;
 import xu.game.okay.page.defined.DefinedControls;
-import xu.game.okay.page.defined.DefinedJPanel;
 
 import javax.swing.JButton;
 import java.awt.Color;
@@ -20,6 +19,7 @@ import java.util.Objects;
 
 import static xu.game.okay.constant.PageConstant.INTERVAL;
 import static xu.game.okay.constant.PageConstant.shapeProList;
+import static xu.game.okay.util.BeanFactory.definedJPanel;
 import static xu.game.okay.util.RayCastUtil.realX;
 import static xu.game.okay.util.RayCastUtil.realY;
 
@@ -51,23 +51,56 @@ public class DrawBoardUtil {
      */
     private static long clickTime;
 
-    public static DefinedJPanel drawJPanel = BeanFactory.definedJPanel;
-
     /**
      * @Description: 初始化
      */
     public static void init() {
         stopDraw();
-        drawJPanel.setDrawnShape(null);
-        drawJPanel.number = null;
+        definedJPanel.setDrawnShape(null);
+        definedJPanel.number = null;
         shapeDTOS.clear();
+    }
+
+    /**
+     * @Description: 停止当前绘画的图形
+     */
+    public static void stopDraw() {
+        DefinedControls.components.forEach(point -> point.setBorderPainted(false));
+        definedJPanel.setDrawing(null);
+        pointDTOS.clear();
+        number = 0;
+    }
+
+    /**
+     * @Description: 修改图形大小或属性
+     */
+    public static void changeSizeOrProperty(ShapeDTO inside, MouseEvent e) {
+        if (Objects.isNull(inside)) {
+            // 清除所有选中
+            DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
+        } else {
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                // 调整圆形大小
+                if (inside.getIsSelected() && inside.getType() == ShapeType.CIRCLE) {
+                    inside.setSize(inside.getSize() % 60 + INTERVAL);
+                }
+            } else if (e.getButton() == MouseEvent.BUTTON3) {
+                int index = shapeProList.indexOf(inside.getProperty());
+                index = (index + 1) % 4;
+                inside.setProperty(shapeProList.get(index));
+            }
+            // 清除所有选中
+            DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
+            // 选中
+            inside.setIsSelected(true);
+        }
     }
 
     /**
      * @Description: 绘图逻辑
      */
     public static void logicForDraw(int index, JButton pointB) {
-        setDefinedJPDrawnShape(drawJPanel);
+        setDefinedJPDrawnShape(definedJPanel);
         PointDTO dto = new PointDTO();
         dto.setNumber(number);
         dto.setPointB(pointB);
@@ -77,8 +110,6 @@ public class DrawBoardUtil {
         pointDTOS.add(dto);
         number++;
         int size = pointDTOS.size();
-        // 校验点击的位置
-        checkLocation();
         // 获取上一次点击的'点'
         PointDTO lastPoint = size > 1 ? pointDTOS.get(size - 2) : null;
         // 根据点击的次数，绘画图形
@@ -120,7 +151,7 @@ public class DrawBoardUtil {
                     return;
                 }
                 // 连线
-                drawJPanel.setDrawing(g -> {
+                definedJPanel.setDrawing(g -> {
                     drawLine(g, pointDTOS);
                     return null;
                 });
@@ -152,13 +183,6 @@ public class DrawBoardUtil {
     }
 
     /**
-     * @Description: 检查点击位置
-     */
-    private static boolean checkLocation() {
-        return true;
-    }
-
-    /**
      * @Description: 画线
      */
     private static void drawLine(Graphics2D g, List<PointDTO> points) {
@@ -167,7 +191,7 @@ public class DrawBoardUtil {
             PointDTO startPoint = points.get(i);
             PointDTO endPoint = points.get(i + 1);
             g.drawLine(realX(startPoint.getX()), realY(startPoint.getY()), realX(endPoint.getX()), realY(endPoint.getY()));
-            drawJPanel.repaint();
+            definedJPanel.repaint();
         }
     }
 
@@ -201,7 +225,7 @@ public class DrawBoardUtil {
             g.setColor(Color.red);
             g.drawOval(realX(point.getX()) - size, realY(point.getY()) - size, size * 2, size * 2);
         }
-        drawJPanel.repaint();
+        definedJPanel.repaint();
     }
 
     /**
@@ -234,7 +258,7 @@ public class DrawBoardUtil {
             g.setColor(Color.red);
             g.drawPolygon(arrX, arrY, shapeDTO.getPoints().size());
         }
-        drawJPanel.repaint();
+        definedJPanel.repaint();
     }
 
     /**
@@ -271,40 +295,5 @@ public class DrawBoardUtil {
         dto.setPoints(Lists.newArrayList(pointDTOS));
         shapeDTOS.add(dto);
         stopDraw();
-    }
-
-    /**
-     * @Description: 停止当前绘画的图形
-     */
-    public static void stopDraw() {
-        DefinedControls.components.forEach(point -> point.setBorderPainted(false));
-        drawJPanel.setDrawing(null);
-        pointDTOS.clear();
-        number = 0;
-    }
-
-    /**
-     * @Description: 修改图形大小或属性
-     */
-    public static void changeSizeOrProperty(ShapeDTO inside, MouseEvent e) {
-        if (Objects.isNull(inside)) {
-            // 清除所有选中
-            DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
-        } else {
-            if (e.getButton() == MouseEvent.BUTTON1) {
-                // 调整圆形大小
-                if (inside.getIsSelected() && inside.getType() == ShapeType.CIRCLE) {
-                    inside.setSize(inside.getSize() % 60 + INTERVAL);
-                }
-            } else if (e.getButton() == MouseEvent.BUTTON3) {
-                int index = shapeProList.indexOf(inside.getProperty());
-                index = (index + 1) % 4;
-                inside.setProperty(shapeProList.get(index));
-            }
-            // 清除所有选中
-            DrawBoardUtil.shapeDTOS.forEach(shapeDTO -> shapeDTO.setIsSelected(false));
-            // 选中
-            inside.setIsSelected(true);
-        }
     }
 }

@@ -1,18 +1,18 @@
 package xu.game.okay;
 
 import xu.game.okay.jdbc.JdbcConfig;
-import xu.game.okay.util.BeanFactory;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.sql.Connection;
 import java.util.Objects;
 
+import static xu.game.okay.util.BeanFactory.initJPanel;
+import static xu.game.okay.util.BeanFactory.jFrame;
+import static xu.game.okay.util.BeanFactory.jdbc;
+
 public class MainClass {
 
-    public static JFrame jFrame = new JFrame();
-    public static JPanel jPanel = BeanFactory.initJPanel;
     private static final String INIT = "init";
     private static final String TRUE = "true";
 
@@ -25,7 +25,7 @@ public class MainClass {
         try {
             String init = System.getProperty(INIT);
             if (TRUE.equalsIgnoreCase(init)) {
-                BeanFactory.jdbc.init();
+                jdbc.init();
             }
         } catch (Exception e) {
             throw new Exception("初始化数据库错误！", e);
@@ -41,7 +41,7 @@ public class MainClass {
         // 居中显示
         jFrame.setLocationRelativeTo(null);
         jFrame.setLayout(new FlowLayout());
-        jFrame.setContentPane(jPanel);
+        jFrame.setContentPane(initJPanel);
         jFrame.setVisible(true);
     }
 }
