@@ -144,10 +144,10 @@ public class PlayJPanel extends BaseJPanel {
                 moveY = (dEndY - dStartY) / (dEndX - dStartX);
             }
         } else {
-            if (startX == endX) {
+            if (startX == endX && startY != endY) {
                 moveX = 1.0;
                 moveY = 0.0;
-            } else {
+            } else if (startX != endX){
                 moveX = 0.0;
                 moveY = 1.0;
             }
