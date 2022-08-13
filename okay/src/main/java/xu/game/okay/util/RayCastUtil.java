@@ -94,8 +94,8 @@ public class RayCastUtil {
                  x 小于 pX，表示 p点 在线段的右侧，此认定为无交点
                  */
                     if (x > px) {
-                        // 处理延伸线穿过顶点的情况
-                        if (x == x1 || x == x2) {
+                        // 处理延伸线穿过顶点的情况（no垂直线）
+                        if (x1 != x2 && (x == x1 || x == x2)) {
                             if ((y1 < y2 && py == y1) || (y1 > y2 && py == y2)) {
                                 flag = !flag;
                             }
