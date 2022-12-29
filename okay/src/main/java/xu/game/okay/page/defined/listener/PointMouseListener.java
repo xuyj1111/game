@@ -25,7 +25,7 @@ public class PointMouseListener implements MouseListener {
         int y = getIndex(pointB) % 20;
         Point point = new Point(RayCastUtil.realX(x), RayCastUtil.realY(y));
         // 选中图形（另一处在DefinedMouseListener）
-        ShapeDTO inside = RayCastUtil.isInside(point);
+        ShapeDTO inside = RayCastUtil.isPointInside(point);
         if (Objects.isNull(inside)) {
             DrawBoardUtil.logicForDraw(getIndex(pointB), pointB);
         }

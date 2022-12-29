@@ -71,7 +71,7 @@ public class PlayMouseListener implements MouseListener {
                 ex.printStackTrace();
             }
             // 判断拉伸线的起点是否在图形内，否小球才移动
-            if (Objects.isNull(RayCastUtil.isInside(playJPanel.getStartPoint()))) {
+            if (Objects.isNull(RayCastUtil.isPointInside(playJPanel.getStartPoint()))) {
                 // 创建定时任务
                 if (Objects.isNull(playJPanel.schedulerFactory)) {
                     // 1、创建调度器Scheduler
@@ -126,8 +126,8 @@ public class PlayMouseListener implements MouseListener {
             // 使小球显示的中心为鼠标
             int locationX = (int) (startX - (distanceX / 6) * i - (diameter / 2));
             int locationY = (int) (startY - (distanceY / 6) * i - (diameter / 2));
-            // 是否覆盖
-            if (isDisplayed(locationX, locationY, diameter)) {
+            // null表示不在内部则显示
+            if (Objects.isNull(RayCastUtil.isBallInside(locationX, locationY, diameter))) {
                 g.fillOval(locationX, locationY, diameter, diameter);
             }
         }
@@ -136,10 +136,17 @@ public class PlayMouseListener implements MouseListener {
 
     /**
      * @Description: 传入坐标，显示小球
+     * ballX、ballY为小球坐标（左上角的位置），由BallMoveJob任务赋值
      */
     private void ballMoving(Graphics2D g, Double ballX, Double ballY) {
+        int locationX = (int) (ballX - BALL_DIAMETER / 2);
+        int locationY = (int) (ballY - BALL_DIAMETER / 2);
         g.setColor(Color.BLACK);
-        g.fillOval((int) (ballX - BALL_DIAMETER / 2), (int) (ballY - BALL_DIAMETER / 2), BALL_DIAMETER, BALL_DIAMETER);
+        g.fillOval(locationX, locationY, BALL_DIAMETER, BALL_DIAMETER);
+
+        RayCastUtil.isBallInside(locationX, locationY, BALL_DIAMETER);
+
+
         playJPanel.repaint();
     }
 
@@ -155,22 +162,4 @@ public class PlayMouseListener implements MouseListener {
         playJPanel.setMoveY(null);
     }
 
-    /**
-     * @Description: 判断拉伸线的小球是否显示（不覆盖图形）
-     */
-    private boolean isDisplayed(int locationX, int locationY, int diameter) {
-        if (Objects.nonNull(RayCastUtil.isInside(new Point(locationX, locationY)))) {
-            return false;
-        }
-        if (Objects.nonNull(RayCastUtil.isInside(new Point(locationX + diameter, locationY)))) {
-            return false;
-        }
-        if (Objects.nonNull(RayCastUtil.isInside(new Point(locationX, locationY + diameter)))) {
-            return false;
-        }
-        if (Objects.nonNull(RayCastUtil.isInside(new Point(locationX + diameter, locationY + diameter)))) {
-            return false;
-        }
-        return true;
-    }
 }

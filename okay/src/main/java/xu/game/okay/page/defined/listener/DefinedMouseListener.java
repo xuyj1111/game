@@ -26,7 +26,7 @@ public class DefinedMouseListener implements MouseListener {
         // 获取当前鼠标位置
         Point point = MouseInfo.getPointerInfo().getLocation();
         point.setLocation(point.x - MOUSE_OFFSET_X, point.y - MOUSE_OFFSET_Y);
-        DrawBoardUtil.changeSizeOrProperty(RayCastUtil.isInside(point), e);
+        DrawBoardUtil.changeSizeOrProperty(RayCastUtil.isPointInside(point), e);
     }
 
     @Override

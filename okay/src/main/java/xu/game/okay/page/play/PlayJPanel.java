@@ -128,7 +128,7 @@ public class PlayJPanel extends BaseJPanel {
     /**
      * @Description: 计算坐标自增量
      */
-    public void calculationIncr(int startX, int startY, int endX, int endY) {
+    private void calculationIncr(int startX, int startY, int endX, int endY) {
         double dStartX = startX;
         double dStartY = startY;
         double dEndX = endX;
