@@ -18,6 +18,11 @@ public class PointDTO implements Serializable {
 
     private static final long serialVersionUID = -7540063795606609401L;
 
+    public PointDTO(Integer x, Integer y) {
+        this.x = x;
+        this.y = y;
+    }
+
     /**
     * @Description: 序号
     */

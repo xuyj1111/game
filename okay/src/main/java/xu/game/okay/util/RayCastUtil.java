@@ -1,18 +1,19 @@
 package xu.game.okay.util;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import lombok.Builder;
 import xu.game.okay.dto.PointDTO;
 import xu.game.okay.dto.ShapeDTO;
 import xu.game.okay.enums.ShapeType;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
-import static xu.game.okay.constant.PageConstant.*;
+import static xu.game.okay.constant.PageConstant.CENTER_OFFSET_X;
+import static xu.game.okay.constant.PageConstant.CENTER_OFFSET_Y;
+import static xu.game.okay.constant.PageConstant.INTERVAL;
+import static xu.game.okay.constant.PageConstant.POINRT_OFFSET;
 
 /**
  * @Description: 射线法的实现及应用
@@ -40,11 +41,13 @@ public class RayCastUtil {
             ShapeType type = shapeDTO.getType();
             switch (type) {
                 case CIRCLE:
-                    flag = isInsideCircle(point, shapeDTO);
+                    flag = isBallInsideCircle(locationX, locationY, diameter, shapeDTO);
                     break;
                 case POLYGON:
-                    flag = isInsidePolygon(point, shapeDTO);
+                    flag = isBallInsidePolygon(locationX, locationY, diameter, shapeDTO);
                     break;
+                case LINE:
+                    flag = isBallInsideLine(locationX, locationY, diameter, shapeDTO);
                 default:
                     break;
             }
@@ -52,20 +55,6 @@ public class RayCastUtil {
                 return shapeDTO;
             }
         }
-        return null;
-
-
-//        ArrayList<Point> points = Lists.newArrayList(
-//                new Point(locationX, locationY),
-//                new Point(locationX + diameter, locationY),
-//                new Point(locationX, locationY + diameter),
-//                new Point(locationX + diameter, locationY + diameter));
-//        for (Point point : points) {
-//            ShapeDTO shapeDTO = isPointInside(point);
-//            if (Objects.nonNull(shapeDTO)) {
-//                return shapeDTO;
-//            }
-//        }
         return null;
     }
 
@@ -196,75 +185,71 @@ public class RayCastUtil {
 
     /**
      * @Description: 判断"小球"是否与线重合
-     * 左上、左下、右上、右下四点判断
+     * 以小球的左上、左下、右上、右下四点，可以构建成一个矩形，因此可以看作"判断矩形是否与线段相交"
+     * 分为两种情况：
+     * 1. 线段的端点是否在矩形内，可以通过 isPointInsidePolygon 判断
+     * 2. 线段的端点不在矩形内，则判断线段是否与矩形的两个对角线相交
+     * 此方法重点实现第二种情况
+     * 具体算法说明：https://blog.csdn.net/qq826309057/article/details/70942061
      */
     private static boolean isBallInsideLine(int locationX, int locationY, int diameter, ShapeDTO shapeDTO) {
-        ArrayList<Point> leftOrFarList = Lists.newArrayList();
-
-        int p1x = locationX, p1y = locationY;
-        int p2x = locationX + diameter, p2y = locationY;
-        int p3x = locationX, p3y = locationY + diameter;
-        int p4x = locationX + diameter, p4y = locationY + diameter;
-
-        ArrayList<Point> points = Lists.newArrayList(
-                new Point(locationX, locationY),
-                new Point(locationX + diameter, locationY),
-                new Point(locationX, locationY + diameter),
-                new Point(locationX + diameter, locationY + diameter));
-        int x1 = realX(shapeDTO.getPoints().get(0).getX());
-        int y1 = realY(shapeDTO.getPoints().get(0).getY());
-        int x2 = realX(shapeDTO.getPoints().get(1).getX());
-        int y2 = realY(shapeDTO.getPoints().get(1).getY());
-
-        for (Point point : points) {
-            int px = point.x;
-            int py = point.y;
-            // 点与多边形顶点重合
-            if ((x1 == px && y1 == py) || (x2 == px && y2 == py)) {
+        // 构建小球的矩形
+        ShapeDTO ballShape = new ShapeDTO();
+        ballShape.setPoints(Lists.newArrayList(
+                new PointDTO(locationX, locationY),
+                new PointDTO(locationX + diameter, locationY),
+                new PointDTO(locationX, locationY + diameter),
+                new PointDTO(locationX + diameter, locationY + diameter)));
+        // 两根对角线
+        Line diagonalL1 = Line.builder().x1(locationX).y1(locationY).x2(locationX + diameter).y2(locationY + diameter).build();
+        Line diagonalL2 = Line.builder().x1(locationX + diameter).y1(locationY).x2(locationX).y2(locationY + diameter).build();
+        // "线段"图形
+        Line line = Line.builder()
+                .x1(realX(shapeDTO.getPoints().get(0).getX()))
+                .y1(realY(shapeDTO.getPoints().get(0).getY()))
+                .x2(realX(shapeDTO.getPoints().get(1).getX()))
+                .y2(realY(shapeDTO.getPoints().get(1).getY()))
+                .build();
+        // 情况一：判断线段的两端点是否在矩形内
+        if (isPointInsidePolygon(new Point(line.x1, line.y1), ballShape) ||
+                isPointInsidePolygon(new Point(line.x2, line.y2), ballShape)) {
+            return true;
+        }
+        // 情况二：判断线段是否与两条对角线相交
+        // 对角线1和线段判断
+        //快速排斥实验
+        if ((Math.max(line.x1, line.x2)) >= (Math.min(diagonalL1.x1, diagonalL1.x2)) &&
+                (Math.max(line.y1, line.y2)) >= (Math.min(diagonalL1.y1, diagonalL1.y2)) &&
+                (Math.max(diagonalL1.x1, diagonalL1.x2)) >= (Math.min(line.x1, line.x2)) &&
+                (Math.max(diagonalL1.y1, diagonalL1.y2)) >= (Math.min(line.y1, line.y2))) {
+            //跨立实验
+            if ((((line.x1 - diagonalL1.x1) * (diagonalL1.y2 - diagonalL1.y1) - (line.y1 - diagonalL1.y1) * (diagonalL1.x2 - diagonalL1.x1)) *
+                    ((line.x2 - diagonalL1.x1) * (diagonalL1.y2 - diagonalL1.y1) - (line.y2 - diagonalL1.y1) * (diagonalL1.x2 - diagonalL1.x1))) <= 0 &&
+                    (((diagonalL1.x1 - line.x1) * (line.y2 - line.y1) - (diagonalL1.y1 - line.y1) * (line.x2 - line.x1)) *
+                            ((diagonalL1.x2 - line.x1) * (line.y2 - line.y1) - (diagonalL1.y2 - line.y1) * (line.x2 - line.x1))) <= 0) {
                 return true;
             }
         }
-
-        if (y1 != y2) {
-//            // p点的 y坐标 在线段的 y坐标 之间
-//            if ((py >= y1 && py <= y2) || (py >= y2 && py <= y1)) {
-//                // 计算出线段上 y坐标=pY 点的 x坐标
-//                double x = x1 + (double) (py - y1) * (x2 - x1) / (y2 - y1);
-//                // 点在多边形的边上
-//                if (x == px) {
-//                    return true;
-//                }
-//            }
-
-
-            for (Point point : points) {
-                int px = point.x;
-                int py = point.y;
-                // p点的 y坐标 在线段的 y坐标 之间
-                if ((py >= y1 && py <= y2) || (py >= y2 && py <= y1)) {
-                    // 计算出线段上 y坐标=pY 点的 x坐标
-                    double x = x1 + (double) (py - y1) * (x2 - x1) / (y2 - y1);
-                    // 点在多边形的边上
-                    if (x == px) {
-                        return true;
-                    } else if (x > px) {
-                        // p点在线的左边，放入list
-                        leftOrFarList.add(point);
-                    }
-                } else if ((px >= x1 && px <= x2) || (px >= x2 && px <= x1)) {
-                    // p点的 x坐标 在线段的 x坐标之间
-
-                } else {
-                    // p点的 x坐标 和 y坐标 远离线段
-                    leftOrFarList.add(point);
-                }
+        // 对角线2和线段判断
+        //快速排斥实验
+        if ((Math.max(line.x1, line.x2)) >= (Math.min(diagonalL2.x1, diagonalL2.x2)) &&
+                (Math.max(line.y1, line.y2)) >= (Math.min(diagonalL2.y1, diagonalL2.y2)) &&
+                (Math.max(diagonalL2.x1, diagonalL2.x2)) >= (Math.min(line.x1, line.x2)) &&
+                (Math.max(diagonalL2.y1, diagonalL2.y2)) >= (Math.min(line.y1, line.y2))) {
+            //跨立实验
+            if ((((line.x1 - diagonalL2.x1) * (diagonalL2.y2 - diagonalL2.y1) - (line.y1 - diagonalL2.y1) * (diagonalL2.x2 - diagonalL2.x1)) *
+                    ((line.x2 - diagonalL2.x1) * (diagonalL2.y2 - diagonalL2.y1) - (line.y2 - diagonalL2.y1) * (diagonalL2.x2 - diagonalL2.x1))) <= 0 &&
+                    (((diagonalL2.x1 - line.x1) * (line.y2 - line.y1) - (diagonalL2.y1 - line.y1) * (line.x2 - line.x1)) *
+                            ((diagonalL2.x2 - line.x1) * (line.y2 - line.y1) - (diagonalL2.y2 - line.y1) * (line.x2 - line.x1))) <= 0) {
+                return true;
             }
-
-
-        } else if (py == y1 && ((px >= x1 && px <= x2) || (px >= x2 && px <= x1))) {
-            // 处理p点在平行于x轴的线段上
-            return true;
         }
         return false;
+    }
+
+    @Builder
+    static class Line {
+        int x1, y1;
+        int x2, y2;
     }
 }

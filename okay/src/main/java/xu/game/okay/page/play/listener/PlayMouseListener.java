@@ -144,7 +144,7 @@ public class PlayMouseListener implements MouseListener {
         g.setColor(Color.BLACK);
         g.fillOval(locationX, locationY, BALL_DIAMETER, BALL_DIAMETER);
 
-        RayCastUtil.isBallInside(locationX, locationY, BALL_DIAMETER);
+//        RayCastUtil.isBallInside(locationX, locationY, BALL_DIAMETER);
 
 
         playJPanel.repaint();
