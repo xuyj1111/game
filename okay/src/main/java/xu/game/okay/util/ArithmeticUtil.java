@@ -16,24 +16,51 @@ import static xu.game.okay.constant.PageConstant.INTERVAL;
 import static xu.game.okay.constant.PageConstant.POINRT_OFFSET;
 
 /**
- * @Description: 射线法的实现及应用
+ * @Description: 各种算法实现的工具类
  * @Author: xuyujun
  * @Date: 2022/4/25
  */
-public class RayCastUtil {
+public class ArithmeticUtil {
 
+    // 通过画板上的相对x坐标，计算屏幕中的绝对x坐标
     public static int realX(int x) {
         return INTERVAL * x + CENTER_OFFSET_X + POINRT_OFFSET;
     }
 
+    // 通过画板上的相对y坐标，计算屏幕中的绝对y坐标
     public static int realY(int y) {
         return INTERVAL * y + CENTER_OFFSET_Y + POINRT_OFFSET;
     }
 
+    /**
+     * @Description: 计算坐标自增量
+     */
+    public static double[] calculationIncr(int startX, int startY, int endX, int endY) {
+        double moveX = 0, moveY = 0;
+        if (startX != endX && startY != endY) {
+            moveX = ((double) endX - (double) startX) / Math.abs((double) endY - (double) startY);
+            if (Math.abs(moveX) > 1) {
+                moveX = moveX > 1 ? 1.0 : -1.0;
+            }
+            moveY = ((double) endY - (double) startY) / Math.abs((double) endX - (double) startX);
+            if (Math.abs(moveY) > 1) {
+                moveY = moveY > 1 ? 1.0 : -1.0;
+            }
+        } else {
+            if (startX == endX && startY != endY) {
+                moveX = 1.0;
+                moveY = 0.0;
+            } else if (startX != endX) {
+                moveX = 0.0;
+                moveY = 1.0;
+            }
+        }
+        return new double[]{moveX, moveY};
+    }
 
     /**
      * @Description: 判断拉伸线的小球是否在图形内，并返回所在图形（不在内部返回null）
-     * 在 RayCastUtil.isInside 的基础上，以小球的左上、左下、右上、右下四点作为判断
+     * 在 ArithmeticUtil.isInside 的基础上，以小球的左上、左下、右上、右下四点作为判断
      */
     public static ShapeDTO isBallInside(int locationX, int locationY, int diameter) {
         for (ShapeDTO shapeDTO : DrawBoardUtil.shapeDTOS) {

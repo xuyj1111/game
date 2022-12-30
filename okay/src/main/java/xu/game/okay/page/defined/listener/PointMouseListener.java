@@ -2,8 +2,8 @@ package xu.game.okay.page.defined.listener;
 
 import xu.game.okay.dto.ShapeDTO;
 import xu.game.okay.page.defined.DefinedControls;
+import xu.game.okay.util.ArithmeticUtil;
 import xu.game.okay.util.DrawBoardUtil;
-import xu.game.okay.util.RayCastUtil;
 
 import javax.swing.JButton;
 import java.awt.Point;
@@ -23,9 +23,9 @@ public class PointMouseListener implements MouseListener {
         JButton pointB = (JButton) e.getSource();
         int x = getIndex(pointB) / 20;
         int y = getIndex(pointB) % 20;
-        Point point = new Point(RayCastUtil.realX(x), RayCastUtil.realY(y));
+        Point point = new Point(ArithmeticUtil.realX(x), ArithmeticUtil.realY(y));
         // 选中图形（另一处在DefinedMouseListener）
-        ShapeDTO inside = RayCastUtil.isPointInside(point);
+        ShapeDTO inside = ArithmeticUtil.isPointInside(point);
         if (Objects.isNull(inside)) {
             DrawBoardUtil.logicForDraw(getIndex(pointB), pointB);
         }

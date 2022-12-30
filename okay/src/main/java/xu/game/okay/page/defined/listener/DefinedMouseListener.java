@@ -1,7 +1,7 @@
 package xu.game.okay.page.defined.listener;
 
+import xu.game.okay.util.ArithmeticUtil;
 import xu.game.okay.util.DrawBoardUtil;
-import xu.game.okay.util.RayCastUtil;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -26,7 +26,7 @@ public class DefinedMouseListener implements MouseListener {
         // 获取当前鼠标位置
         Point point = MouseInfo.getPointerInfo().getLocation();
         point.setLocation(point.x - MOUSE_OFFSET_X, point.y - MOUSE_OFFSET_Y);
-        DrawBoardUtil.changeSizeOrProperty(RayCastUtil.isPointInside(point), e);
+        DrawBoardUtil.changeSizeOrProperty(ArithmeticUtil.isPointInside(point), e);
     }
 
     @Override

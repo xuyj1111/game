@@ -20,8 +20,8 @@ import java.util.Objects;
 import static xu.game.okay.constant.PageConstant.INTERVAL;
 import static xu.game.okay.constant.PageConstant.shapeProList;
 import static xu.game.okay.util.BeanFactory.definedJPanel;
-import static xu.game.okay.util.RayCastUtil.realX;
-import static xu.game.okay.util.RayCastUtil.realY;
+import static xu.game.okay.util.ArithmeticUtil.realX;
+import static xu.game.okay.util.ArithmeticUtil.realY;
 
 /**
  * @Description: 绘图板

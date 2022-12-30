@@ -3,9 +3,10 @@ package xu.game.okay.page.play.listener;
 import lombok.SneakyThrows;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import xu.game.okay.dto.ShapeDTO;
 import xu.game.okay.job.BallMoveJob;
 import xu.game.okay.page.play.PlayControls;
-import xu.game.okay.util.RayCastUtil;
+import xu.game.okay.util.ArithmeticUtil;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -71,7 +72,7 @@ public class PlayMouseListener implements MouseListener {
                 ex.printStackTrace();
             }
             // 判断拉伸线的起点是否在图形内，否小球才移动
-            if (Objects.isNull(RayCastUtil.isPointInside(playJPanel.getStartPoint()))) {
+            if (Objects.isNull(ArithmeticUtil.isPointInside(playJPanel.getStartPoint()))) {
                 // 创建定时任务
                 if (Objects.isNull(playJPanel.schedulerFactory)) {
                     // 1、创建调度器Scheduler
@@ -127,7 +128,7 @@ public class PlayMouseListener implements MouseListener {
             int locationX = (int) (startX - (distanceX / 6) * i - (diameter / 2));
             int locationY = (int) (startY - (distanceY / 6) * i - (diameter / 2));
             // null表示不在内部则显示
-            if (Objects.isNull(RayCastUtil.isBallInside(locationX, locationY, diameter))) {
+            if (Objects.isNull(ArithmeticUtil.isBallInside(locationX, locationY, diameter))) {
                 g.fillOval(locationX, locationY, diameter, diameter);
             }
         }
@@ -144,7 +145,11 @@ public class PlayMouseListener implements MouseListener {
         g.setColor(Color.BLACK);
         g.fillOval(locationX, locationY, BALL_DIAMETER, BALL_DIAMETER);
 
-//        RayCastUtil.isBallInside(locationX, locationY, BALL_DIAMETER);
+        ShapeDTO shapeDTO = ArithmeticUtil.isBallInside(locationX, locationY, BALL_DIAMETER);
+        if (Objects.nonNull(shapeDTO)) {
+            // 计算反弹
+        }
+
 
 
         playJPanel.repaint();

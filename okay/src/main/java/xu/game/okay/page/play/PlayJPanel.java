@@ -6,6 +6,7 @@ import org.quartz.SchedulerFactory;
 import xu.game.okay.enums.PlayJPanelSource;
 import xu.game.okay.page.base.BaseJPanel;
 import xu.game.okay.page.play.listener.PlayMouseListener;
+import xu.game.okay.util.ArithmeticUtil;
 import xu.game.okay.util.Function3;
 
 import java.awt.*;
@@ -119,37 +120,11 @@ public class PlayJPanel extends BaseJPanel {
             if (Objects.isNull(moveX) && Objects.isNull(moveY)) {
                 ballX = (double) startPoint.x;
                 ballY = (double) startPoint.y;
-                calculationIncr(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+                double[] coordinate = ArithmeticUtil.calculationIncr(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+                moveX = coordinate[0];
+                moveY = coordinate[1];
             }
             getBallMove().apply(g, ballX, ballY);
-        }
-    }
-
-    /**
-     * @Description: 计算坐标自增量
-     */
-    private void calculationIncr(int startX, int startY, int endX, int endY) {
-        double dStartX = startX;
-        double dStartY = startY;
-        double dEndX = endX;
-        double dEndY = endY;
-        if (startX != endX && startY != endY) {
-            moveX = (dEndX - dStartX) / Math.abs(dEndY - dStartY);
-            if (Math.abs(moveX) > 1) {
-                moveX = moveX > 1 ? 1.0 : -1.0;
-            }
-            moveY = (dEndY - dStartY) / Math.abs(dEndX - dStartX);
-            if (Math.abs(moveY) > 1) {
-                moveY = moveY > 1 ? 1.0 : -1.0;
-            }
-        } else {
-            if (startX == endX && startY != endY) {
-                moveX = 1.0;
-                moveY = 0.0;
-            } else if (startX != endX) {
-                moveX = 0.0;
-                moveY = 1.0;
-            }
         }
     }
 }

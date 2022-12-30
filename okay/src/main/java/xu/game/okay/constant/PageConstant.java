@@ -21,17 +21,17 @@ public class PageConstant {
     public static final int INTERVAL = 20;
 
     /**
-     * 点阵图居中的x轴偏移量
+     * 画板居中的x轴偏移量
      */
     public static final int CENTER_OFFSET_X = 50;
 
     /**
-     * 点阵图居中的y轴偏移量
+     * 画板居中的y轴偏移量
      */
     public static final int CENTER_OFFSET_Y = 25;
 
     /**
-     * '点'的西北向为起点，到'点'中心的偏移量
+     * 画板上的'点'，从左上角为起点，到'点'中心的偏移量【点的半径，在 DefinedControls 类中设置点的长宽】
      */
     public static final int POINRT_OFFSET = 8;
 
