@@ -1,10 +1,11 @@
 # okay（画线弹射游戏）
 > 本项目为个人在初学 Java 时，用 Swing 这个老旧技术简单实现的游戏。模仿的是 okay? app  
 
-<span style="color: red;">【未完成，还差小球撞击反弹判断】</span>  
+**【未完成，还差小球撞击反弹判断】**  
 [算法说明](./okay/src/main/resources/okay算法说明.pdf)  
-[游戏玩法说明](https://github.com/xuyj1111/game/blob/master/okay/src/main/resources/file/desc.md)
-
+[游戏玩法说明](https://github.com/xuyj1111/game/blob/master/okay/src/main/resources/file/desc.md)  
+![自定义关卡界面](./okay/definePage.png)
+![游戏界面](./okay/playPage.png)
 ## 开发环境
 - Intellij IDEA
 - Java SE
