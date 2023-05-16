@@ -1,4 +1,5 @@
 # okay（画线弹射游戏）
+<span style="color: red;">【未完成，还差小球撞击反弹判断】</span>
 ## 开发环境
 - Intellij IDEA
 - Java SE
